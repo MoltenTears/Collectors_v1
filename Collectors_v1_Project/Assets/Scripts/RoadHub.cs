@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class RoadHub : MonoBehaviour
@@ -5,8 +7,15 @@ public class RoadHub : MonoBehaviour
     Color m_MouseOverColor = Color.red;
     Color m_OriginalColor;
     MeshRenderer m_Renderer;
+
+    [Header("External References")]
     [SerializeField] private RoadMap myRoadMap;
     [SerializeField] private CollectorMovement myCollectorMovement;
+
+    [Header("Connected Road Hubs")]
+    [SerializeField] private GameObject nodeOrigin;
+    [SerializeField] public List<GameObject> ConnectedRoadHubs;
+
 
     void Start()
     {
@@ -14,6 +23,7 @@ public class RoadHub : MonoBehaviour
         m_OriginalColor = m_Renderer.material.color;
         myRoadMap = GameObject.FindObjectOfType<RoadMap>();
         myCollectorMovement = GameObject.FindObjectOfType<CollectorMovement>();
+        nodeOrigin = gameObject;
     }
 
     void OnMouseOver()
