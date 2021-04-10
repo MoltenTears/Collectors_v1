@@ -38,7 +38,7 @@ public class RoadHub : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Mouse0))
             {
                 // debug
-                Debug.Log("mouse0 pressed.");
+                // Debug.Log("mouse0 pressed.");
                 
                 // store a reference to this object to the RoadMap
                 myCollectorMovement.selectedRoadHub = gameObject;

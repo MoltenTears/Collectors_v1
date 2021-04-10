@@ -18,8 +18,6 @@ public class RoadNode : MonoBehaviour
         // if the collision is a RoadHub
         if (collision.gameObject.GetComponent<RoadHub>() && !checkedHub)
         {
-            Debug.Log("RoadNode at RoadHub.");
-
             // store a reference
             connectedHub = collision.gameObject;
 
