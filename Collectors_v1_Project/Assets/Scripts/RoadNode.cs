@@ -5,12 +5,9 @@ using UnityEngine;
 public class RoadNode : MonoBehaviour
 {
     private bool checkedHub = false;
-
     [SerializeField] GameObject connectedHub;
-
     [SerializeField] private GameObject myParentGO;
 
-    // Start is called before the first frame update
     void Start()
     {
         myParentGO = gameObject.GetComponentInParent<RoadHub>().gameObject;
