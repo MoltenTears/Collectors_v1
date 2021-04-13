@@ -8,14 +8,17 @@ public class CollectorMovement : MonoBehaviour
     [SerializeField] public GameObject selectedRoadHub = null;
     
     [Header("Movement")]
-    [SerializeField] NavMeshAgent myAgent;
+    [SerializeField] public NavMeshAgent myAgent;
+    [SerializeField] public bool gotDestination = false;
     [SerializeField] public bool isMoving = false;
+    [SerializeField] private bool isRotating = false;
+    [SerializeField] private float rotationAngle;
+    [SerializeField] private float rotationSpeed;
+    [SerializeField] private float movementSpeed;
     [SerializeField] private float distanceToLocation;
-    [SerializeField] private float distanceToHubFromCollectorTemp;
-    [SerializeField] private float distanceToHubFromDestinationTemp;
-    [SerializeField] private float distanceToHubFromCollector;
-    [SerializeField] private float distanceToHubFromDestination;
     [SerializeField] private float arrivalTollerance;
+    [SerializeField] private float angleTollerance;
+    [SerializeField] private Vector3 agentDestination;
 
     [Header("RoadHubs")]
     [SerializeField] public RoadHub[] allRoadHubs;
@@ -30,54 +33,80 @@ public class CollectorMovement : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        if (selectedRoadHub)
+        agentDestination = myAgent.destination;
+        float velocity = myAgent.velocity.magnitude;
+        Debug.Log($"myAgent velocity == {velocity}.");
+
+        if (gotDestination && (myAgent.velocity.magnitude > 0))
         {
-            // calculate distance remaining
-            distanceToLocation = Vector3.Distance(gameObject.transform.position, myAgent.destination);
+            rotationAngle = Vector3.Angle(transform.position, myAgent.steeringTarget);
+        }
+        else
+        {
+            rotationAngle = 0.0f;
+        }
 
-            // find the closest hub to the Collector
-            FindNextHub();
-
-            // check to see if the agent is close enough to the destination...
-            if (myAgent.velocity.magnitude == 0 && distanceToLocation == 0)
-            {
-                // .. then stop all moving variables
-                StopMoving();
-            }
+        if (selectedRoadHub && gotDestination)
+        {
+            GotDestination();
         }
     }
 
-    private void FindNextHub()
+    private void GotDestination()
     {
-        distanceToHubFromCollectorTemp = Mathf.Infinity;
-        distanceToHubFromDestinationTemp = Mathf.Infinity;
+        // Debug.Log($"angle to roate == {Vector3.Angle(transform.position, myAgent.steeringTarget)}");
 
-        // set distances               
-        foreach (RoadHub roadHub in allRoadHubs)
+        // if destination is set and the angle toward the first intersection is greater than zero
+        if (selectedRoadHub && (Mathf.Abs(rotationAngle) > angleTollerance))
         {
-            // ingnore the current roadHub
-            if (Vector3.Distance(roadHub.transform.position, gameObject.transform.position) <= 1)
-            {
-                continue;
-            }
+            // rotate before moving
+            isRotating = true;
+            FaceForward(myAgent.steeringTarget);
+        }
+        // if not rotating, and has destination set...
+        else if (!isRotating && selectedRoadHub)
+        {
+            Debug.Log("started moving toward destination.");
 
-            // get the distance from the roadHub to the Collector
-            distanceToHubFromCollector = Vector3.Distance(gameObject.transform.position, roadHub.transform.position);
+            // ... move toward destination
+            MoveToHub(selectedRoadHub);
+        }
+        // if is moving and close enough to destination...
+        else if (isMoving && (distanceToLocation <= arrivalTollerance))
+        {
+            // ... stop moving
+            StopMoving();
+        }
+    }
 
-            // get the distance from the roadHub to the Destination
-            distanceToHubFromDestination = Vector3.Distance(selectedRoadHub.transform.position, roadHub.transform.position);
+    private void FaceForward(Vector3 _facingTarget)
+    {
+        // if destination is set and the 
+        if (selectedRoadHub && (Mathf.Abs(rotationAngle) > 0))
+        {
+            // debug
+            Debug.Log("Collector needs to rotate before moving.");
 
-            // if the hub is closer to the Collector than the last hub...
-            if (distanceToHubFromCollector <= distanceToHubFromCollectorTemp)
-            {
-                // overwrite the temp variable
-                distanceToHubFromCollectorTemp = distanceToHubFromCollector;
+            // Determine which direction to rotate towards
+            Vector3 targetDirection = _facingTarget - transform.position;
 
-                // ... mark this roadHub as the nextClosestHub
-                nextClosestHub = roadHub.transform.gameObject;
-            }
+            // The step size is equal to speed times frame time.
+            float singleStep = rotationSpeed * Time.deltaTime;
+
+            // rotate the forward direction toward the target direction by one step
+            Vector3 newDir = Vector3.RotateTowards(transform.forward, targetDirection, singleStep, 0.0f);
+
+            // Draw a ray pointing at our target in
+            Debug.DrawRay(transform.position, newDir, Color.red);
+
+            // Calculate a rotation a step closer to the target and applies rotation to this object
+            transform.rotation = Quaternion.LookRotation(newDir);
+        }
+        else
+        {
+            isRotating = false;
         }
     }
 
@@ -89,28 +118,31 @@ public class CollectorMovement : MonoBehaviour
         if(myAgent)
         {
             isMoving = true;
-
-            // if the Collector is not yet at the destination hub...
-            if (distanceToHubFromCollector < 0)
-            {
-                // ... move towards the closest Hub
-
-
-
-
-                // ...move the agent toward the location
-                myAgent.destination = selectedRoadHub.transform.position;
-            }
+            myAgent.destination = _selectedHub.transform.position;
         }
+    }
+
+    public void ResetDestination()
+    {
+        // update bools
+        isRotating = false;
+        isMoving = false;
+        gotDestination = true;
+
+        rotationAngle = 0.0f;
     }
 
     public void StopMoving()
     {
         // debug
-        // Debug.Log("Collector stopped moving.");
+        Debug.Log("Collector stopped moving.");
 
-        // make the agent stop moving
+        // update bools
+        gotDestination = false;
+        isRotating = false;
         isMoving = false;
+
+        rotationAngle = 0.0f;
 
         // empty the GO
         selectedRoadHub = null;

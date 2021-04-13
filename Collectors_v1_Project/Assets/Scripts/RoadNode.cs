@@ -10,7 +10,8 @@ public class RoadNode : MonoBehaviour
 
     void Start()
     {
-        myParentGO = gameObject.GetComponentInParent<RoadHub>().gameObject;
+        if(gameObject.GetComponentInParent<RoadHub>())
+            myParentGO = gameObject.GetComponentInParent<RoadHub>().gameObject;
     }
 
     private void OnTriggerStay(Collider collision)

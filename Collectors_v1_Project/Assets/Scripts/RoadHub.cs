@@ -32,31 +32,23 @@ public class RoadHub : MonoBehaviour
         m_Renderer.material.color = m_MouseOverColor;
   
         // trigger movement if the Collector is not already moving
-        if(!myCollectorMovement.isMoving)
+        if(myCollectorMovement != null)
         {
             // only trigger if the Player is 
             if (Input.GetKeyDown(KeyCode.Mouse0))
             {
-                // debug
-                // Debug.Log("mouse0 pressed.");
-                
                 // store a reference to this object to the RoadMap
                 myCollectorMovement.selectedRoadHub = gameObject;
 
-                // if not already moving...
-                if (!myCollectorMovement.isMoving)
-                {
-                    // ... trigger the function to move
-                    myCollectorMovement.MoveToHub(gameObject);
-                }
+                // set this location as the destination
+                myCollectorMovement.ResetDestination();
             }
         }
     }
 
     void OnMouseExit()
     {
-        // Debug.Log($"MouseExit {gameObject.name}.");
+        // change it back to the original colour
         m_Renderer.material.color = m_OriginalColor;
-        // myRoadMap.hoverOverRoadHub = null;
     }
 }
