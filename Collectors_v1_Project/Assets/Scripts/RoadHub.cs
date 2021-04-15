@@ -37,6 +37,9 @@ public class RoadHub : MonoBehaviour
             // only trigger if the Player is 
             if (Input.GetKeyDown(KeyCode.Mouse0))
             {
+                // stop where you are
+                myCollectorMovement.myAgent.destination = myCollectorMovement.transform.position;
+
                 // store a reference to this object to the RoadMap
                 myCollectorMovement.selectedRoadHub = gameObject;
 

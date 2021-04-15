@@ -37,7 +37,7 @@ public class CollectorMovement : MonoBehaviour
     {
         agentDestination = myAgent.destination;
         float velocity = myAgent.velocity.magnitude;
-        Debug.Log($"myAgent velocity == {velocity}.");
+        // Debug.Log($"myAgent velocity == {velocity}.");
 
         if (gotDestination && (myAgent.velocity.magnitude > 0))
         {
@@ -68,7 +68,7 @@ public class CollectorMovement : MonoBehaviour
         // if not rotating, and has destination set...
         else if (!isRotating && selectedRoadHub)
         {
-            Debug.Log("started moving toward destination.");
+            // Debug.Log("started moving toward destination.");
 
             // ... move toward destination
             MoveToHub(selectedRoadHub);
@@ -87,7 +87,7 @@ public class CollectorMovement : MonoBehaviour
         if (selectedRoadHub && (Mathf.Abs(rotationAngle) > 0))
         {
             // debug
-            Debug.Log("Collector needs to rotate before moving.");
+            // Debug.Log("Collector needs to rotate before moving.");
 
             // Determine which direction to rotate towards
             Vector3 targetDirection = _facingTarget - transform.position;
