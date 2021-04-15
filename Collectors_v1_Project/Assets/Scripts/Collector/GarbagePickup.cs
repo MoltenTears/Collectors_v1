@@ -6,6 +6,7 @@ using UnityEngine.AI;
 public class GarbagePickup : MonoBehaviour
 {
     [SerializeField] public bool isCollecting = false;
+    [SerializeField] public float garbageInCollector;
     [SerializeField] public float collectionSpeed;
     [SerializeField] private NavMeshAgent myNavMeshAgent;
     [SerializeField] private GameManager myGameManager;
@@ -25,8 +26,9 @@ public class GarbagePickup : MonoBehaviour
             tempHouseGarbage = collision.GetComponentInParent<GarbageManager>().myGarbageLevel;
         }
 
-        // if the collector runs into the house trigger AND the house has Garbage AND the Collector is in pickup mode...
-        if (collision.CompareTag("Garbage") && tempHouseGarbage > 0 && isCollecting)
+        if (collision.CompareTag("Garbage") // if the collector runs into the house trigger
+            && collision.GetComponentInParent<GarbageManager>().garbageNeedsCollecting // AND the house has Garbage
+            && isCollecting) // AND the Collector is in pickup mode...
         {
             // debug
             Debug.Log("Collector near house with garbage.");
@@ -50,20 +52,29 @@ public class GarbagePickup : MonoBehaviour
 
             tempHouseGarbage = collision.GetComponentInParent<GarbageManager>().myGarbageLevel;
         }
-
-        // if the collector runs into the house trigger AND the house has Garbage AND the Collector is in pickup mode...
-        if (collision.CompareTag("Garbage") && tempHouseGarbage > 0 && isCollecting)
+        // IF...
+        if (collision.CompareTag("Garbage") //  the collector runs into the house trigger
+            && collision.GetComponentInParent<GarbageManager>().garbageNeedsCollecting // AND the house has Garbage
+            && isCollecting) // AND the Collector is in pickup mode...
         {
             // ... get a reference to the house's Garbage Manager
             GarbageManager tempGM = collision.GetComponentInParent<GarbageManager>();
 
+            // temp variable for collecting garbage
+            float garbageCollected = (collectionSpeed * Time.deltaTime) / myGameManager.garbageDivisor;
+
             // ... reduce the garbage in the house at a given speed
-            tempGM.myGarbageLevel -= (collectionSpeed * Time.deltaTime) / myGameManager.garbageDivisor;
+            tempGM.myGarbageLevel -= garbageCollected;
+
+            // ... and add it to the Collector
+            garbageInCollector += garbageCollected;
         }
-        else if (collision.CompareTag("Garbage") && tempHouseGarbage <= 0 && isCollecting)
+        else if (collision.CompareTag("Garbage") 
+            && !collision.GetComponentInParent<GarbageManager>().garbageNeedsCollecting
+            && isCollecting)
         {
             // debug
-            Debug.Log("No more garbage at house, Collector resumed collection.");
+            Debug.Log("No more garbage at house, Collector not stopping.");
             
             // ... resume the movement
             myNavMeshAgent.isStopped = false;
@@ -76,6 +87,7 @@ public class GarbagePickup : MonoBehaviour
         {
             // tell the house, the collector has left
             collision.GetComponentInParent<GarbageManager>().garbageBeingCollected = false;
+            collision.GetComponentInParent<GarbageManager>().garbageNeedsCollecting = false;
         }
     }
 }

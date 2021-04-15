@@ -8,6 +8,7 @@ public class GarbageManager : MonoBehaviour
     [SerializeField] public float myGarbageSpeed;
     [SerializeField] public float myGarbageLevel;
     [SerializeField] private GarbageBin[] binArray;
+    [SerializeField] public bool garbageNeedsCollecting = false;
     [SerializeField] public bool garbageBeingCollected = false;
 
     [Header("External References")]
@@ -38,6 +39,18 @@ public class GarbageManager : MonoBehaviour
     private void AccumulateGarbage()
     {
         myGarbageLevel += (myGarbageSpeed * Time.deltaTime) / myGameManager.garbageDivisor;
+
+        // if there's at least one bin out...
+        if (myGarbageLevel >= myGameManager.binSizeSmall)
+        {
+            // ... Collector may collect
+            garbageNeedsCollecting = true;
+        }
+        else
+        {
+            // ... don't stop at the house
+            garbageNeedsCollecting = false;
+        }
     }
 
     private void SetOutBins()
@@ -52,7 +65,8 @@ public class GarbageManager : MonoBehaviour
         float tempGarbage = myGarbageLevel;
         for (int i = 0; i <binArray.Length; i++)
         {
-            if (tempGarbage >= myGameManager.binSizeMedium)
+            // if there's more garbage than a large bin...
+            if (tempGarbage >= myGameManager.binSizeLarge)
             {
                 // show the bin
                 binArray[i].binLarge.SetActive(true);
@@ -60,7 +74,9 @@ public class GarbageManager : MonoBehaviour
                 // reduce the temp value
                 tempGarbage -= myGameManager.binSizeLarge;
             }
-            else if (tempGarbage >= myGameManager.binSizeSmall)
+
+            // if there's More garbage than a medium bin...
+            else if (tempGarbage >= myGameManager.binSizeMedium)
             {
                 // show the bin
                 binArray[i].binMedium.SetActive(true);
@@ -68,7 +84,9 @@ public class GarbageManager : MonoBehaviour
                 // reduce the temp value
                 tempGarbage -= myGameManager.binSizeMedium;
             }
-            else if (tempGarbage >= 0)
+
+            // if there's more garbage than a small bin...
+            else if (tempGarbage >= myGameManager.binSizeSmall)
             {
                 // show the bin
                 binArray[i].binSmall.SetActive(true);

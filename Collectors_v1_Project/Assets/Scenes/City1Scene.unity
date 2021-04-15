@@ -11460,7 +11460,7 @@ MonoBehaviour:
   houseSingleMaterial: {fileID: 2100000, guid: 1412852a5fc929745a72a4c96b26d4ad, type: 2}
   houseFamilyMaterial: {fileID: 2100000, guid: 4b1deb84a0c737e4fb08dd5d37e3f7d7, type: 2}
   houseShareMaterial: {fileID: 2100000, guid: 7e46d3c8c55631540abc737a26dee398, type: 2}
-  garbageDivisor: 3
+  garbageDivisor: 1
   garbageSpeedSingle: 1
   garbageSpeedFamily: 2
   singleGarbageShare: 3
