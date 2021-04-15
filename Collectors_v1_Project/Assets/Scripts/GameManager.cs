@@ -14,4 +14,13 @@ public class GameManager : MonoBehaviour
     [SerializeField] public float garbageSpeedSingle;
     [SerializeField] public float garbageSpeedFamily;
     [SerializeField] public float singleGarbageShare;
+
+    [Header("Bins")]
+    [SerializeField] public GameObject binSmall;
+    [SerializeField] public GameObject binMedium;
+    [SerializeField] public GameObject binLarge;
+    [SerializeField] public int binSizeSmall;
+    [SerializeField] public int binSizeMedium;
+    [SerializeField] public int binSizeLarge;
+
 }

@@ -15,6 +15,7 @@ public class HouseManager : MonoBehaviour
 
     [Header("External References")]
     [SerializeField] private GameManager myGameManager;
+    [SerializeField] private GarbageManager myGarbageManager;
 
     [Header("House Details - Visuals")]
     [SerializeField] private Material myHouseMaterial;
@@ -22,17 +23,15 @@ public class HouseManager : MonoBehaviour
 
     [Header("House Details - Occupancy")]
     [SerializeField] private HouseType myHouseType;
-    [SerializeField] private bool isOccupied;
+    [SerializeField] public bool isOccupied;
 
-    [Header("House Details - garbage")]
-    [SerializeField] private float myGarbageSpeed;
-    [SerializeField] public float myGarbageLevel;
 
 
     private void Start()
     {
         // get realtime references
         myGameManager = FindObjectOfType<GameManager>();
+        myGarbageManager = GetComponent<GarbageManager>();
         myHouseMeshRender = GetComponentInChildren<MeshRenderer>();
 
         // set some variables
@@ -42,16 +41,10 @@ public class HouseManager : MonoBehaviour
 
     private void Update()
     {
-        if (isOccupied)
-        {
-            AccumulateGarbage();
-        }
+
     }
 
-    private void AccumulateGarbage()
-    {
-        myGarbageLevel += (myGarbageSpeed * Time.deltaTime) / myGameManager.garbageDivisor;
-    }
+
 
     private void RandomHouseType()
     {
@@ -66,19 +59,19 @@ public class HouseManager : MonoBehaviour
             case HouseType.SINGLE:
                 {
                     myHouseMaterial = myGameManager.houseSingleMaterial;
-                    myGarbageSpeed = myGameManager.garbageSpeedSingle;
+                    myGarbageManager.myGarbageSpeed = myGameManager.garbageSpeedSingle;
                     break;
                 }
             case HouseType.FAMILY:
                 {
                     myHouseMaterial = myGameManager.houseFamilyMaterial;
-                    myGarbageSpeed = myGameManager.garbageSpeedFamily;
+                    myGarbageManager.myGarbageSpeed = myGameManager.garbageSpeedFamily;
                     break;
                 }
             case HouseType.SHARE:
                 {
                     myHouseMaterial = myGameManager.houseShareMaterial;
-                    myGarbageSpeed = myGameManager.singleGarbageShare;
+                    myGarbageManager.myGarbageSpeed = myGameManager.singleGarbageShare;
                     break;
                 }
             case HouseType.NONE:
