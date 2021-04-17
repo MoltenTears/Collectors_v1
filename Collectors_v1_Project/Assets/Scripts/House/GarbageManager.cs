@@ -36,6 +36,7 @@ public class GarbageManager : MonoBehaviour
         }
     }
 
+
     private void AccumulateGarbage()
     {
         myGarbageLevel += (myGarbageSpeed * Time.deltaTime) / myGameManager.garbageDivisor;
