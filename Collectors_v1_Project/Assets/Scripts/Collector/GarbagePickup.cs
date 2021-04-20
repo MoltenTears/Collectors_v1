@@ -30,7 +30,7 @@ public class GarbagePickup : MonoBehaviour
     {
         if (garbageInCollector >= garbageInCollectorMax && !isDeliveringWaste)
         {
-            // TODO DisposeOfWaste()
+            isDeliveringWaste = true;
         }
 
         if (isReturningToDepot)
@@ -81,6 +81,7 @@ public class GarbagePickup : MonoBehaviour
 
                 tempHouseGarbage = collision.GetComponentInParent<GarbageManager>().myGarbageLevel;
             }
+
             // IF...
             if (collision.CompareTag("Garbage") //  the collector runs into the house trigger
                 && collision.GetComponentInParent<GarbageManager>().garbageNeedsCollecting // AND the house has Garbage
@@ -137,25 +138,27 @@ public class GarbagePickup : MonoBehaviour
 
     public void ReturnToDepot()
     {
-        // reset bools
-        isCollecting = false;
+        if (myCollectorMovement)
+        {
+            // store a reference of the Waste Centre
+            myCollectorMovement.selectedRoadHub = myDepotFrontGate.roadHubAtDepotFrontGate;
 
-        // store a reference of the Waste Centre
-        myCollectorMovement.selectedRoadHub = myDepotFrontGate.roadHubAtDepotFrontGate;
-
-        // set this location as the destination
-        myCollectorMovement.ResetDestination();
+            // set this location as the destination
+            myCollectorMovement.ResetDestination();
+        }
     }
 
     public void DeliveringWaste()
     {
-        // reset bools
-        isCollecting = false;
+        if (myCollectorMovement)
+        {
+            // store a reference of the Waste Centre
+            myCollectorMovement.selectedRoadHub = myWasteCentreFrontGate.roadHubAtWasteCentreFrontGate;
 
-        // store a reference of the Waste Centre
-        myCollectorMovement.selectedRoadHub = myWasteCentreFrontGate.roadHubAtWasteCentreFrontGate;
+            // set this location as the destination
+            myCollectorMovement.ResetDestination();
+        }
 
-        // set this location as the destination
-        myCollectorMovement.ResetDestination();
+
     }
 }

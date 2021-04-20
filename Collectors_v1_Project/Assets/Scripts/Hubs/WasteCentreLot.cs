@@ -6,6 +6,7 @@ public class WasteCentreLot : MonoBehaviour
 {
     [SerializeField] private WasteQueueSpot[] myWasteQueueSpots;
     [SerializeField] private GameObject[] myCollectorPositions;
+    [SerializeField] private WasteCentreFrontGate myWasteCentreFrontGate;
 
     [SerializeField] public Queue<GameObject> collectorsWaiting = new Queue<GameObject>();
 
@@ -21,6 +22,7 @@ public class WasteCentreLot : MonoBehaviour
     void Start()
     {
         myWasteCentreManager = GetComponentInParent<WasteCenteManager>();
+        myWasteCentreFrontGate = GetComponentInChildren<WasteCentreFrontGate>();
         FindQueueSpots();
     }
 
@@ -28,18 +30,37 @@ public class WasteCentreLot : MonoBehaviour
     {
         UpdateQueue();
 
-        // RollCall();
-
         NextCollector();
 
         ReadyToDumpWaste();
+
+        ReleaseCollector();
+    }
+
+    private void ReleaseCollector()
+    {
+        if (nextCollector && nextCollector.GetComponentInChildren<GarbagePickup>().isReturningToDepot)
+        {
+            // turn back on NAvMeshAgent
+            nextCollector.GetComponent<CollectorMovement>().myAgent.enabled = true;
+
+            // remove Collector from from of List
+            lotOccupied = false;
+            nextCollector = null;
+            collectorsWaitingList.RemoveAt(0);
+        }
+    }
+
+    public void GetNextCollector()
+    {
+        // TODO actions to take after last Collector left dumping spot
     }
 
     private void ReadyToDumpWaste()
     {
         if (nextCollector)
         {
-            Debug.Log($"Collector name {nextCollector.name} notified to drop waste.");
+            // Debug.Log($"Collector name {nextCollector.name} notified to drop waste.");
             nextCollector.GetComponentInChildren<WasteDrop>().isDroppingWaste = true;
         }
     }
@@ -49,7 +70,7 @@ public class WasteCentreLot : MonoBehaviour
         for (int i = 0; i < collectorsWaitingList.Count; i++)
         {
             // turn off the NavMesh Agent
-            collectorsWaitingList[i].GetComponent<CollectorMovement>().myAgent.enabled = false;
+            collectorsWaitingList[i].GetComponentInParent<CollectorMovement>().myAgent.enabled = false;
 
             // put it in an assigned spot
             collectorsWaitingList[i].transform.position = myCollectorPositions[i].transform.position;
@@ -78,46 +99,4 @@ public class WasteCentreLot : MonoBehaviour
 
         }
     }
-
-    //public void ShowCollector()
-    //{
-    //    // reset all the parking lots
-    //    HideCollector();
-
-    //    switch (currentCollectorDisplayed)
-    //    {
-    //        case CollectorTypes.CollectorType.BASE:
-    //            {
-    //                // show the BASE collector
-    //                baseCollector.SetActive(true);
-    //                break;
-    //            }
-    //        case CollectorTypes.CollectorType.NONE:
-    //            {
-    //                // do nothing, there is no collector in this spot
-    //                break;
-    //            }
-    //        default:
-    //            {
-    //                // error in switch
-    //                Debug.LogError("DepotLot ShowCollector() switch result default. Review Error as lot may be full");
-    //                HideCollector();
-    //                break;
-    //            }
-    //    }
-    //}
-
-    //private void HideCollector()
-    //{
-    //    // use this to hide all collector types for this parking lot
-    //    baseCollector.SetActive(false);
-    //}
-
-    //private void RollCall()
-    //{
-    //    if (collectorsWaiting.Count > 0)
-    //    {
-    //        Debug.Log($"{collectorsWaiting.Count} Collector(s) at Waste Centre.");
-    //    }
-    //}
 }
