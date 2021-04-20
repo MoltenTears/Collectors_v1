@@ -4,17 +4,11 @@ using UnityEngine;
 
 public class DepotLot : MonoBehaviour
 {
-    public enum CollectorInParking
-    {
-        NONE,
-        BASE
-    }
-
     [Header("Collector References")]
     [SerializeField] public GameObject baseCollector;
 
     [Header("Parking Details")]
-    [SerializeField] public CollectorInParking myCollectorInParking;
+    [SerializeField] public CollectorTypes.CollectorType myCollectorInParking;
 
     // Start is called before the first frame update
     void Start()
@@ -35,13 +29,13 @@ public class DepotLot : MonoBehaviour
 
         switch (myCollectorInParking)
         {
-            case CollectorInParking.BASE:
+            case CollectorTypes.CollectorType.BASE:
                 {
                     // show the BASE collector
                     baseCollector.SetActive(true);
                     break;
                 }
-            case CollectorInParking.NONE:
+            case CollectorTypes.CollectorType.NONE:
                 {
                     // do nothing, there is no collector in this spot
                     break;

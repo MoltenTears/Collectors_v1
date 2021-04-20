@@ -1072,7 +1072,7 @@ PrefabInstance:
     - target: {fileID: 4458835292998509290, guid: 4b531b77815564e4db47c3b825e55f9e,
         type: 3}
       propertyPath: m_Name
-      value: FrontGate
+      value: DepotGate
       objectReference: {fileID: 0}
     - target: {fileID: 4458835292998509293, guid: 4b531b77815564e4db47c3b825e55f9e,
         type: 3}

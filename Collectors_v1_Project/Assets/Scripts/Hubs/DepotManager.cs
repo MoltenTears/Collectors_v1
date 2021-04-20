@@ -28,7 +28,7 @@ public class DepotManager : MonoBehaviour
         {
             if (tempBaseCollectors > 0)
             {
-                myDepotLots[i].myCollectorInParking = DepotLot.CollectorInParking.BASE;
+                myDepotLots[i].myCollectorInParking = CollectorTypes.CollectorType.BASE;
                 --tempBaseCollectors;
             }
         }

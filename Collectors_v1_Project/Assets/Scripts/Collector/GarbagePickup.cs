@@ -6,6 +6,7 @@ using UnityEngine.AI;
 public class GarbagePickup : MonoBehaviour
 {
     [SerializeField] public bool isCollecting = false;
+    [SerializeField] public bool isDeliveringWaste = false;
     [SerializeField] public bool isReturningToDepot = false;
     [SerializeField] public float garbageInCollector;
     [SerializeField] public float garbageInCollectorMax;
@@ -14,6 +15,7 @@ public class GarbagePickup : MonoBehaviour
     [SerializeField] private NavMeshAgent myNavMeshAgent;
     [SerializeField] private GameManager myGameManager;
     [SerializeField] private DepotFrontGate myDepotFrontGate;
+    [SerializeField] private WasteCentreFrontGate myWasteCentreFrontGate;
 
     private void Start()
     {
@@ -21,19 +23,30 @@ public class GarbagePickup : MonoBehaviour
         myNavMeshAgent = GetComponentInParent<NavMeshAgent>();
         myGameManager = FindObjectOfType<GameManager>();
         myDepotFrontGate = FindObjectOfType<DepotFrontGate>();
+        myWasteCentreFrontGate = FindObjectOfType<WasteCentreFrontGate>();
     }
 
     private void LateUpdate()
     {
-        if (garbageInCollector >= garbageInCollectorMax && !isReturningToDepot)
+        if (garbageInCollector >= garbageInCollectorMax && !isDeliveringWaste)
+        {
+            // TODO DisposeOfWaste()
+        }
+
+        if (isReturningToDepot)
         {
             ReturnToDepot();
+        }
+
+        if (isDeliveringWaste)
+        {
+            DeliveringWaste();
         }
     }
 
     private void OnTriggerEnter(Collider collision)
     {
-        if (isCollecting && !isReturningToDepot)
+        if (isCollecting && !isDeliveringWaste)
         {
             // temp variable
             float tempHouseGarbage = 0;
@@ -57,7 +70,7 @@ public class GarbagePickup : MonoBehaviour
 
     private void OnTriggerStay(Collider collision)
     {
-        if (isCollecting && !isReturningToDepot)
+        if (isCollecting && !isDeliveringWaste)
         {
             // temp variable
             float tempHouseGarbage = 0;
@@ -108,7 +121,7 @@ public class GarbagePickup : MonoBehaviour
 
     private void OnTriggerExit(Collider collision)
     {
-        if (isCollecting && !isReturningToDepot)
+        if (isCollecting && !isDeliveringWaste)
         {
             if (collision.GetComponentInParent<GarbageManager>())
             {
@@ -126,10 +139,21 @@ public class GarbagePickup : MonoBehaviour
     {
         // reset bools
         isCollecting = false;
-        isReturningToDepot = true;
 
-        // store a reference to this object to the RoadMap
+        // store a reference of the Waste Centre
         myCollectorMovement.selectedRoadHub = myDepotFrontGate.roadHubAtDepotFrontGate;
+
+        // set this location as the destination
+        myCollectorMovement.ResetDestination();
+    }
+
+    public void DeliveringWaste()
+    {
+        // reset bools
+        isCollecting = false;
+
+        // store a reference of the Waste Centre
+        myCollectorMovement.selectedRoadHub = myWasteCentreFrontGate.roadHubAtWasteCentreFrontGate;
 
         // set this location as the destination
         myCollectorMovement.ResetDestination();

@@ -241,19 +241,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   selectedRoadHub: {fileID: 0}
   myAgent: {fileID: 0}
-  gotDestination: 0
+  myCollectorType: 1
   isMoving: 0
+  isAtHouse: 0
+  agentSpeed: 0
   isRotating: 0
+  angleTollerance: 0
   rotationAngle: 0
   rotationSpeed: 0
-  movementSpeed: 0
-  distanceToLocation: 0
+  gotDestination: 0
   arrivalTollerance: 1.1
-  angleTollerance: 0
+  distanceToLocation: 0
   agentDestination: {x: 0, y: 0, z: 0}
-  allRoadHubs: []
-  nextClosestHub: {fileID: 0}
-  nextHubToDestination: {fileID: 0}
 --- !u!195 &3865105313608338846
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -364,10 +363,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isCollecting: 0
+  isDeliveringWaste: 0
   isReturningToDepot: 0
   garbageInCollector: 0
   garbageInCollectorMax: 100
   collectionSpeed: 20
+  myCollectorMovement: {fileID: 0}
   myNavMeshAgent: {fileID: 0}
   myGameManager: {fileID: 0}
   myDepotFrontGate: {fileID: 0}
+  myWasteCentreFrontGate: {fileID: 0}

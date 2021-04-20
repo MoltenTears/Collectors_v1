@@ -7,6 +7,7 @@ public class CollectorMovement : MonoBehaviour
     
     [Header("References")]
     [SerializeField] public NavMeshAgent myAgent;
+    [SerializeField] public CollectorTypes.CollectorType myCollectorType;
 
     [Header("Movement")]
     [SerializeField] public bool isMoving = false;
@@ -110,7 +111,7 @@ public class CollectorMovement : MonoBehaviour
 
     public void MoveToHub(GameObject _selectedHub)
     {
-        if(myAgent)
+        if(myAgent && myAgent.enabled)
         {
             // allow the NavMeshAgent to move again
             myAgent.isStopped = false;
