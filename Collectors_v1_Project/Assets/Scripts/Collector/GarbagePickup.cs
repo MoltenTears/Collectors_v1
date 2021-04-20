@@ -30,6 +30,7 @@ public class GarbagePickup : MonoBehaviour
     {
         if (garbageInCollector >= garbageInCollectorMax && !isDeliveringWaste)
         {
+            isCollecting = false;
             isDeliveringWaste = true;
         }
 
@@ -48,13 +49,6 @@ public class GarbagePickup : MonoBehaviour
     {
         if (isCollecting && !isDeliveringWaste)
         {
-            // temp variable
-            float tempHouseGarbage = 0;
-            if (collision.GetComponentInParent<GarbageManager>())
-            {
-                tempHouseGarbage = collision.GetComponentInParent<GarbageManager>().myGarbageLevel;
-            }
-
             if (collision.CompareTag("Garbage") // if the collector runs into the house trigger
                 && collision.GetComponentInParent<GarbageManager>().garbageNeedsCollecting // AND the house has Garbage
                 && isCollecting) // AND the Collector is in pickup mode...
@@ -77,8 +71,6 @@ public class GarbagePickup : MonoBehaviour
         
             if (collision.GetComponentInParent<GarbageManager>())
             {
-                collision.GetComponentInParent<GarbageManager>().garbageBeingCollected = true;
-
                 tempHouseGarbage = collision.GetComponentInParent<GarbageManager>().myGarbageLevel;
             }
 
@@ -87,9 +79,6 @@ public class GarbagePickup : MonoBehaviour
                 && collision.GetComponentInParent<GarbageManager>().garbageNeedsCollecting // AND the house has Garbage
                 && isCollecting) // AND the Collector is in pickup mode...
             {
-                // indicate the Collector is collecting
-                myCollectorMovement.isAtHouse = true;
-
                 // ... get a reference to the house's Garbage Manager
                 GarbageManager tempGM = collision.GetComponentInParent<GarbageManager>();
 
@@ -101,6 +90,14 @@ public class GarbagePickup : MonoBehaviour
 
                 // ... and add it to the Collector
                 garbageInCollector += garbageCollected;
+
+                // if the house has run out of garbage
+                if (tempGM.myGarbageLevel <= 0)
+                {
+                    tempGM.garbageNeedsCollecting = false;
+                    tempGM.garbageBeingCollected = false;
+                    tempGM.myGarbageLevel = 0.0f;
+                }
             }
             else if (collision.CompareTag("Garbage") 
                 && !collision.GetComponentInParent<GarbageManager>().garbageNeedsCollecting
@@ -113,11 +110,6 @@ public class GarbagePickup : MonoBehaviour
                 myNavMeshAgent.isStopped = false;
             }
         }
-        else if (!isCollecting)
-        {
-            myCollectorMovement.isAtHouse = false;
-        }
-
     }
 
     private void OnTriggerExit(Collider collision)
@@ -129,9 +121,6 @@ public class GarbagePickup : MonoBehaviour
                 // tell the house, the collector has left
                 collision.GetComponentInParent<GarbageManager>().garbageBeingCollected = false;
                 collision.GetComponentInParent<GarbageManager>().garbageNeedsCollecting = false;
-
-                // tell the collector it is no longer collecting
-                myCollectorMovement.isAtHouse = false;
             }
         }
     }

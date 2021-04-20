@@ -11,7 +11,6 @@ public class CollectorMovement : MonoBehaviour
 
     [Header("Movement")]
     [SerializeField] public bool isMoving = false;
-    [SerializeField] public bool isAtHouse = false;
     [SerializeField] private float agentSpeed;
 
     [Header("Rotation Details")]
