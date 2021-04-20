@@ -14,7 +14,6 @@ public class WasteCentreLot : MonoBehaviour
     [Header("Collectors Details")]
     [SerializeField] private bool lotOccupied;
     [SerializeField] public GameObject nextCollector;
-    [SerializeField] private CollectorTypes.CollectorType currentCollectorDisplayed;
     [SerializeField] private GameObject baseCollector;
 
     [Header("References")]
@@ -29,8 +28,8 @@ public class WasteCentreLot : MonoBehaviour
 
     private void FindQueueSpots()
     {
-        myWasteQueueSpots = new WasteQueueSpot[8];
-        myCollectorPositions = new GameObject[8];
+        myWasteQueueSpots = new WasteQueueSpot[9];
+        myCollectorPositions = new GameObject[9];
         myWasteQueueSpots = GetComponentsInChildren<WasteQueueSpot>();
         for (int i = 0; i < myWasteQueueSpots.Length; i++)
         {
@@ -45,7 +44,7 @@ public class WasteCentreLot : MonoBehaviour
 
         // RollCall();
 
-        // NextCollector();
+        NextCollector();
     }
 
     public void UpdateQueue()
@@ -61,21 +60,16 @@ public class WasteCentreLot : MonoBehaviour
         }
     }
 
-    //public void NextCollector()
-    //{
-    //    if (collectorsWaiting.Count > 0/* && !lotOccupied*/)
-    //    {
-    //        lotOccupied = true;
+    public void NextCollector()
+    {
+        if (collectorsWaitingList.Count > 0 && !lotOccupied)
+        {
+            lotOccupied = true;
 
-    //        nextCollector = collectorsWaiting.Peek();
+            nextCollector = collectorsWaitingList[0];
 
-    //        Debug.Log($"Next Collector name is: {nextCollector.name}.");
-
-    //        //nextCollector = collectorsWaiting.Dequeue();
-    //        // Debug.Break();
-
-    //    }
-    //}
+        }
+    }
 
     //public void ShowCollector()
     //{

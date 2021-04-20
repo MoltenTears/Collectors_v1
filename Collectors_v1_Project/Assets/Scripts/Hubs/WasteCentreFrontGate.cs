@@ -7,7 +7,6 @@ public class WasteCentreFrontGate : MonoBehaviour
     [SerializeField] public GameObject roadHubAtWasteCentreFrontGate;
     [SerializeField] public WasteCenteManager myWasteCentreManager;
     [SerializeField] public WasteCentreLot myWasteCentreLot;
-    [SerializeField] private float yieldTime = 0.5f;
 
     private void Start()
     {
@@ -23,7 +22,8 @@ public class WasteCentreFrontGate : MonoBehaviour
             // pause the collector movement
             collision.GetComponentInParent<CollectorMovement>().StopMoving();
 
-            myWasteCentreLot.collectorsWaiting.Enqueue(collision.transform.parent.gameObject);
+
+            // myWasteCentreLot.collectorsWaiting.Enqueue(collision.transform.parent.gameObject);
             myWasteCentreLot.collectorsWaitingList.Add(collision.transform.parent.gameObject);
 
             
