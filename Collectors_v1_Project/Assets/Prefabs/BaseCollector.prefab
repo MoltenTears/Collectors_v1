@@ -302,6 +302,7 @@ GameObject:
   - component: {fileID: 7220188632256177166}
   - component: {fileID: 361343568584250067}
   - component: {fileID: 4581673058760540921}
+  - component: {fileID: 5554342318464476254}
   m_Layer: 10
   m_Name: Trigger
   m_TagString: Collector
@@ -359,3 +360,15 @@ MonoBehaviour:
   myGameManager: {fileID: 0}
   myDepotFrontGate: {fileID: 0}
   myWasteCentreFrontGate: {fileID: 0}
+--- !u!114 &5554342318464476254
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8837370497481063349}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f708b06cbbca07043a7e09c0cfb215d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -28911,6 +28911,16 @@ PrefabInstance:
       propertyPath: m_Mass
       value: 10000
       objectReference: {fileID: 0}
+    - target: {fileID: 5554342318464476254, guid: d14caf168012dbe4dbd74b6b6041df94,
+        type: 3}
+      propertyPath: dropoffSpeed
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 5554342318464476254, guid: d14caf168012dbe4dbd74b6b6041df94,
+        type: 3}
+      propertyPath: isDroppingWaste
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8590226492394693771, guid: d14caf168012dbe4dbd74b6b6041df94,
         type: 3}
       propertyPath: m_RootOrder
@@ -32118,7 +32128,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 1
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &1887993635
 MonoBehaviour:
@@ -32132,6 +32142,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f708b06cbbca07043a7e09c0cfb215d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  myGarbagePickup: {fileID: 0}
+  myWasteCentreManager: {fileID: 0}
+  myGameManager: {fileID: 0}
+  isDroppingWaste: 0
+  dropoffSpeed: 0
 --- !u!1001 &1890432906
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -36272,6 +36287,11 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 1002938020225290330, guid: eea18b6da7879554f99ce468363d8d23,
+        type: 3}
+      propertyPath: m_TagString
+      value: WasteCentre
+      objectReference: {fileID: 0}
     - target: {fileID: 1062380296887339210, guid: eea18b6da7879554f99ce468363d8d23,
         type: 3}
       propertyPath: m_LocalPosition.z
@@ -36306,6 +36326,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Icon
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3065891331111952203, guid: eea18b6da7879554f99ce468363d8d23,
+        type: 3}
+      propertyPath: m_TagString
+      value: WasteCentre
       objectReference: {fileID: 0}
     - target: {fileID: 5424417679306319283, guid: eea18b6da7879554f99ce468363d8d23,
         type: 3}

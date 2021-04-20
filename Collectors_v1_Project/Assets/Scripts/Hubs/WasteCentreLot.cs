@@ -14,30 +14,16 @@ public class WasteCentreLot : MonoBehaviour
     [Header("Collectors Details")]
     [SerializeField] private bool lotOccupied;
     [SerializeField] public GameObject nextCollector;
-    [SerializeField] private GameObject baseCollector;
 
     [Header("References")]
     [SerializeField] private WasteCenteManager myWasteCentreManager;
 
-    // Start is called before the first frame update
     void Start()
     {
         myWasteCentreManager = GetComponentInParent<WasteCenteManager>();
         FindQueueSpots();
     }
 
-    private void FindQueueSpots()
-    {
-        myWasteQueueSpots = new WasteQueueSpot[9];
-        myCollectorPositions = new GameObject[9];
-        myWasteQueueSpots = GetComponentsInChildren<WasteQueueSpot>();
-        for (int i = 0; i < myWasteQueueSpots.Length; i++)
-        {
-            myCollectorPositions[i] = myWasteQueueSpots[i].gameObject;
-        }
-    }
-
-    // Update is called once per frame
     void Update()
     {
         UpdateQueue();
@@ -45,6 +31,17 @@ public class WasteCentreLot : MonoBehaviour
         // RollCall();
 
         NextCollector();
+
+        ReadyToDumpWaste();
+    }
+
+    private void ReadyToDumpWaste()
+    {
+        if (nextCollector)
+        {
+            Debug.Log($"Collector name {nextCollector.name} notified to drop waste.");
+            nextCollector.GetComponentInChildren<WasteDrop>().isDroppingWaste = true;
+        }
     }
 
     public void UpdateQueue()
@@ -57,6 +54,17 @@ public class WasteCentreLot : MonoBehaviour
             // put it in an assigned spot
             collectorsWaitingList[i].transform.position = myCollectorPositions[i].transform.position;
             collectorsWaitingList[i].transform.rotation = myCollectorPositions[i].transform.rotation;
+        }
+    }
+
+    private void FindQueueSpots()
+    {
+        myWasteQueueSpots = new WasteQueueSpot[9];
+        myCollectorPositions = new GameObject[9];
+        myWasteQueueSpots = GetComponentsInChildren<WasteQueueSpot>();
+        for (int i = 0; i < myWasteQueueSpots.Length; i++)
+        {
+            myCollectorPositions[i] = myWasteQueueSpots[i].gameObject;
         }
     }
 
