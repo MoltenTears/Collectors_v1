@@ -37,5 +37,9 @@ public class RatingsMeter : MonoBehaviour
         // waste sliders
         wasteSlider.maxValue = myGameManager.maxCityGarbageLevel;
         wasteSlider.value = myGameManager.cityGarbageLevel;
+
+        // satisfaction slider
+        satisfactionSlider.maxValue = 100.0f;
+        satisfactionSlider.value = myGameManager.citySatisfactionLevel;
     }
 }

@@ -9,6 +9,7 @@ TagManager:
   - RoadHub
   - WasteCentre
   - Instructions
+  - House
   layers:
   - Default
   - TransparentFX
@@ -23,7 +24,7 @@ TagManager:
   - Collector
   - CityBlock
   - WasteCentre
-  - 
+  - Satisfaction
   - 
   - 
   - 

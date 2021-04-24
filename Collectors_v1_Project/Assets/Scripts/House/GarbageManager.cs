@@ -41,7 +41,7 @@ public class GarbageManager : MonoBehaviour
 
     private void SetMaxGarbage()
     {
-        switch (myHouseManager.myHouseType)
+        switch (myHouseManager.houseType)
         {
             case HouseManager.HouseType.SINGLE:
                 {
