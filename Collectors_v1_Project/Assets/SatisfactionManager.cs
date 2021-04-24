@@ -4,12 +4,29 @@ using UnityEngine;
 
 public class SatisfactionManager : MonoBehaviour
 {
+    public enum SatisfactionLevel
+    {
+        NONE,
+        LOW,
+        MEDIUM,
+        HIGH
+    }
+    
+    
+    
     [SerializeField] private HouseManager myHouseManager;
     [SerializeField] private GameManager myGameManager;
-    [SerializeField] private float satisfactionTollerance;
-    [SerializeField] public float satisfactionPercentage;
+
+
+    [Header("Satisfaction Variables")]
+    [SerializeField] public SatisfactionLevel mySatisfcationLevel;
+    private float satisfactionTolleranceLow;
+    private float satisfactionTolleranceMedium;
+    private float satisfactionTolleranceHigh;
 
     [SerializeField] public float otherGarbageLevel;
+    [SerializeField] public float maxOtherGarbageLevel;
+    [SerializeField] public float otherGarbagePercentage;
     [SerializeField] private List<GarbageManager> otherGarbageManagers = new List<GarbageManager>();
 
 
@@ -19,50 +36,76 @@ public class SatisfactionManager : MonoBehaviour
         myHouseManager = GetComponentInParent<HouseManager>();
         myGameManager = FindObjectOfType<GameManager>();
 
-        SetMaxGarbageTollerance();
+        GetSatisfactionTollerance();
     }
 
     // Update is called once per frame
     void Update()
     {
+        MaxGarbageLevel(); 
         UpdateGarbageLevel();
         UpdateSatisfactionLevel();
     }
 
-    private void UpdateSatisfactionLevel()
-    {
-        satisfactionPercentage = 100 - ((otherGarbageLevel / satisfactionTollerance) * 100);
-    }
-
-    private void SetMaxGarbageTollerance()
+    private void GetSatisfactionTollerance()
     {
         switch (myHouseManager.houseType)
         {
             case HouseManager.HouseType.SINGLE:
                 {
-                    satisfactionTollerance = myGameManager.satisfactionTolleranceSingle;
+                    satisfactionTolleranceLow = myGameManager.satisfactionTolleranceSingleLow;
+                    satisfactionTolleranceMedium = myGameManager.satisfactionTolleranceSingleMedium;
+                    satisfactionTolleranceHigh = myGameManager.satisfactionTolleranceSingleHigh;
                     break;
                 }
             case HouseManager.HouseType.FAMILY:
                 {
-                    satisfactionTollerance = myGameManager.satisfactionTolleranceFamily;
+                    satisfactionTolleranceLow = myGameManager.satisfactionTolleranceFamilyLow;
+                    satisfactionTolleranceMedium = myGameManager.satisfactionTolleranceFamilyMedium;
+                    satisfactionTolleranceHigh = myGameManager.satisfactionTolleranceFamilyHigh;
                     break;
                 }
             case HouseManager.HouseType.SHARE:
                 {
-                    satisfactionTollerance = myGameManager.satisfactionTolleranceShare;
+                    satisfactionTolleranceLow = myGameManager.satisfactionTolleranceShareLow;
+                    satisfactionTolleranceMedium = myGameManager.satisfactionTolleranceShareMedium;
+                    satisfactionTolleranceHigh = myGameManager.satisfactionTolleranceShareHigh;
                     break;
                 }
             case HouseManager.HouseType.NONE:
                 {
-                    Debug.LogWarning("SatisfactionManager.SetMaxGarbageTollerance() housetype set to NONE, tollerance not set.");
+                    Debug.LogWarning("SatisfactionManager.GetSatisfactionTollerance() housetype set to none, tollerances not set.");
                     break;
                 }
             default:
                 {
-                    Debug.LogError("SatisfactionManager.SetMaxGarbageTollerance() switch defaulted, review and correct.");
+                    Debug.LogError("SatisfactionManager.GetSatisfactionTollerance() switch failed, review and correct.");
                     break;
                 }
+        }
+    }
+
+    private void UpdateSatisfactionLevel()
+    {
+        if ((otherGarbageLevel / maxOtherGarbageLevel) >= satisfactionTolleranceHigh)
+        {
+            // most problems
+            mySatisfcationLevel = SatisfactionLevel.NONE;
+        }
+        else if ((otherGarbageLevel / maxOtherGarbageLevel) >= satisfactionTolleranceMedium)
+        {
+            // more problems
+            mySatisfcationLevel = SatisfactionLevel.LOW;
+        }
+        else if ((otherGarbageLevel / maxOtherGarbageLevel) >= satisfactionTolleranceLow)
+        {
+            // some problems
+            mySatisfcationLevel = SatisfactionLevel.MEDIUM;
+        }
+        else if ((otherGarbageLevel / maxOtherGarbageLevel) < satisfactionTolleranceLow)
+        {
+            // no problems
+            mySatisfcationLevel = SatisfactionLevel.HIGH;
         }
     }
 
@@ -73,6 +116,26 @@ public class SatisfactionManager : MonoBehaviour
         for (int i = 0; i < otherGarbageManagers.Count; i++)
         {
             otherGarbageLevel += otherGarbageManagers[i].garbageLevel;
+        }
+
+        if (otherGarbageLevel < maxOtherGarbageLevel)
+        {
+            otherGarbagePercentage = otherGarbageLevel / maxOtherGarbageLevel;
+        }
+        else
+        {
+            otherGarbageLevel = maxOtherGarbageLevel;
+            otherGarbagePercentage = 1.0f;
+        }
+    }
+
+    private void MaxGarbageLevel()
+    {
+        maxOtherGarbageLevel = 0.0f;
+
+        for (int i = 0; i < otherGarbageManagers.Count; i++)
+        {
+            maxOtherGarbageLevel = otherGarbageManagers[i].maxGarbageLevel;
         }
     }
 
