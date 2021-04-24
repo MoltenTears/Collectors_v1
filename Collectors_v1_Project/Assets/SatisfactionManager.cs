@@ -20,9 +20,9 @@ public class SatisfactionManager : MonoBehaviour
 
     [Header("Satisfaction Variables")]
     [SerializeField] public SatisfactionLevel mySatisfcationLevel;
-    private float satisfactionTolleranceLow;
-    private float satisfactionTolleranceMedium;
-    private float satisfactionTolleranceHigh;
+    [SerializeField] private float wasteTolleranceLow;
+    [SerializeField] private float wasteTolleranceMedium;
+    [SerializeField] private float wasteTolleranceHigh;
 
     [SerializeField] public float otherGarbageLevel;
     [SerializeField] public float maxOtherGarbageLevel;
@@ -53,23 +53,23 @@ public class SatisfactionManager : MonoBehaviour
         {
             case HouseManager.HouseType.SINGLE:
                 {
-                    satisfactionTolleranceLow = myGameManager.satisfactionTolleranceSingleLow;
-                    satisfactionTolleranceMedium = myGameManager.satisfactionTolleranceSingleMedium;
-                    satisfactionTolleranceHigh = myGameManager.satisfactionTolleranceSingleHigh;
+                    wasteTolleranceLow = myGameManager.wasteTolleranceSingleLow;
+                    wasteTolleranceMedium = myGameManager.wasteTolleranceSingleMedium;
+                    wasteTolleranceHigh = myGameManager.wasteTolleranceSingleHigh;
                     break;
                 }
             case HouseManager.HouseType.FAMILY:
                 {
-                    satisfactionTolleranceLow = myGameManager.satisfactionTolleranceFamilyLow;
-                    satisfactionTolleranceMedium = myGameManager.satisfactionTolleranceFamilyMedium;
-                    satisfactionTolleranceHigh = myGameManager.satisfactionTolleranceFamilyHigh;
+                    wasteTolleranceLow = myGameManager.wasteTolleranceFamilyLow;
+                    wasteTolleranceMedium = myGameManager.wasteTolleranceFamilyMedium;
+                    wasteTolleranceHigh = myGameManager.wasteTolleranceFamilyHigh;
                     break;
                 }
             case HouseManager.HouseType.SHARE:
                 {
-                    satisfactionTolleranceLow = myGameManager.satisfactionTolleranceShareLow;
-                    satisfactionTolleranceMedium = myGameManager.satisfactionTolleranceShareMedium;
-                    satisfactionTolleranceHigh = myGameManager.satisfactionTolleranceShareHigh;
+                    wasteTolleranceLow = myGameManager.wasteTolleranceShareLow;
+                    wasteTolleranceMedium = myGameManager.wasteTolleranceShareMedium;
+                    wasteTolleranceHigh = myGameManager.wasteTolleranceShareHigh;
                     break;
                 }
             case HouseManager.HouseType.NONE:
@@ -87,22 +87,22 @@ public class SatisfactionManager : MonoBehaviour
 
     private void UpdateSatisfactionLevel()
     {
-        if ((otherGarbageLevel / maxOtherGarbageLevel) >= satisfactionTolleranceHigh)
+        if ((otherGarbageLevel / maxOtherGarbageLevel) >= wasteTolleranceHigh)
         {
             // most problems
             mySatisfcationLevel = SatisfactionLevel.NONE;
         }
-        else if ((otherGarbageLevel / maxOtherGarbageLevel) >= satisfactionTolleranceMedium)
+        else if ((otherGarbageLevel / maxOtherGarbageLevel) >= wasteTolleranceMedium)
         {
             // more problems
             mySatisfcationLevel = SatisfactionLevel.LOW;
         }
-        else if ((otherGarbageLevel / maxOtherGarbageLevel) >= satisfactionTolleranceLow)
+        else if ((otherGarbageLevel / maxOtherGarbageLevel) >= wasteTolleranceLow)
         {
             // some problems
             mySatisfcationLevel = SatisfactionLevel.MEDIUM;
         }
-        else if ((otherGarbageLevel / maxOtherGarbageLevel) < satisfactionTolleranceLow)
+        else if ((otherGarbageLevel / maxOtherGarbageLevel) < wasteTolleranceLow)
         {
             // no problems
             mySatisfcationLevel = SatisfactionLevel.HIGH;
@@ -135,7 +135,7 @@ public class SatisfactionManager : MonoBehaviour
 
         for (int i = 0; i < otherGarbageManagers.Count; i++)
         {
-            maxOtherGarbageLevel = otherGarbageManagers[i].maxGarbageLevel;
+            maxOtherGarbageLevel += otherGarbageManagers[i].maxGarbageLevel;
         }
     }
 

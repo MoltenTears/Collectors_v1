@@ -73,7 +73,7 @@ public class GarbageManager : MonoBehaviour
 
     private void AccumulateGarbage()
     {
-        garbageLevel += (garbageSpeed * Time.deltaTime) / myGameManager.garbageDivisor;
+        garbageLevel += (garbageSpeed * Time.deltaTime) * myGameManager.garbageMultipler;
 
         // if there's at least one bin out...
         if (garbageLevel >= myGameManager.binSizeSmall)

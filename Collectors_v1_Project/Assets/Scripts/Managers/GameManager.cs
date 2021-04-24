@@ -5,7 +5,6 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     [Header("General Variables")]
-    [SerializeField] public int garbageDivisor;
     [SerializeField] [Range(0, 1)] public float garbageMultipler;
 
     [Header("Bins")]
@@ -17,7 +16,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] public float cityGarbageLevel;
     [SerializeField] public float maxCityGarbageLevel;
     [SerializeField] public float citySatisfactionLevel;
-    [SerializeField] public float SatisfactionTotal;
+    [SerializeField] public float maxCitySatisfactionLevel;
     [SerializeField] public float houseSatisfactionNone;
     [SerializeField] public float houseSatisfactionLow;
     [SerializeField] public float houseSatisfactionMedium;
@@ -28,27 +27,27 @@ public class GameManager : MonoBehaviour
     [SerializeField] public float garbageSpeedSingle;
     [SerializeField] public float maxGarbageSingle;
     [SerializeField] public float satisfactionRadiusSingle;
-    [SerializeField] public float satisfactionTolleranceSingleLow;
-    [SerializeField] public float satisfactionTolleranceSingleMedium;
-    [SerializeField] public float satisfactionTolleranceSingleHigh;
+    [SerializeField] public float wasteTolleranceSingleLow;
+    [SerializeField] public float wasteTolleranceSingleMedium;
+    [SerializeField] public float wasteTolleranceSingleHigh;
 
     [Header("House Type: FAMILY")]
     [SerializeField] public Material houseFamilyMaterial;
     [SerializeField] public float garbageSpeedFamily;
     [SerializeField] public float maxGarbageFamily;
     [SerializeField] public float satisfactionRadiusFamily;
-    [SerializeField] public float satisfactionTolleranceFamilyLow;
-    [SerializeField] public float satisfactionTolleranceFamilyMedium;
-    [SerializeField] public float satisfactionTolleranceFamilyHigh;
+    [SerializeField] public float wasteTolleranceFamilyLow;
+    [SerializeField] public float wasteTolleranceFamilyMedium;
+    [SerializeField] public float wasteTolleranceFamilyHigh;
 
     [Header("House Type: SHARE")]
     [SerializeField] public Material houseShareMaterial;
     [SerializeField] public float garbageSpeedShare;
     [SerializeField] public float maxGarbageShare;
     [SerializeField] public float satisfactionRadiusShare;
-    [SerializeField] public float satisfactionTolleranceShareLow;
-    [SerializeField] public float satisfactionTolleranceShareMedium;
-    [SerializeField] public float satisfactionTolleranceShareHigh;
+    [SerializeField] public float wasteTolleranceShareLow;
+    [SerializeField] public float wasteTolleranceShareMedium;
+    [SerializeField] public float wasteTolleranceShareHigh;
 
     [Header("Lists")]
     [SerializeField] public List<GarbageManager> houseGarbage = new List<GarbageManager>();
@@ -63,6 +62,7 @@ public class GameManager : MonoBehaviour
 
     private void GetHouses()
     {
+
         // flush the list
         houseGarbage.Clear();
 
@@ -73,6 +73,9 @@ public class GameManager : MonoBehaviour
             // add them back into the list
             houseGarbage.Add(garbageManager);
         }
+
+        maxCitySatisfactionLevel = houseGarbage.Count;
+
     }
 
     private void GetGarbage()

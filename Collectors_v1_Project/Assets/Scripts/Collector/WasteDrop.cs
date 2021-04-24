@@ -32,8 +32,8 @@ public class WasteDrop : MonoBehaviour
         if (isDroppingWaste && myGarbagePickup.garbageInCollector > 0)
         {
             // Debug.Log("Collector dumping waste...");
-            myWasteCentreManager.generalWaste += (dropoffSpeed * Time.deltaTime) / myGameManager.garbageDivisor;
-            myGarbagePickup.garbageInCollector -= (dropoffSpeed * Time.deltaTime) / myGameManager.garbageDivisor;
+            myWasteCentreManager.generalWaste += (dropoffSpeed * Time.deltaTime) * myGameManager.garbageMultipler;
+            myGarbagePickup.garbageInCollector -= (dropoffSpeed * Time.deltaTime) * myGameManager.garbageMultipler;
         }
         else if (isDroppingWaste && myGarbagePickup.garbageInCollector <= 0)
         {

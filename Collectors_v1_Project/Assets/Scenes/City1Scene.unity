@@ -12886,14 +12886,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   garbageDivisor: 20
-  garbageMultipler: 0
+  garbageMultipler: 0.5
   binSizeSmall: 5
   binSizeMedium: 10
   binSizeLarge: 15
   cityGarbageLevel: 0
   maxCityGarbageLevel: 0
   citySatisfactionLevel: 0
-  SatisfactionTotal: 0
+  maxCitySatisfactionLevel: 0
   houseSatisfactionNone: 0
   houseSatisfactionLow: 0.33
   houseSatisfactionMedium: 0.66
@@ -12902,23 +12902,23 @@ MonoBehaviour:
   garbageSpeedSingle: 1
   maxGarbageSingle: 50
   satisfactionRadiusSingle: 4.5
-  satisfactionTolleranceSingleLow: 0.5
-  satisfactionTolleranceSingleMedium: 0.65
-  satisfactionTolleranceSingleHigh: 0.8
+  wasteTolleranceSingleLow: 0.4
+  wasteTolleranceSingleMedium: 0.6
+  wasteTolleranceSingleHigh: 0.8
   houseFamilyMaterial: {fileID: 2100000, guid: 4b1deb84a0c737e4fb08dd5d37e3f7d7, type: 2}
   garbageSpeedFamily: 2
   maxGarbageFamily: 70
   satisfactionRadiusFamily: 8
-  satisfactionTolleranceFamilyLow: 0.4
-  satisfactionTolleranceFamilyMedium: 0.55
-  satisfactionTolleranceFamilyHigh: 0.7
+  wasteTolleranceFamilyLow: 0.3
+  wasteTolleranceFamilyMedium: 0.5
+  wasteTolleranceFamilyHigh: 0.7
   houseShareMaterial: {fileID: 2100000, guid: 7e46d3c8c55631540abc737a26dee398, type: 2}
   garbageSpeedShare: 3
   maxGarbageShare: 105
   satisfactionRadiusShare: 2
-  satisfactionTolleranceShareLow: 0.6
-  satisfactionTolleranceShareMedium: 0.75
-  satisfactionTolleranceShareHigh: 0.9
+  wasteTolleranceShareLow: 0.5
+  wasteTolleranceShareMedium: 0.7
+  wasteTolleranceShareHigh: 0.9
   houseGarbage: []
   houseSatisfaction: []
 --- !u!4 &650904462

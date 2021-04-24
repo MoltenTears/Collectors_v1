@@ -83,7 +83,7 @@ public class GarbagePickup : MonoBehaviour
                 GarbageManager tempGM = collision.GetComponentInParent<GarbageManager>();
 
                 // temp variable for collecting garbage
-                float garbageCollected = (collectionSpeed * Time.deltaTime) / myGameManager.garbageDivisor;
+                float garbageCollected = (collectionSpeed * Time.deltaTime) * myGameManager.garbageMultipler;
 
                 // ... reduce the garbage in the house at a given speed
                 tempGM.garbageLevel -= garbageCollected;
