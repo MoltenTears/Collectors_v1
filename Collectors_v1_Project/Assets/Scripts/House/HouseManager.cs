@@ -22,12 +22,11 @@ public class HouseManager : MonoBehaviour
     [SerializeField] private MeshRenderer myHouseMeshRender;
 
     [Header("House Details - Occupancy")]
-    [SerializeField] private HouseType myHouseType;
+    [SerializeField] public HouseType myHouseType;
     [SerializeField] public bool isOccupied;
 
 
-
-    private void Start()
+    private void Awake()
     {
         // get realtime references
         myGameManager = FindObjectOfType<GameManager>();
@@ -36,6 +35,10 @@ public class HouseManager : MonoBehaviour
 
         // set some variables
         RandomHouseType();
+    }
+    private void Start()
+    {
+        
         SetHouse();
     }
 
@@ -59,19 +62,19 @@ public class HouseManager : MonoBehaviour
             case HouseType.SINGLE:
                 {
                     myHouseMaterial = myGameManager.houseSingleMaterial;
-                    myGarbageManager.myGarbageSpeed = myGameManager.garbageSpeedSingle;
+                    myGarbageManager.garbageSpeed = myGameManager.garbageSpeedSingle;
                     break;
                 }
             case HouseType.FAMILY:
                 {
                     myHouseMaterial = myGameManager.houseFamilyMaterial;
-                    myGarbageManager.myGarbageSpeed = myGameManager.garbageSpeedFamily;
+                    myGarbageManager.garbageSpeed = myGameManager.garbageSpeedFamily;
                     break;
                 }
             case HouseType.SHARE:
                 {
                     myHouseMaterial = myGameManager.houseShareMaterial;
-                    myGarbageManager.myGarbageSpeed = myGameManager.singleGarbageShare;
+                    myGarbageManager.garbageSpeed = myGameManager.garbageSpeedShare;
                     break;
                 }
             case HouseType.NONE:

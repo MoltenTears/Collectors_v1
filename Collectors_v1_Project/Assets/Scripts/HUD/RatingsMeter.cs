@@ -5,41 +5,37 @@ using UnityEngine.UI;
 
 public class RatingsMeter : MonoBehaviour
 {
-    [Header("Satisfaction Objects")]
+    [Header("Sliders")]
     public Slider satisfactionSlider;
-
-    [Header("Waste Objects)")]
     public Slider wasteSlider;
 
-    [Header("Happiness Ratings")]
-    [SerializeField] Sprite sadFace3 = null;
-    [SerializeField] Sprite sadFace2 = null;
-    [SerializeField] Sprite sadFace1 = null;
-    [SerializeField] Sprite neutralFace = null;
-    [SerializeField] Sprite happyFace1 = null;
-    [SerializeField] Sprite happyFace2 = null;
-    [SerializeField] Sprite happyFace3 = null;
+    [Header("External References")]
+    [SerializeField] private GameManager myGameManager;
 
     // Start is called before the first frame update
     void Start()
     {
-        // reset the slider at the beginning of the level
-        satisfactionSlider.value = 1.0f;
-        wasteSlider.value = 0.0f;
+        // get external references
+        myGameManager = FindObjectOfType<GameManager>();
 
-        // check the Maximum value of the ratings meter
-        CheckLevelSliderMinMax();
+
+        // reset the slider at the beginning of the level
+        satisfactionSlider.value = 1.0f; // full
+        wasteSlider.value = 0.0f; // empty
+
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        SetSliders();
     }
 
-
-    public void CheckLevelSliderMinMax()
+    private void SetSliders()
     {
-
+        // waste sliders
+        wasteSlider.maxValue = myGameManager.maxCityGarbageLevel;
+        wasteSlider.value = myGameManager.cityGarbageLevel;
     }
 }

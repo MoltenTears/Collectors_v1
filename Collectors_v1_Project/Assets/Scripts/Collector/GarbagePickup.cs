@@ -71,7 +71,7 @@ public class GarbagePickup : MonoBehaviour
         
             if (collision.GetComponentInParent<GarbageManager>())
             {
-                tempHouseGarbage = collision.GetComponentInParent<GarbageManager>().myGarbageLevel;
+                tempHouseGarbage = collision.GetComponentInParent<GarbageManager>().garbageLevel;
             }
 
             // IF...
@@ -86,17 +86,17 @@ public class GarbagePickup : MonoBehaviour
                 float garbageCollected = (collectionSpeed * Time.deltaTime) / myGameManager.garbageDivisor;
 
                 // ... reduce the garbage in the house at a given speed
-                tempGM.myGarbageLevel -= garbageCollected;
+                tempGM.garbageLevel -= garbageCollected;
 
                 // ... and add it to the Collector
                 garbageInCollector += garbageCollected;
 
                 // if the house has run out of garbage
-                if (tempGM.myGarbageLevel <= 0)
+                if (tempGM.garbageLevel <= 0)
                 {
                     tempGM.garbageNeedsCollecting = false;
                     tempGM.garbageBeingCollected = false;
-                    tempGM.myGarbageLevel = 0.0f;
+                    tempGM.garbageLevel = 0.0f;
                 }
             }
             else if (collision.CompareTag("Garbage") 

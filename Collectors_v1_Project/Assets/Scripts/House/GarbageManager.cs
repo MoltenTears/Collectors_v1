@@ -5,8 +5,9 @@ using UnityEngine;
 public class GarbageManager : MonoBehaviour
 {
     [Header("House Details - garbage")]
-    [SerializeField] public float myGarbageSpeed;
-    [SerializeField] public float myGarbageLevel;
+    [SerializeField] public float garbageSpeed;
+    [SerializeField] public float garbageLevel;
+    [SerializeField] public float maxGarbageLevel;
     [SerializeField] private GarbageBin[] binArray;
     [SerializeField] public bool garbageNeedsCollecting = false;
     [SerializeField] public bool garbageBeingCollected = false;
@@ -21,6 +22,8 @@ public class GarbageManager : MonoBehaviour
         myGameManager = FindObjectOfType<GameManager>();
         myHouseManager = GetComponent<HouseManager>();
         binArray = GetComponentsInChildren<GarbageBin>();
+
+        SetMaxGarbage();
     }
 
     // Update is called once per frame
@@ -28,7 +31,7 @@ public class GarbageManager : MonoBehaviour
     {
         if(myHouseManager.isOccupied)
         {
-            if (!garbageBeingCollected)
+            if (!garbageBeingCollected && garbageLevel <= maxGarbageLevel)
             {
                 AccumulateGarbage();
             }
@@ -36,13 +39,44 @@ public class GarbageManager : MonoBehaviour
         }
     }
 
+    private void SetMaxGarbage()
+    {
+        switch (myHouseManager.myHouseType)
+        {
+            case HouseManager.HouseType.SINGLE:
+                {
+                    maxGarbageLevel = myGameManager.maxGarbageSingle;
+                    break;
+                }
+            case HouseManager.HouseType.FAMILY:
+                {
+                    maxGarbageLevel = myGameManager.maxGarbageFamily;
+                    break;
+                }
+            case HouseManager.HouseType.SHARE:
+                {
+                    maxGarbageLevel = myGameManager.maxGarbageShare;
+                    break;
+                }
+            case HouseManager.HouseType.NONE:
+                {
+                    Debug.LogWarning("House does not have HouseType set in HouseManager.cs");
+                    break;
+                }
+            default:
+                {
+                    Debug.LogError("Switch in HouseManager.SetMaxGarbage() has defaulted, review and correct.");
+                    break;
+                }
+        }
+    }
 
     private void AccumulateGarbage()
     {
-        myGarbageLevel += (myGarbageSpeed * Time.deltaTime) / myGameManager.garbageDivisor;
+        garbageLevel += (garbageSpeed * Time.deltaTime) / myGameManager.garbageDivisor;
 
         // if there's at least one bin out...
-        if (myGarbageLevel >= myGameManager.binSizeSmall)
+        if (garbageLevel >= myGameManager.binSizeSmall)
         {
             // ... Collector may collect
             garbageNeedsCollecting = true;
@@ -63,7 +97,7 @@ public class GarbageManager : MonoBehaviour
         }
 
 
-        float tempGarbage = myGarbageLevel;
+        float tempGarbage = garbageLevel;
         for (int i = 0; i <binArray.Length; i++)
         {
             // if there's more garbage than a large bin...
