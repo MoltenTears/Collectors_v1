@@ -25,6 +25,9 @@ public class CollectorMovement : MonoBehaviour
     [SerializeField] private float distanceToLocation;
     [SerializeField] private Vector3 agentDestination;
 
+    [Header("Depot Despatch Details")]
+    [SerializeField] public bool isActive;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -70,7 +73,7 @@ public class CollectorMovement : MonoBehaviour
             FaceForward(myAgent.steeringTarget);
         }
         // if has destination set, got destination and is not rotating...
-        else if (selectedRoadHub && gotDestination && !isRotating/* && !isMoving*/)
+        else if (selectedRoadHub && gotDestination && !isRotating)
         {
             // ... move toward destination
             MoveToHub(selectedRoadHub);
@@ -79,6 +82,19 @@ public class CollectorMovement : MonoBehaviour
         else if (isMoving && (distanceToLocation <= arrivalTollerance))
         {
             StopMoving();
+        }
+    }
+
+
+    public void MoveToHub(GameObject _selectedHub)
+    {
+        if(myAgent && myAgent.enabled)
+        {
+            // allow the NavMeshAgent to move again
+            myAgent.isStopped = false;
+
+            isMoving = true;
+            myAgent.destination = _selectedHub.transform.position;
         }
     }
 
@@ -105,18 +121,6 @@ public class CollectorMovement : MonoBehaviour
         else
         {
             isRotating = false;
-        }
-    }
-
-    public void MoveToHub(GameObject _selectedHub)
-    {
-        if(myAgent && myAgent.enabled)
-        {
-            // allow the NavMeshAgent to move again
-            myAgent.isStopped = false;
-
-            isMoving = true;
-            myAgent.destination = _selectedHub.transform.position;
         }
     }
 

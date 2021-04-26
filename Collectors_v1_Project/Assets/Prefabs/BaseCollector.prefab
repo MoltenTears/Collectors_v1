@@ -292,7 +292,6 @@ MonoBehaviour:
   myAgent: {fileID: 0}
   myCollectorType: 1
   isMoving: 0
-  isAtHouse: 0
   agentSpeed: 0
   isRotating: 0
   angleTollerance: 0
@@ -302,6 +301,7 @@ MonoBehaviour:
   arrivalTollerance: 1.1
   distanceToLocation: 0
   agentDestination: {x: 0, y: 0, z: 0}
+  isActive: 0
 --- !u!195 &3865105313608338846
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -413,9 +413,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isCollecting: 0
-  isDeliveringWaste: 1
+  isDeliveringWaste: 0
   isReturningToDepot: 0
-  garbageInCollector: 100
+  garbageInCollector: 0
   garbageInCollectorMax: 100
   collectionSpeed: 20
   myCollectorMovement: {fileID: 0}

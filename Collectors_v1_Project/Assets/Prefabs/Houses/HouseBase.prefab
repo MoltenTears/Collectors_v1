@@ -4815,7 +4815,7 @@ GameObject:
   - component: {fileID: 1475608153535707147}
   - component: {fileID: 6197336585049797246}
   - component: {fileID: 5665474002950102382}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: SatisfactionTrigger
   m_TagString: House
   m_Icon: {fileID: 0}
@@ -4861,8 +4861,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ee2c96163bf4474e8e2e3de8cba8a7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  otherGarbageManagers: []
+  myHouseManager: {fileID: 0}
+  myGameManager: {fileID: 0}
+  mySatisfcationLevel: 0
+  wasteTolleranceLow: 0
+  wasteTolleranceMedium: 0
+  wasteTolleranceHigh: 0
   otherGarbageLevel: 0
+  maxOtherGarbageLevel: 0
+  otherGarbagePercentage: 0
+  otherGarbageManagers: []
 --- !u!1 &8058275006444113305
 GameObject:
   m_ObjectHideFlags: 0
@@ -5094,7 +5102,7 @@ MonoBehaviour:
   mySatisfactionTrigger: {fileID: 0}
   myHouseMaterial: {fileID: 0}
   myHouseMeshRender: {fileID: 0}
-  myHouseType: 0
+  houseType: 0
   isOccupied: 0
 --- !u!114 &1011379004326137055
 MonoBehaviour:
