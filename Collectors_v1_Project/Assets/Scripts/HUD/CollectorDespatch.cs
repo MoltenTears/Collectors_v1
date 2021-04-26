@@ -38,7 +38,7 @@ public class CollectorDespatch : MonoBehaviour
     {
         if (myDepotManager.baseCollectors > 0 && collectButton != null)
         {
-            Debug.Log("Player could send out a Collector.");
+            // Debug.Log("Player could send out a Collector.");
 
             // allow button to be used
             collectButton.interactable = true;

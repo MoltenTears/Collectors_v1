@@ -9,6 +9,10 @@ public class RoadHub : MonoBehaviour
     Color m_OriginalColor;
     MeshRenderer m_Renderer;
 
+    [Header("Active RoadHub")]
+    [SerializeField] public bool isActive;
+    [SerializeField] private GameObject activeHub;
+
     [Header("External References")]
     [SerializeField] private RoadMap myRoadMap;
 
@@ -19,39 +23,31 @@ public class RoadHub : MonoBehaviour
     [Header("Active Collector")]
     [SerializeField] private GameObject activeCollector;
 
-
-    void Start()
+    private void Update()
     {
-        m_Renderer = GetComponentInChildren<MeshRenderer>();
-        m_OriginalColor = m_Renderer.material.color;
-        myRoadMap = GameObject.FindObjectOfType<RoadMap>();
-        nodeOrigin = gameObject;
+        RaycastRoadHub();
+        SelectRoadHub();
     }
 
-    void OnMouseOver()
+    private void SelectRoadHub()
     {
-        // highlight the RoadHub the player has the cursor on
-        m_Renderer.material.color = m_MouseOverColor;
-        Debug.Log($"MouseOver RoadHub: {gameObject.name}.");
-  
-        // 
-        if(activeCollector != null)
+        // if there is an Active Collector
+        if (activeCollector != null)
         {
+            // re-check if the Active Collector is indeed Active
             if (activeCollector.GetComponent<CollectorMovement>().isActive)
             {
-                // Debug.Log("MouseOver and ActiveCollector");
-
-                // only trigger if the Player is 
+                // only trigger if the Player presses the right key
                 if (Input.GetKeyDown(KeyCode.Mouse0))
                 {
                     // debug
-                    Debug.Log($"Active Collector sent to RoadHub: {gameObject.name}.");
+                    // Debug.Log($"Active Collector sent to RoadHub: {gameObject.name}.");
 
                     // stop where you are
                     activeCollector.GetComponent<CollectorMovement>().myAgent.destination = activeCollector.transform.position;
 
                     // store a reference to this object to the RoadMap
-                    activeCollector.GetComponent<CollectorMovement>().selectedRoadHub = gameObject;
+                    activeCollector.GetComponent<CollectorMovement>().selectedRoadHub = activeHub;
 
                     // set this location as the destination
                     activeCollector.GetComponent<CollectorMovement>().ResetDestination();
@@ -64,10 +60,55 @@ public class RoadHub : MonoBehaviour
         }
     }
 
-    void OnMouseExit()
+    private void RaycastRoadHub()
     {
-        // change it back to the original colour
-        m_Renderer.material.color = m_OriginalColor;
+        RaycastHit[] hits = Physics.RaycastAll(Camera.main.ScreenPointToRay(Input.mousePosition));
+
+        foreach (RaycastHit hit in hits)
+        {
+            if (hit.collider.GetComponent<RoadHub>())
+            {
+                // Debug.Log($"mouse over RoadHub: {hit.transform.name}");
+
+                // store a reference for later
+                activeHub = hit.collider.transform.gameObject;
+
+                // activate the RoadHub
+                isActive = true;
+
+                // change colour to indicate to the player the hub is activated
+                hit.transform.GetComponent<MeshRenderer>().material.color = m_MouseOverColor;
+
+                // break the foreach (because we found what we're looking for)
+                break;
+            }
+            else
+            {
+                // Debug.Log($"RaycastHit: {hit.transform.name}.");
+
+                // deactiveate the RoadHub
+                isActive = false;
+
+                // if there was a reference to an ActiveHub
+                if (activeHub != null)
+                {
+                    // change it back to the original colour
+                    activeHub.GetComponent<MeshRenderer>().material.color = m_OriginalColor;
+                
+                    // forget about the reference
+                     activeHub = null;
+                }
+            }
+        }
+    }
+
+
+    void Start()
+    {
+        m_Renderer = GetComponentInChildren<MeshRenderer>();
+        m_OriginalColor = m_Renderer.material.color;
+        myRoadMap = GameObject.FindObjectOfType<RoadMap>();
+        nodeOrigin = gameObject;
     }
 
     private void ForgetActiveCollector()

@@ -28,8 +28,18 @@ public class DepotManager : MonoBehaviour
 
     public void UpdateParkingLot()
     {
+        // clear the lot
+        for (int i = 0; i < myDepotLots.Length; i++)
+        {
+            myDepotLots[i].myCollectorInParking = CollectorTypes.CollectorType.NONE;
+        }
+
+        // storea temp variable
         int tempBaseCollectors = baseCollectors;
 
+        // Debug.Log($"tempBaseCollectors: {tempBaseCollectors}.");
+
+        // add to the lot
         for (int i = 0; i < myDepotLots.Length; i++)
         {
             if (tempBaseCollectors > 0)
@@ -42,15 +52,16 @@ public class DepotManager : MonoBehaviour
 
     public void DespatchCollector()
     {
-        Debug.Log("Collector despatched from Depot.");
+        //Debug.Log("Collector despatched from Depot.");
 
         // create a new Collector
         GameObject newCollector = Instantiate(baseCollectorPrefab, new Vector3(depotFrontGateTrans.position.x, 0, depotFrontGateTrans.position.z), transform.rotation);
         newCollector.GetComponent<CollectorMovement>().isActive = true;
 
         //remove the old one from the parkign lot
-        --baseCollectors;
+        baseCollectors--;
 
+        // Debug.Log($"Collectors at Depot: {baseCollectors}.");
 
         // find all the RoadHubs in the game...
         RoadHub[] roadHubs = FindObjectsOfType<RoadHub>();

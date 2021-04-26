@@ -19,7 +19,7 @@ public class DepotFrontGate : MonoBehaviour
         if (collision.CompareTag("Collector") && collision.GetComponentInChildren<GarbagePickup>().isReturningToDepot == true)
         {
             // debug
-            Debug.Log("Collector returned to Depot");
+            // Debug.Log("Collector returned to Depot");
 
             // ... destroy the game object
             Destroy(collision.transform.parent.gameObject);
@@ -27,7 +27,7 @@ public class DepotFrontGate : MonoBehaviour
             // add the truck back to the tally of trucks at the depot
             int tempCount = myDepotManager.baseCollectors;
             ++myDepotManager.baseCollectors;
-            Debug.Log($"Count of base Collectors at Depot was: {tempCount}, is now: {myDepotManager.baseCollectors}.");
+            //Debug.Log($"Count of base Collectors at Depot was: {tempCount}, is now: {myDepotManager.baseCollectors}.");
 
         }
 
