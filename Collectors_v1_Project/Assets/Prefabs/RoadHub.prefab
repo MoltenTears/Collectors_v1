@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 559453997545175659}
   - component: {fileID: 4704358773652441865}
+  - component: {fileID: 6168997718985617544}
   - component: {fileID: 4787854558313713002}
   - component: {fileID: 8718814995461122643}
   - component: {fileID: 1295516295875227409}
@@ -51,10 +52,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0127b39cf8ecf474391061fea6d97171, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isActive: 0
+  activeHub: {fileID: 0}
   myRoadMap: {fileID: 0}
-  myCollectorMovement: {fileID: 0}
   nodeOrigin: {fileID: 0}
   ConnectedRoadHubs: []
+  activeCollector: {fileID: 0}
+--- !u!114 &6168997718985617544
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5950462389470279751}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 021ad61f2a7ead9428c7e67f532a7f71, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!135 &4787854558313713002
 SphereCollider:
   m_ObjectHideFlags: 0

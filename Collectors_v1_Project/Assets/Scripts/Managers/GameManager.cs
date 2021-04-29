@@ -53,7 +53,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] public List<GarbageManager> houseGarbage = new List<GarbageManager>();
     [SerializeField] public List<SatisfactionManager> houseSatisfaction = new List<SatisfactionManager>();
 
-    private void Update()
+    private void FixedUpdate()
     {
         GetHouses();
         GetGarbage();

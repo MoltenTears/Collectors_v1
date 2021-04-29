@@ -11,10 +11,11 @@ public class RoadHub : MonoBehaviour
 
     [Header("Active RoadHub")]
     [SerializeField] public bool isActive;
-    [SerializeField] private GameObject activeHub;
+    [SerializeField] public GameObject activeHub;
 
     [Header("External References")]
     [SerializeField] private RoadMap myRoadMap;
+    [SerializeField] private CollectorInitiate myCollectorInitate;
 
     [Header("Connected Road Hubs")]
     [SerializeField] private GameObject nodeOrigin;
@@ -22,6 +23,8 @@ public class RoadHub : MonoBehaviour
 
     [Header("Active Collector")]
     [SerializeField] private GameObject activeCollector;
+
+    
 
     private void Update()
     {
@@ -47,7 +50,7 @@ public class RoadHub : MonoBehaviour
                     activeCollector.GetComponent<CollectorMovement>().myAgent.destination = activeCollector.transform.position;
 
                     // store a reference to this object to the RoadMap
-                    activeCollector.GetComponent<CollectorMovement>().selectedRoadHub = activeHub;
+                    activeCollector.GetComponent<CollectorMovement>().collectorDestination = activeHub;
 
                     // set this location as the destination
                     activeCollector.GetComponent<CollectorMovement>().ResetDestination();
@@ -95,8 +98,8 @@ public class RoadHub : MonoBehaviour
                     // change it back to the original colour
                     activeHub.GetComponent<MeshRenderer>().material.color = m_OriginalColor;
                 
-                    // forget about the reference
-                     activeHub = null;
+                    //// forget about the reference
+                     // activeHub = null;
                 }
             }
         }
@@ -109,6 +112,7 @@ public class RoadHub : MonoBehaviour
         m_OriginalColor = m_Renderer.material.color;
         myRoadMap = GameObject.FindObjectOfType<RoadMap>();
         nodeOrigin = gameObject;
+        myCollectorInitate = FindObjectOfType<CollectorInitiate>();
     }
 
     private void ForgetActiveCollector()

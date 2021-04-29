@@ -5,7 +5,14 @@ using UnityEngine.AI;
 
 public class GarbagePickup : MonoBehaviour
 {
+    [Header("Collection Details")]
+    [SerializeField] private float distanceToWaste = Mathf.Infinity;
+    [SerializeField] private GarbageManager[] garbageManagers;
+    [SerializeField] private float collectorSpeed;
+    [SerializeField] private GameObject myCollectorDestination;
+
     [SerializeField] public bool isCollecting = false;
+    [SerializeField] public bool foundWaste = false;
     [SerializeField] public bool isDeliveringWaste = false;
     [SerializeField] public bool isReturningToDepot = false;
     [SerializeField] public float garbageInCollector;
@@ -26,8 +33,10 @@ public class GarbagePickup : MonoBehaviour
         myWasteCentreFrontGate = FindObjectOfType<WasteCentreFrontGate>();
     }
 
-    private void LateUpdate()
+    private void Update()
     {
+        collectorSpeed = myNavMeshAgent.velocity.magnitude;
+
         if (garbageInCollector >= garbageInCollectorMax && !isDeliveringWaste)
         {
             isCollecting = false;
@@ -43,7 +52,89 @@ public class GarbagePickup : MonoBehaviour
         {
             DeliveringWaste();
         }
+
+        if (isCollecting)
+        {
+            WasteCollection();
+        }
+
+        if (isCollecting && garbageInCollector > garbageInCollectorMax && myNavMeshAgent.velocity.magnitude == 0)
+        {
+            Debug.Log("Reset Collector, even though isCollecting and not yet full.");
+            foundWaste = false;
+            FindNearestWaste();
+        }
     }
+
+    private void WasteCollection()
+    {
+        if (!foundWaste)
+        {
+            FindNearestWaste();
+        }
+        if (foundWaste) // if there is waste to collect...
+        {
+            // .. move to that location to trigger collection
+            MoveToWaste();
+        }
+        else // .. if there is no waste found...
+        {
+            // .. turn off collection..
+            isCollecting = false;
+            if (garbageInCollector > 0) // ... if the collector has SOME waste in it...
+            {
+                isDeliveringWaste = true; // ... take it to the Waste Centre
+            }
+            else // .. if not...
+            {
+                isReturningToDepot = true; // .. go back to the depot (fail catch)
+            }
+        }
+    }
+
+    private void FindNearestWaste()
+    {
+        Debug.Log($"Collector checking for garbage...");
+
+        // find all the GarbageManagers in the scene
+        garbageManagers = FindObjectsOfType<GarbageManager>();
+
+        // create a temporary distance variable and set it infinitely large
+        distanceToWaste = Mathf.Infinity;
+        float distanceToGM;
+
+        // iterate through the GarbageManagers, recording the one with the closest distance
+        foreach (GarbageManager garbageManager in garbageManagers)
+        {
+            distanceToGM = Vector3.Distance(
+                transform.position, garbageManager.GetComponentInParent<GarbageManager>().GetComponentInChildren<CollectionPoint>().transform.position);
+
+            // if the GM is closer than the previous distance recorded and the GM has at least one bin for collection...
+            if (distanceToGM < distanceToWaste && garbageManager.garbageLevel >= myGameManager.binSizeSmall)
+            {
+                // ... overwrite the distance variable
+                distanceToWaste = distanceToGM;
+
+                // ... store the object as the destination
+                myCollectorMovement.collectorDestination = garbageManager.GetComponentInParent<GarbageManager>().GetComponentInChildren<CollectionPoint>().gameObject;
+
+                // ... set the foundWaste bool to true
+                foundWaste = true;
+
+                // get out of the foreach loop
+                break;
+            }
+        }
+
+        // pause for debugging
+        if(foundWaste) Debug.Break();
+    }
+
+    private void MoveToWaste()
+    {
+        myCollectorMovement.gotDestination = true;
+    }
+
 
     private void OnTriggerEnter(Collider collision)
     {
@@ -105,6 +196,9 @@ public class GarbagePickup : MonoBehaviour
             {
                 // debug
                 // Debug.Log("No more garbage at house, Collector not stopping.");
+                
+                // reset the bool to look for more garbage
+                foundWaste = false;
             
                 // ... resume the movement
                 myNavMeshAgent.isStopped = false;
@@ -130,7 +224,7 @@ public class GarbagePickup : MonoBehaviour
         if (myCollectorMovement)
         {
             // store a reference of the Waste Centre
-            myCollectorMovement.selectedRoadHub = myDepotFrontGate.roadHubAtDepotFrontGate;
+            myCollectorMovement.collectorDestination = myDepotFrontGate.roadHubAtDepotFrontGate;
 
             // set this location as the destination
             myCollectorMovement.ResetDestination();
@@ -142,7 +236,7 @@ public class GarbagePickup : MonoBehaviour
         if (myCollectorMovement)
         {
             // store a reference of the Waste Centre
-            myCollectorMovement.selectedRoadHub = myWasteCentreFrontGate.roadHubAtWasteCentreFrontGate;
+            myCollectorMovement.collectorDestination = myWasteCentreFrontGate.roadHubAtWasteCentreFrontGate;
 
             // set this location as the destination
             myCollectorMovement.ResetDestination();

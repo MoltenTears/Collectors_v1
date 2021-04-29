@@ -3,7 +3,7 @@ using UnityEngine.AI;
 
 public class CollectorMovement : MonoBehaviour
 {
-    [SerializeField] public GameObject selectedRoadHub = null;
+    [SerializeField] public GameObject collectorDestination = null;
     
     [Header("References")]
     [SerializeField] public NavMeshAgent myAgent;
@@ -43,7 +43,7 @@ public class CollectorMovement : MonoBehaviour
         agentDestination = myAgent.destination;
         distanceToLocation = Vector3.Distance(transform.position, myAgent.destination);
         
-        if (selectedRoadHub && gotDestination)
+        if (collectorDestination && gotDestination)
         {
             GotDestination();
         }
@@ -66,17 +66,17 @@ public class CollectorMovement : MonoBehaviour
     public void GotDestination()
     {
         // if destination is set and the angle toward the first intersection is greater than zero
-        if (selectedRoadHub && (Mathf.Abs(rotationAngle) > angleTollerance))
+        if (collectorDestination && (Mathf.Abs(rotationAngle) > angleTollerance))
         {
             // rotate before moving
             isRotating = true;
             FaceForward(myAgent.steeringTarget);
         }
         // if has destination set, got destination and is not rotating...
-        else if (selectedRoadHub && gotDestination && !isRotating)
+        else if (collectorDestination && gotDestination && !isRotating)
         {
             // ... move toward destination
-            MoveToHub(selectedRoadHub);
+            MoveToHub(collectorDestination);
         }
         // if is moving and close enough to destination...
         else if (isMoving && (distanceToLocation <= arrivalTollerance))
@@ -101,7 +101,7 @@ public class CollectorMovement : MonoBehaviour
     private void FaceForward(Vector3 _facingTarget)
     {
         // if destination is set and the 
-        if (selectedRoadHub && (Mathf.Abs(rotationAngle) > 0))
+        if (collectorDestination && (Mathf.Abs(rotationAngle) > 0))
         {
             // Determine which direction to rotate towards
             Vector3 targetDirection = _facingTarget - transform.position;
@@ -145,6 +145,6 @@ public class CollectorMovement : MonoBehaviour
         rotationAngle = 0.0f;
 
         // empty the GO
-        selectedRoadHub = null;
+        collectorDestination = null;
     }
 }

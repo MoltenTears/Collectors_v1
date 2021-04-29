@@ -144,6 +144,63 @@ MonoBehaviour:
   myWasteCentreLot: {fileID: 0}
   isDroppingWaste: 0
   dropoffSpeed: 20
+--- !u!1 &5556619423108690932
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4855364420863515618}
+  - component: {fileID: 13066646577109613}
+  - component: {fileID: 3814906400153371070}
+  m_Layer: 14
+  m_Name: DestinationTrigger
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4855364420863515618
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5556619423108690932}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 7220188632256177166}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &13066646577109613
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5556619423108690932}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.1, y: 1, z: 0.1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &3814906400153371070
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5556619423108690932}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 021ad61f2a7ead9428c7e67f532a7f71, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5694560864072898611
 GameObject:
   m_ObjectHideFlags: 0
@@ -235,7 +292,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8590226492394693771}
-  - component: {fileID: 1575321754}
   - component: {fileID: 1575321755}
   - component: {fileID: 3865105313608338846}
   - component: {fileID: 5331394337387599335}
@@ -263,19 +319,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1575321754
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8590226492394693773}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0c195dab7a107a4479be1ff7ebe424a8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  selectedRoadHub: {fileID: 0}
 --- !u!114 &1575321755
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -288,7 +331,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a200dc899a14f748be865e4168d32b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectedRoadHub: {fileID: 0}
+  collectorDestination: {fileID: 0}
   myAgent: {fileID: 0}
   myCollectorType: 1
   isMoving: 0
@@ -384,6 +427,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4190568223502362951}
+  - {fileID: 4855364420863515618}
   m_Father: {fileID: 8590226492394693771}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -412,7 +456,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 961b66ba6d0872545865163f85a3acb0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  distanceToWaste: Infinity
+  garbageManagers: []
   isCollecting: 0
+  foundWaste: 0
   isDeliveringWaste: 0
   isReturningToDepot: 0
   garbageInCollector: 0
