@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+
+    [Header("Gameplay Variables")]
+    [SerializeField] public int daysToPlay;
+    [SerializeField] public int daysLeftToPlay;
+    
     [Header("General Variables")]
     
     [Tooltip("Larger means garbage accumulates quicker in the city")] [SerializeField] [Range(0, 1)] public float garbageMultipler;
@@ -54,6 +59,11 @@ public class GameManager : MonoBehaviour
     [SerializeField] public List<GarbageManager> houseGarbage = new List<GarbageManager>();
     [SerializeField] public List<SatisfactionManager> houseSatisfaction = new List<SatisfactionManager>();
     [SerializeField] public List<ActiveCollector> activeCollectorsList = new List<ActiveCollector>();
+
+    private void Start()
+    {
+        daysLeftToPlay = daysToPlay;   
+    }
 
     private void FixedUpdate()
     {
