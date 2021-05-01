@@ -54,6 +54,8 @@ MonoBehaviour:
   isActive: 0
   activeHub: {fileID: 0}
   myRoadMap: {fileID: 0}
+  myCollectorInitate: {fileID: 0}
+  myGameManager: {fileID: 0}
   nodeOrigin: {fileID: 0}
   ConnectedRoadHubs: []
   activeCollector: {fileID: 0}
@@ -142,6 +144,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 559453997545175659}
     m_Modifications:
+    - target: {fileID: 6118135111030301654, guid: 70cb0475ec3415c48a6adcb099c70501,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8797623128249625922, guid: 70cb0475ec3415c48a6adcb099c70501,
         type: 3}
       propertyPath: m_Name
@@ -217,6 +224,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 559453997545175659}
     m_Modifications:
+    - target: {fileID: 6118135111030301654, guid: 70cb0475ec3415c48a6adcb099c70501,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8797623128249625922, guid: 70cb0475ec3415c48a6adcb099c70501,
         type: 3}
       propertyPath: m_Name
@@ -292,6 +304,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 559453997545175659}
     m_Modifications:
+    - target: {fileID: 6118135111030301654, guid: 70cb0475ec3415c48a6adcb099c70501,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8797623128249625922, guid: 70cb0475ec3415c48a6adcb099c70501,
         type: 3}
       propertyPath: m_Name
@@ -367,6 +384,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 559453997545175659}
     m_Modifications:
+    - target: {fileID: 6118135111030301654, guid: 70cb0475ec3415c48a6adcb099c70501,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8797623128249625922, guid: 70cb0475ec3415c48a6adcb099c70501,
         type: 3}
       propertyPath: m_Name

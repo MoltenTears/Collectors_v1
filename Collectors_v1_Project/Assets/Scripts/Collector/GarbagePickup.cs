@@ -125,21 +125,25 @@ public class GarbagePickup : MonoBehaviour
         // iterate through the GarbageManagers, recording the one with the closest distance
         foreach (GarbageManager garbageManager in garbageManagers)
         {
-            distanceToGM = Vector3.Distance(
-                transform.position, garbageManager.GetComponentInParent<GarbageManager>().GetComponentInChildren<CollectionPoint>().transform.position);
-
-            // if the GM is closer than the previous distance recorded and the GM has at least one large bin (times minimumBinsOut if > 0) for collection...
-            if (distanceToGM < distanceToWaste 
-                && minimumBinsOut > 0 ? garbageManager.garbageLevel >= myGameManager.binSizeMedium  * minimumBinsOut: garbageManager.garbageLevel >= myGameManager.binSizeLarge)
+            // if there is not currently a Collector at the house
+            if (!garbageManager.garbageBeingCollected)
             {
-                // ... overwrite the distance variable
-                distanceToWaste = distanceToGM;
+                distanceToGM = Vector3.Distance(
+                    transform.position, garbageManager.GetComponentInParent<GarbageManager>().GetComponentInChildren<CollectionPoint>().transform.position);
 
-                // ... store the object as the destination
-                myCollectorMovement.collectorDestination = garbageManager.GetComponentInParent<GarbageManager>().GetComponentInChildren<CollectionPoint>().gameObject;
+                // if the GM is closer than the previous distance recorded and the GM has at least one large bin (times minimumBinsOut if > 0) for collection...
+                if (distanceToGM < distanceToWaste 
+                    && minimumBinsOut > 0 ? garbageManager.garbageLevel >= myGameManager.binSizeMedium  * minimumBinsOut: garbageManager.garbageLevel >= myGameManager.binSizeLarge)
+                {
+                    // ... overwrite the distance variable
+                    distanceToWaste = distanceToGM;
 
-                // ... set the foundWaste bool to true
-                foundWaste = true;
+                    // ... store the object as the destination
+                    myCollectorMovement.collectorDestination = garbageManager.GetComponentInParent<GarbageManager>().GetComponentInChildren<CollectionPoint>().gameObject;
+
+                    // ... set the foundWaste bool to true
+                    foundWaste = true;
+                }
             }
         }
     }
