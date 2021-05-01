@@ -70,7 +70,7 @@ public class GarbagePickup : MonoBehaviour
                 && myCollectorMovement.myAgent.velocity.magnitude == 0
                 && myCollectorMovement.collectorDestination != null)
             {
-                Debug.Log("Collector Lost, looking for waste.");
+                // Debug.Log("Collector Lost, looking for waste.");
                 WasteCollection();
             }
 
@@ -79,7 +79,7 @@ public class GarbagePickup : MonoBehaviour
                 && myCollectorMovement.myAgent.velocity.magnitude == 0
                 && myCollectorMovement.collectorDestination != null)
             {
-                Debug.Log($"Collector {transform.parent.name} Reset, got stuck.");
+                // Debug.Log($"Collector {transform.parent.name} Reset, got stuck.");
                 myCollectorMovement.ResetDestination();
             }
         }
