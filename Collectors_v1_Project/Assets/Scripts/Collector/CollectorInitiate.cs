@@ -7,11 +7,15 @@ public class CollectorInitiate : MonoBehaviour
 {
     [SerializeField] public GameObject activeHub;
     [SerializeField] private GarbagePickup myGarbagePickup;
+    [SerializeField] private GameManager myGameManager;
+    [SerializeField] private GameObject myGameObject;
     
         // Start is called before the first frame update
     void Start()
     {
         myGarbagePickup = GetComponentInParent<GarbagePickup>();
+        myGameManager = FindObjectOfType<GameManager>();
+        myGameObject = transform.parent.gameObject;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -29,30 +33,32 @@ public class CollectorInitiate : MonoBehaviour
         // if the collision is a Collector
         if (other.GetComponent<RoadHub>())
         {
-            //Debug.Log($"Collector triggered CollectorInitiate on {other.gameObject.name}.");
-
-            if (other.GetComponent<RoadHub>().activeHub != null)
+            // iterate through the activeCollectorList...
+            foreach (ActiveCollector activeCollector in myGameManager.activeCollectorsList)
             {
-                //Debug.Log($"{other.gameObject.name} knows that {other.GetComponent<RoadHub>().activeHub.gameObject.name} is the active RoadHub.");
+                // Debug.Log($"Collector (List) Name: {activeCollector.collector.name}.");
+                // Debug.Log($"Collector (Self) Name: {myGameObject.transform.parent.name}.");
 
-                //Debug.Log($"This RoadHub's name  : {other.GetComponent<RoadHub>().activeHub.gameObject.name}.");
-                //Debug.Log($"the activeHub's name : {other.gameObject.name}.");
-
-                if (other.GetComponent<RoadHub>().activeHub.gameObject.name == other.gameObject.name)
+                // if this collector is in the List...
+                if (activeCollector.collector.name == myGameObject.transform.parent.name)
                 {
-                    //Debug.Log("Collector has arrived at the activeHub.");
+                    // debug
+                    // Debug.Log("Found this Collector in the List.");
 
-                    // check what the collector is doing
-                    if (!myGarbagePickup.isCollecting
-                        && !myGarbagePickup.isDeliveringWaste
-                        && !myGarbagePickup.isReturningToDepot)
+                    // Debug.Log($"RoadHub (List) Name: {activeCollector.destination.name}.");
+                    // Debug.Log($"RoadHub (Self) Name: {other.GetComponentInParent<RoadHub>().gameObject.name}.");
+
+
+                    // ... if there is a RoadHub in the list that matches the RoadHub that was collided with...
+                    if (activeCollector.destination.name == other.gameObject.name)
                     {
-                        // Debug.Log("Collector arrived at activeHub and is ready to start collecting!");
+                        // Debug.Log($"Collector target: {activeCollector.destination.name}, has arrived at: {other.gameObject.name}");
 
-                        // if it's not doing anything, set it to collecting
-                        myGarbagePickup.isCollecting = true;
+                        activeCollector.collector.GetComponentInChildren<GarbagePickup>().isCollecting = true;
                     }
+
                 }
+
             }
         }
     }

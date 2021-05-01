@@ -53,6 +53,7 @@ public class GameManager : MonoBehaviour
     [Header("Lists")]
     [SerializeField] public List<GarbageManager> houseGarbage = new List<GarbageManager>();
     [SerializeField] public List<SatisfactionManager> houseSatisfaction = new List<SatisfactionManager>();
+    [SerializeField] public List<ActiveCollector> activeCollectorsList = new List<ActiveCollector>();
 
     private void FixedUpdate()
     {
@@ -60,6 +61,17 @@ public class GameManager : MonoBehaviour
         GetGarbage();
         GetSatisfaction();
     }
+
+    public void AddCollectorDestination(GameObject _collector, GameObject _roadHub)
+    {
+        ActiveCollector instance = ActiveCollector.CreateInstance<ActiveCollector>();
+        
+        instance.collector = _collector;
+        instance.destination = _roadHub;
+
+        activeCollectorsList.Add(instance);
+    }
+
 
     private void GetHouses()
     {
