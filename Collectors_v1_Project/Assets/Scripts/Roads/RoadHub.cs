@@ -16,6 +16,7 @@ public class RoadHub : MonoBehaviour
     [Header("External References")]
     [SerializeField] private RoadMap myRoadMap;
     [SerializeField] private CollectorInitiate myCollectorInitate;
+    [SerializeField] private GameManager myGameManager;
 
     [Header("Connected Road Hubs")]
     [SerializeField] private GameObject nodeOrigin;
@@ -34,30 +35,31 @@ public class RoadHub : MonoBehaviour
 
     private void SelectRoadHub()
     {
-        // if there is an Active Collector
-        if (activeCollector != null)
+        // if this RoadHub isActive
+        if (isActive)
         {
-            // re-check if the Active Collector is indeed Active
-            if (activeCollector.GetComponent<CollectorMovement>().isActive)
+            // if there is an Active Collector
+            if (activeCollector != null)
             {
-                // only trigger if the Player presses the right key
-                if (Input.GetKeyDown(KeyCode.Mouse0))
+                // re-check if the Active Collector is indeed Active
+                if (activeCollector.GetComponent<CollectorMovement>().newDespatch)
                 {
-                    // debug
-                    // Debug.Log($"Active Collector sent to RoadHub: {gameObject.name}.");
+                    // only trigger if the Player presses the right key
+                    if (Input.GetKeyDown(KeyCode.Mouse0))
+                    {
+                        // add the combo to the List in GameManager
+                        myGameManager.AddCollectorDestination(activeCollector, this.gameObject);
 
-                    // stop where you are
-                    // activeCollector.GetComponent<CollectorMovement>().myAgent.destination = activeCollector.transform.position;
+                        // store a reference to this object to the RoadMap
+                        activeCollector.GetComponent<CollectorMovement>().collectorDestination = activeHub;
 
-                    // store a reference to this object to the RoadMap
-                    activeCollector.GetComponent<CollectorMovement>().collectorDestination = activeHub;
+                        // set this location as the destination
+                        activeCollector.GetComponent<CollectorMovement>().ResetDestination();
 
-                    // set this location as the destination
-                    activeCollector.GetComponent<CollectorMovement>().ResetDestination();
-
-                    // deselect the Active Collector
-                    activeCollector.GetComponent<CollectorMovement>().isActive = false;
-                    ForgetActiveCollector();
+                        // deselect the Active Collector
+                        activeCollector.GetComponent<CollectorMovement>().isActive = false;
+                        ForgetActiveCollector();
+                    }
                 }
             }
         }
@@ -69,15 +71,14 @@ public class RoadHub : MonoBehaviour
 
         foreach (RaycastHit hit in hits)
         {
-            if (hit.collider.GetComponent<RoadHub>() && activeCollector != null)
+            // if there is an ActiveCollector
+            if (hit.collider.GetComponent<RoadHub>())
             {
-                // Debug.Log($"mouse over RoadHub: {hit.transform.name}");
-
                 // store a reference for later
                 activeHub = hit.collider.transform.gameObject;
 
                 // activate the RoadHub
-                isActive = true;
+                activeHub.GetComponent<RoadHub>().isActive = true;
 
                 // change colour to indicate to the player the hub is activated
                 hit.transform.GetComponent<MeshRenderer>().material.color = m_MouseOverColor;
@@ -87,19 +88,15 @@ public class RoadHub : MonoBehaviour
             }
             else
             {
-                // Debug.Log($"RaycastHit: {hit.transform.name}.");
-
                 // deactiveate the RoadHub
                 isActive = false;
 
                 // if there was a reference to an ActiveHub
                 if (activeHub != null)
                 {
-                    // change it back to the original colour
+                    // creset the RoadHub
                     activeHub.GetComponent<MeshRenderer>().material.color = m_OriginalColor;
-                
-                    //// forget about the reference
-                     // activeHub = null;
+                    activeHub.GetComponent<RoadHub>().isActive = false;
                 }
             }
         }
@@ -113,6 +110,7 @@ public class RoadHub : MonoBehaviour
         myRoadMap = GameObject.FindObjectOfType<RoadMap>();
         nodeOrigin = gameObject;
         myCollectorInitate = FindObjectOfType<CollectorInitiate>();
+        myGameManager = FindObjectOfType<GameManager>();
     }
 
     private void ForgetActiveCollector()
