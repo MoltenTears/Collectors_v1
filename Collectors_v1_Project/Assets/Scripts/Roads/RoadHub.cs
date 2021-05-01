@@ -47,7 +47,7 @@ public class RoadHub : MonoBehaviour
                     // Debug.Log($"Active Collector sent to RoadHub: {gameObject.name}.");
 
                     // stop where you are
-                    activeCollector.GetComponent<CollectorMovement>().myAgent.destination = activeCollector.transform.position;
+                    // activeCollector.GetComponent<CollectorMovement>().myAgent.destination = activeCollector.transform.position;
 
                     // store a reference to this object to the RoadMap
                     activeCollector.GetComponent<CollectorMovement>().collectorDestination = activeHub;
@@ -69,7 +69,7 @@ public class RoadHub : MonoBehaviour
 
         foreach (RaycastHit hit in hits)
         {
-            if (hit.collider.GetComponent<RoadHub>())
+            if (hit.collider.GetComponent<RoadHub>() && activeCollector != null)
             {
                 // Debug.Log($"mouse over RoadHub: {hit.transform.name}");
 

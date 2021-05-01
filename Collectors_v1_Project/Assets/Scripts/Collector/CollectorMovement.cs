@@ -10,6 +10,7 @@ public class CollectorMovement : MonoBehaviour
     [SerializeField] public CollectorTypes.CollectorType myCollectorType;
 
     [Header("Movement")]
+    [SerializeField] public bool newDespatch = true;
     [SerializeField] public bool isMoving = false;
     [SerializeField] private float agentSpeed;
 
@@ -34,6 +35,15 @@ public class CollectorMovement : MonoBehaviour
         myAgent = gameObject.GetComponent<NavMeshAgent>();
     }
 
+    private void Update()
+    {
+        if (collectorDestination && gotDestination)
+        {
+            newDespatch = false;
+            GotDestination();
+        }
+    }
+
     // Update is called once per frame
     void FixedUpdate()
     {
@@ -42,23 +52,16 @@ public class CollectorMovement : MonoBehaviour
         agentSpeed = myAgent.velocity.magnitude;
         agentDestination = myAgent.destination;
         distanceToLocation = Vector3.Distance(transform.position, myAgent.destination);
-        
-        if (collectorDestination && gotDestination)
-        {
-            GotDestination();
-        }
     }
 
     private void GetRotationAngle()
     {
         if (gotDestination && (agentSpeed > 0))
         {
-            // Debug.Log("Checking rotationAngle.");
             rotationAngle = Vector3.Angle(transform.position, myAgent.steeringTarget);
         }
         else
         {
-            // Debug.Log("rotationAngle zeroed.");
             rotationAngle = 0.0f;
         }
     }
@@ -145,6 +148,6 @@ public class CollectorMovement : MonoBehaviour
         rotationAngle = 0.0f;
 
         // empty the GO
-        collectorDestination = null;
+        //collectorDestination = null;
     }
 }

@@ -16,6 +16,16 @@ public class CollectorInitiate : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        ArrivedAtDestination(other);
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        ArrivedAtDestination(other);
+    }
+
+    private void ArrivedAtDestination(Collider other)
+    {
         // if the collision is a Collector
         if (other.GetComponent<RoadHub>())
         {
@@ -37,7 +47,7 @@ public class CollectorInitiate : MonoBehaviour
                         && !myGarbagePickup.isDeliveringWaste
                         && !myGarbagePickup.isReturningToDepot)
                     {
-                        Debug.Log("Collector arrived at activeHub and is ready to start collecting!");
+                        // Debug.Log("Collector arrived at activeHub and is ready to start collecting!");
 
                         // if it's not doing anything, set it to collecting
                         myGarbagePickup.isCollecting = true;

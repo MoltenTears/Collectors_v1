@@ -8,8 +8,7 @@ public class GarbagePickup : MonoBehaviour
     [Header("Collection Details")]
     [SerializeField] private float distanceToWaste = Mathf.Infinity;
     [SerializeField] private GarbageManager[] garbageManagers;
-    [SerializeField] private float collectorSpeed;
-    [SerializeField] private GameObject myCollectorDestination;
+    [SerializeField] private int minimumBinsOut;
 
     [SerializeField] public bool isCollecting = false;
     [SerializeField] public bool foundWaste = false;
@@ -24,7 +23,7 @@ public class GarbagePickup : MonoBehaviour
     [SerializeField] private DepotFrontGate myDepotFrontGate;
     [SerializeField] private WasteCentreFrontGate myWasteCentreFrontGate;
 
-    private void Start()
+    private void Awake()
     {
         myCollectorMovement = GetComponentInParent<CollectorMovement>();
         myNavMeshAgent = GetComponentInParent<NavMeshAgent>();
@@ -35,7 +34,6 @@ public class GarbagePickup : MonoBehaviour
 
     private void Update()
     {
-        collectorSpeed = myNavMeshAgent.velocity.magnitude;
 
         if (garbageInCollector >= garbageInCollectorMax && !isDeliveringWaste)
         {
@@ -60,9 +58,30 @@ public class GarbagePickup : MonoBehaviour
 
         if (isCollecting && garbageInCollector > garbageInCollectorMax && myNavMeshAgent.velocity.magnitude == 0)
         {
-            Debug.Log("Reset Collector, even though isCollecting and not yet full.");
             foundWaste = false;
             FindNearestWaste();
+        }
+
+        // if not a new despatch...
+        if (!myCollectorMovement.newDespatch)
+        {
+            // is not moving but has a destination it should be going to...
+            if ((!myCollectorMovement.isMoving && !isCollecting && !isDeliveringWaste && !isReturningToDepot)
+                && myCollectorMovement.myAgent.velocity.magnitude == 0
+                && myCollectorMovement.collectorDestination != null)
+            {
+                Debug.Log("Collector Lost, looking for waste.");
+                WasteCollection();
+            }
+
+            // ... thinks it's moving, isn't, and has a destination to go to...
+            if (!myCollectorMovement.isMoving
+                && myCollectorMovement.myAgent.velocity.magnitude == 0
+                && myCollectorMovement.collectorDestination != null)
+            {
+                Debug.Log($"Collector {transform.parent.name} Reset, got stuck.");
+                myCollectorMovement.ResetDestination();
+            }
         }
     }
 
@@ -83,10 +102,12 @@ public class GarbagePickup : MonoBehaviour
             isCollecting = false;
             if (garbageInCollector > 0) // ... if the collector has SOME waste in it...
             {
+                Debug.Log($"Collector {myCollectorMovement.transform.name} is going to Waste Centre with partial load, not more waste available.");
                 isDeliveringWaste = true; // ... take it to the Waste Centre
             }
             else // .. if not...
             {
+                Debug.Log($"Collector {myCollectorMovement.transform.name} is going to Collector Depot, insufficient Waste to collect.");
                 isReturningToDepot = true; // .. go back to the depot (fail catch)
             }
         }
@@ -94,8 +115,6 @@ public class GarbagePickup : MonoBehaviour
 
     private void FindNearestWaste()
     {
-        Debug.Log($"Collector checking for garbage...");
-
         // find all the GarbageManagers in the scene
         garbageManagers = FindObjectsOfType<GarbageManager>();
 
@@ -109,8 +128,9 @@ public class GarbagePickup : MonoBehaviour
             distanceToGM = Vector3.Distance(
                 transform.position, garbageManager.GetComponentInParent<GarbageManager>().GetComponentInChildren<CollectionPoint>().transform.position);
 
-            // if the GM is closer than the previous distance recorded and the GM has at least one bin for collection...
-            if (distanceToGM < distanceToWaste && garbageManager.garbageLevel >= myGameManager.binSizeSmall)
+            // if the GM is closer than the previous distance recorded and the GM has at least one large bin (times minimumBinsOut if > 0) for collection...
+            if (distanceToGM < distanceToWaste 
+                && minimumBinsOut > 0 ? garbageManager.garbageLevel >= myGameManager.binSizeMedium  * minimumBinsOut: garbageManager.garbageLevel >= myGameManager.binSizeLarge)
             {
                 // ... overwrite the distance variable
                 distanceToWaste = distanceToGM;
@@ -120,14 +140,8 @@ public class GarbagePickup : MonoBehaviour
 
                 // ... set the foundWaste bool to true
                 foundWaste = true;
-
-                // get out of the foreach loop
-                break;
             }
         }
-
-        // pause for debugging
-        if(foundWaste) Debug.Break();
     }
 
     private void MoveToWaste()

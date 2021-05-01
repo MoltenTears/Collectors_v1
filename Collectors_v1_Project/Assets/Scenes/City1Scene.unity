@@ -13291,7 +13291,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa5040cc84dea544a9a55d35dc5bc2da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  garbageMultipler: 0.5
+  garbageMultipler: 0.4
   binSizeSmall: 5
   binSizeMedium: 10
   binSizeLarge: 15
@@ -23439,7 +23439,7 @@ PrefabInstance:
     - target: {fileID: 8590226492394693773, guid: d14caf168012dbe4dbd74b6b6041df94,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d14caf168012dbe4dbd74b6b6041df94, type: 3}
@@ -25225,7 +25225,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1311144935
 Transform:
   m_ObjectHideFlags: 0
@@ -30651,7 +30651,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh16406
+  m_Name: pb_Mesh16414
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2

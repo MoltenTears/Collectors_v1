@@ -5,7 +5,8 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     [Header("General Variables")]
-    [SerializeField] [Range(0, 1)] public float garbageMultipler;
+    
+    [Tooltip("Larger means garbage accumulates quicker in the city")] [SerializeField] [Range(0, 1)] public float garbageMultipler;
 
     [Header("Bins")]
     [SerializeField] public int binSizeSmall;

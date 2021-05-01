@@ -143,7 +143,7 @@ MonoBehaviour:
   myGameManager: {fileID: 0}
   myWasteCentreLot: {fileID: 0}
   isDroppingWaste: 0
-  dropoffSpeed: 20
+  dropoffSpeed: 500
 --- !u!1 &5556619423108690932
 GameObject:
   m_ObjectHideFlags: 0
@@ -201,6 +201,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 021ad61f2a7ead9428c7e67f532a7f71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  activeHub: {fileID: 0}
+  myGarbagePickup: {fileID: 0}
 --- !u!1 &5694560864072898611
 GameObject:
   m_ObjectHideFlags: 0
@@ -334,10 +336,11 @@ MonoBehaviour:
   collectorDestination: {fileID: 0}
   myAgent: {fileID: 0}
   myCollectorType: 1
+  newDespatch: 1
   isMoving: 0
   agentSpeed: 0
   isRotating: 0
-  angleTollerance: 0
+  angleTollerance: 2
   rotationAngle: 0
   rotationSpeed: 0
   gotDestination: 0
@@ -354,7 +357,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 8590226492394693773}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.2
+  m_Radius: 0.1
   m_Speed: 3.5
   m_Acceleration: 8
   avoidancePriority: 50
@@ -458,13 +461,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   distanceToWaste: Infinity
   garbageManagers: []
+  minimumBinsOut: 1
   isCollecting: 0
   foundWaste: 0
   isDeliveringWaste: 0
   isReturningToDepot: 0
   garbageInCollector: 0
-  garbageInCollectorMax: 100
-  collectionSpeed: 20
+  garbageInCollectorMax: 500
+  collectionSpeed: 60
   myCollectorMovement: {fileID: 0}
   myNavMeshAgent: {fileID: 0}
   myGameManager: {fileID: 0}
