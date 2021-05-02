@@ -49,6 +49,10 @@ Pending Bugs:
 
 Week 12:
 ---
+BUG: Collectors often stat collecting in packs due to the broad application of finding a house with garbage to collect.
+FEATURE: split the city up into "zones" so that a Collector can be assigned to a Zone, only collect in that zone, and drop waste 
+at the Waste Centre once all the houses in a zone have been visited once.
+---
 FEATURE: Implemented Starting Game Difficulties (Easy, Medium, Hard).
 ---
 
