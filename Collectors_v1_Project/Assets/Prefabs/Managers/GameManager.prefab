@@ -1,0 +1,86 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &7968516774522263401
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7968516774522263403}
+  - component: {fileID: 7968516774522263400}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7968516774522263403
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7968516774522263401}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.8998605, y: 1.1656854, z: -3.8426275}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7968516774522263400
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7968516774522263401}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa5040cc84dea544a9a55d35dc5bc2da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  daysToPlay: 2
+  daysLeftToPlay: 0
+  isGameOver: 0
+  totalWasteGenerated: 0
+  satisfactionToWin: 70
+  garbageMultipler: 0.4
+  binSizeSmall: 5
+  binSizeMedium: 10
+  binSizeLarge: 15
+  cityGarbageLevel: 0
+  maxCityGarbageLevel: 0
+  citySatisfactionLevel: 0
+  maxCitySatisfactionLevel: 0
+  houseSatisfactionNone: 0
+  houseSatisfactionLow: 0.33
+  houseSatisfactionMedium: 0.66
+  houseSatisfactionHigh: 1
+  houseSingleMaterial: {fileID: 2100000, guid: 1412852a5fc929745a72a4c96b26d4ad, type: 2}
+  garbageSpeedSingle: 1
+  maxGarbageSingle: 50
+  satisfactionRadiusSingle: 4.5
+  wasteTolleranceSingleLow: 0.4
+  wasteTolleranceSingleMedium: 0.6
+  wasteTolleranceSingleHigh: 0.8
+  houseFamilyMaterial: {fileID: 2100000, guid: 4b1deb84a0c737e4fb08dd5d37e3f7d7, type: 2}
+  garbageSpeedFamily: 2
+  maxGarbageFamily: 70
+  satisfactionRadiusFamily: 8
+  wasteTolleranceFamilyLow: 0.3
+  wasteTolleranceFamilyMedium: 0.5
+  wasteTolleranceFamilyHigh: 0.7
+  houseShareMaterial: {fileID: 2100000, guid: 7e46d3c8c55631540abc737a26dee398, type: 2}
+  garbageSpeedShare: 3
+  maxGarbageShare: 105
+  satisfactionRadiusShare: 2
+  wasteTolleranceShareLow: 0.5
+  wasteTolleranceShareMedium: 0.7
+  wasteTolleranceShareHigh: 0.9
+  houseGarbage: []
+  houseSatisfaction: []
+  activeCollectorsList: []

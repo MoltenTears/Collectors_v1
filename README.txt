@@ -47,6 +47,11 @@ Pending Bugs:
 - Lost Collector
 
 
+Week 12:
+---
+FEATURE: Implemented Starting Game Difficulties (Easy, Medium, Hard).
+---
+
 Week 11:
 ---
 FEATURE:Implemented GameOver Overlay once player ran out of days left to play. Included GameOverOverlay.cs that called from 
@@ -140,6 +145,7 @@ DepotLot.cs.
 ---
 BUG: Repo not handling large volume of changes. Identified .gitignore at wrong level of project. Fixed repo; much faster :-)
 ---
+
 
 WEEK 9:
 ---

@@ -11,10 +11,10 @@ public class GameManager : MonoBehaviour
     [SerializeField] public bool isGameOver;
     [SerializeField] public float totalWasteGenerated;
     [SerializeField] public float satisfactionToWin = 0;
+    [SerializeField] public int startingBaseCollectors;
     
     [Header("General Variables")]
-    
-    [Tooltip("Larger means garbage accumulates quicker in the city")] [SerializeField] [Range(0, 1)] public float garbageMultipler;
+    [Tooltip("Larger value means garbage accumulates quicker in the city.")] [SerializeField] [Range(0, 1)] public float garbageMultipler;
 
     [Header("Bins")]
     [SerializeField] public int binSizeSmall;
@@ -63,14 +63,35 @@ public class GameManager : MonoBehaviour
     [SerializeField] public List<SatisfactionManager> houseSatisfaction = new List<SatisfactionManager>();
     [SerializeField] public List<ActiveCollector> activeCollectorsList = new List<ActiveCollector>();
 
+    [Header("External References")]
+    [SerializeField] private DepotManager myDepotManager;
+
+// Singleton
+    public static GameManager GMInstance { get; private set; }
+
+    private void Awake()
+    {
+        if (GMInstance  == null)
+        {
+            GMInstance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
     private void Start()
     {
-        daysLeftToPlay = daysToPlay;   
+        daysLeftToPlay = daysToPlay;
+
     }
 
     private void Update()
     {
         CheckGameOver();
+        if (myDepotManager == null) FindDepotManager();
     }
 
 
@@ -79,6 +100,12 @@ public class GameManager : MonoBehaviour
         GetHouses();
         GetGarbage();
         GetSatisfaction();
+    }
+
+    private void FindDepotManager()
+    {
+        myDepotManager = FindObjectOfType<DepotManager>();
+        if (myDepotManager) myDepotManager.baseCollectors = startingBaseCollectors;
     }
 
     private void CheckGameOver()

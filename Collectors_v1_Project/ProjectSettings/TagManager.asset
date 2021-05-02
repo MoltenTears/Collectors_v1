@@ -10,6 +10,7 @@ TagManager:
   - WasteCentre
   - Instructions
   - House
+  - Difficulty
   layers:
   - Default
   - TransparentFX
