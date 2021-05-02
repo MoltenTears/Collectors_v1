@@ -6,4 +6,5 @@ public class ActiveCollector: ScriptableObject
 {
         public GameObject collector;
         public GameObject destination;
+
 }

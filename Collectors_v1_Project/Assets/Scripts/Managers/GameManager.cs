@@ -8,6 +8,9 @@ public class GameManager : MonoBehaviour
     [Header("Gameplay Variables")]
     [SerializeField] public int daysToPlay;
     [SerializeField] public int daysLeftToPlay;
+    [SerializeField] public bool isGameOver;
+    [SerializeField] public float totalWasteGenerated;
+    [SerializeField] public float satisfactionToWin = 0;
     
     [Header("General Variables")]
     
@@ -65,11 +68,30 @@ public class GameManager : MonoBehaviour
         daysLeftToPlay = daysToPlay;   
     }
 
+    private void Update()
+    {
+        CheckGameOver();
+    }
+
+
     private void FixedUpdate()
     {
         GetHouses();
         GetGarbage();
         GetSatisfaction();
+    }
+
+    private void CheckGameOver()
+    {
+        if (daysLeftToPlay == 0)
+        {
+            isGameOver = true; // trigger GameOver state
+            garbageMultipler = 0.0f; // stop garbage accumulation
+        }
+        else
+        {
+            isGameOver = false;
+        }
     }
 
     public void AddCollectorDestination(GameObject _collector, GameObject _roadHub)
@@ -80,6 +102,22 @@ public class GameManager : MonoBehaviour
         instance.destination = _roadHub;
 
         activeCollectorsList.Add(instance);
+    }
+
+    public void RemoveCollectorDestination(GameObject _collector)
+    {
+        // iterate through the list
+        for (int i = 0; i < activeCollectorsList.Count; i++)
+        {
+            if (activeCollectorsList[i].collector = _collector)
+            {
+                // remove the one you found
+                activeCollectorsList.Remove(activeCollectorsList[i]);
+
+                // stop looking
+                break;
+            }
+        }
     }
 
 

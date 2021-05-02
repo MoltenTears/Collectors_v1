@@ -7,19 +7,32 @@ public class DepotFrontGate : MonoBehaviour
     [SerializeField] public GameObject roadHubAtDepotFrontGate;
 
     [SerializeField] private DepotManager myDepotManager;
+    [SerializeField] private GameManager myGameManager;
 
     private void Start()
     {
         myDepotManager = FindObjectOfType<DepotManager>();
+        myGameManager = FindObjectOfType<GameManager>();
     }
 
     private void OnTriggerEnter(Collider collision)
     {
+
+        // if the collision is the road hub at the front gate...
+        if (collision.CompareTag("RoadHub"))
+        {
+            // store a reference
+            roadHubAtDepotFrontGate = collision.gameObject;
+        }
+
         // if the collision is a collector and they are intending to return to the depot...
         if (collision.CompareTag("Collector") && collision.GetComponentInChildren<GarbagePickup>().isReturningToDepot == true)
         {
             // debug
             // Debug.Log("Collector returned to Depot");
+
+            // remove the object from the List of Active Collectors
+            myGameManager.RemoveCollectorDestination(collision.transform.parent.gameObject);
 
             // ... destroy the game object
             Destroy(collision.transform.parent.gameObject);
@@ -29,13 +42,6 @@ public class DepotFrontGate : MonoBehaviour
             ++myDepotManager.baseCollectors;
             //Debug.Log($"Count of base Collectors at Depot was: {tempCount}, is now: {myDepotManager.baseCollectors}.");
 
-        }
-
-        // if the collision is the road hub at the front gate...
-        if (collision.CompareTag("RoadHub"))
-        {
-            // store a reference
-            roadHubAtDepotFrontGate = collision.gameObject;
         }
     }
 }

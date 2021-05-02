@@ -3,6 +3,7 @@ Collectors_v1
 Credit, Licences & Attribution
 UI Asset Pack: www.kenney.nl
 SceneHandler.cs: https://answers.unity.com/questions/242794/inspector-field-for-scene-asset.html
+Singleton Pattern: https://gamedevtoday.com/singleton-unity-c-code/
 
 Project Management Repository
 https://github.com/MoltenTears/Collectors_v1 (public repo)
@@ -48,10 +49,16 @@ Pending Bugs:
 
 Week 11:
 ---
+FEATURE:Implemented GameOver Overlay once player ran out of days left to play. Included GameOverOverlay.cs that called from 
+GameManager.cs, WasteCentreManager.cs, and had to iterate through the outstanding Collectors to assess pending waste drop off.
+Implemented satisfactionToWin as global variable that must be exceeded at the end ofthe game to have won.
+---
+BUG: after creating list of Active Collectors, nullReferenceException occured in CollectorInitialise.cs.
+FIX: used correct iteration technique to check if gameObject was in list before actioning item on gameobject.
+---
 FEATURE: implemented time system displayed on HUD to show time of day (e.g. 2pm) and how many days left in the play session. Total 
 number of days available set in GameManager.cs to be able to check a win/lose state.
 ---
-Week 11:
 BUG: When despatching multiple Collectors from the Depot, and there are still Collectors that have been despatched, but have not 
 reached their destination, all pending Collectors will be re-assigned the destination for the last Collector Despatch. This results
 in all pending Collectors going to the same destination before commencing collection.
