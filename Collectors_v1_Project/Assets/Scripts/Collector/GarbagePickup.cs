@@ -35,31 +35,42 @@ public class GarbagePickup : MonoBehaviour
     private void Update()
     {
 
+        // check to see if the Collector is full and needs to go to the Waste Depot
         if (garbageInCollector >= garbageInCollectorMax && !isDeliveringWaste)
         {
             isCollecting = false;
             isDeliveringWaste = true;
         }
 
-        if (isReturningToDepot)
+        // check which action is occuring. Depending on priority, turn off the other two
+        // TODO convert to ENUM/Switch
+        if (isCollecting)
         {
+            isDeliveringWaste = false;
+            isReturningToDepot = false;
+            WasteCollection();
+        }
+        else if (isDeliveringWaste)
+        {
+            isCollecting = false;
+            isReturningToDepot = false;
+
+            DeliveringWaste();
+        }
+        else if (isReturningToDepot)
+        {
+            isDeliveringWaste = false;
+            isCollecting = false;
             ReturnToDepot();
         }
 
-        if (isDeliveringWaste)
-        {
-            DeliveringWaste();
-        }
-
-        if (isCollecting)
-        {
-            WasteCollection();
-        }
-
+        // catch for NAvMesh error
         if (isCollecting && garbageInCollector > garbageInCollectorMax && myNavMeshAgent.velocity.magnitude == 0)
         {
-            foundWaste = false;
-            FindNearestWaste();
+            Debug.Log($"{myCollectorMovement.transform.name} is stationary and should be collecting. Delivery waste, then return to the Depot (you broken!).");
+
+            isCollecting = false;
+            isDeliveringWaste = true;
         }
 
         // if not a new despatch...
