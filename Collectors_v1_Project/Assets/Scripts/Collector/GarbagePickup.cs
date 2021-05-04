@@ -23,6 +23,8 @@ public class GarbagePickup : MonoBehaviour
     [SerializeField] private DepotFrontGate myDepotFrontGate;
     [SerializeField] private WasteCentreFrontGate myWasteCentreFrontGate;
 
+    [SerializeField] public ZoneManager collectionZone;
+
     private void Awake()
     {
         myCollectorMovement = GetComponentInParent<CollectorMovement>();

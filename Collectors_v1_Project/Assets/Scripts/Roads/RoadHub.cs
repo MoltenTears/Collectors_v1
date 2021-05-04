@@ -17,15 +17,32 @@ public class RoadHub : MonoBehaviour
     [SerializeField] private RoadMap myRoadMap;
     [SerializeField] private CollectorInitiate myCollectorInitate;
     [SerializeField] private GameManager myGameManager;
+    
+    [Header("Zone Management Details")]  
+    [SerializeField] private ZoneManager myZoneManager;
+    [SerializeField] private List<RoadHub> myZoneRoadHubs;
 
     [Header("Connected Road Hubs")]
-    [SerializeField] private GameObject nodeOrigin;
-    [SerializeField] public List<GameObject> ConnectedRoadHubs;
+    [HideInInspector] private GameObject nodeOrigin;
+    [HideInInspector] public List<GameObject> ConnectedRoadHubs;
 
     [Header("Active Collector")]
     [SerializeField] private GameObject activeCollector;
 
-    
+    void Start()
+    {
+        m_Renderer = GetComponentInChildren<MeshRenderer>();
+        m_OriginalColor = m_Renderer.material.color;
+        myRoadMap = GameObject.FindObjectOfType<RoadMap>();
+        nodeOrigin = gameObject;
+        myCollectorInitate = FindObjectOfType<CollectorInitiate>();
+        myGameManager = FindObjectOfType<GameManager>();
+        myZoneManager = GetComponentInParent<ZoneManager>();
+        foreach (RoadHub roadHub in myZoneManager.myRoadHubs)
+        {
+            myZoneRoadHubs.Add(roadHub);
+        }
+    }
 
     private void Update()
     {
@@ -50,11 +67,14 @@ public class RoadHub : MonoBehaviour
                         // add the combo to the List in GameManager
                         myGameManager.AddCollectorDestination(activeCollector, this.gameObject);
 
-                        // store a reference to this object to the RoadMap
+                        // store a reference to this object in the collector
                         activeCollector.GetComponent<CollectorMovement>().collectorDestination = activeHub;
 
                         // set this location as the destination
                         activeCollector.GetComponent<CollectorMovement>().ResetDestination();
+
+                        // tell the Collector which zone their working in
+                        activeCollector.GetComponentInChildren<GarbagePickup>().collectionZone = myZoneManager;
 
                         // deselect the Active Collector
                         activeCollector.GetComponent<CollectorMovement>().isActive = false;
@@ -80,8 +100,12 @@ public class RoadHub : MonoBehaviour
                 // activate the RoadHub
                 activeHub.GetComponent<RoadHub>().isActive = true;
 
-                // change colour to indicate to the player the hub is activated
-                hit.transform.GetComponent<MeshRenderer>().material.color = m_MouseOverColor;
+                // for each RoadHub in the Zone...
+                foreach (RoadHub roadHub in activeHub.GetComponent<RoadHub>().myZoneRoadHubs)
+                {
+                    // change colour to indicate to the player the hub is activated
+                    roadHub.transform.GetComponent<MeshRenderer>().material.color = m_MouseOverColor;
+                }
 
                 // break the foreach (because we found what we're looking for)
                 break;
@@ -95,22 +119,19 @@ public class RoadHub : MonoBehaviour
                 if (activeHub != null)
                 {
                     // creset the RoadHub
-                    activeHub.GetComponent<MeshRenderer>().material.color = m_OriginalColor;
+
+                    // for each RoadHub in the Zone...
+                    foreach (RoadHub roadHub in activeHub.GetComponent<RoadHub>().myZoneRoadHubs)
+                    {
+                        // change colour to indicate to the player the hub is activated
+                        roadHub.transform.GetComponent<MeshRenderer>().material.color = m_OriginalColor;
+                    }
+                    
+                    // deactivate this RoadHub
                     activeHub.GetComponent<RoadHub>().isActive = false;
                 }
             }
         }
-    }
-
-
-    void Start()
-    {
-        m_Renderer = GetComponentInChildren<MeshRenderer>();
-        m_OriginalColor = m_Renderer.material.color;
-        myRoadMap = GameObject.FindObjectOfType<RoadMap>();
-        nodeOrigin = gameObject;
-        myCollectorInitate = FindObjectOfType<CollectorInitiate>();
-        myGameManager = FindObjectOfType<GameManager>();
     }
 
     private void ForgetActiveCollector()

@@ -9646,6 +9646,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 441659654}
+  - component: {fileID: 441659655}
   m_Layer: 0
   m_Name: ZoneA
   m_TagString: Untagged
@@ -9669,6 +9670,20 @@ Transform:
   m_Father: {fileID: 1833927885}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &441659655
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 441659653}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0dc0224c6844a1744b7682852e2728a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myHouseManagers: []
+  myRoadHubs: []
 --- !u!4 &442087238 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 9092349243525469315, guid: ee9a5a661db219f4f9b483eb17f3e958,
@@ -13050,6 +13065,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 610207055}
+  - component: {fileID: 610207056}
   m_Layer: 0
   m_Name: ZoneE
   m_TagString: Untagged
@@ -13073,6 +13089,20 @@ Transform:
   m_Father: {fileID: 1833927885}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &610207056
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 610207054}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0dc0224c6844a1744b7682852e2728a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myHouseManagers: []
+  myRoadHubs: []
 --- !u!1001 &612955292
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13934,6 +13964,7 @@ MonoBehaviour:
   yCoordUp: 0
   yCoordShow: 0
   moveTollerance: 0
+  myNewDespatch: 0
   showHubs: 0
 --- !u!1 &652061298
 GameObject:
@@ -14927,6 +14958,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 714375466}
+  - component: {fileID: 714375467}
   m_Layer: 0
   m_Name: ZoneJ
   m_TagString: Untagged
@@ -14950,6 +14982,20 @@ Transform:
   m_Father: {fileID: 53971885}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &714375467
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 714375465}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0dc0224c6844a1744b7682852e2728a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myHouseManagers: []
+  myRoadHubs: []
 --- !u!1001 &715282996
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -15034,6 +15080,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 718212742}
+  - component: {fileID: 718212743}
   m_Layer: 0
   m_Name: ZoneF
   m_TagString: Untagged
@@ -15057,6 +15104,20 @@ Transform:
   m_Father: {fileID: 1833927885}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &718212743
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 718212741}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0dc0224c6844a1744b7682852e2728a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myHouseManagers: []
+  myRoadHubs: []
 --- !u!1001 &719105539
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -17526,6 +17587,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 842059377}
+  - component: {fileID: 842059378}
   m_Layer: 0
   m_Name: ZoneG
   m_TagString: Untagged
@@ -17549,6 +17611,20 @@ Transform:
   m_Father: {fileID: 1670138369}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &842059378
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 842059376}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0dc0224c6844a1744b7682852e2728a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myHouseManagers: []
+  myRoadHubs: []
 --- !u!1001 &845480730
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -19213,6 +19289,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 921453985}
+  - component: {fileID: 921453986}
   m_Layer: 0
   m_Name: ZoneD
   m_TagString: Untagged
@@ -19236,6 +19313,20 @@ Transform:
   m_Father: {fileID: 1670138369}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &921453986
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 921453984}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0dc0224c6844a1744b7682852e2728a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myHouseManagers: []
+  myRoadHubs: []
 --- !u!4 &922426614 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 9092349243525469315, guid: ee9a5a661db219f4f9b483eb17f3e958,
@@ -24392,6 +24483,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1209265930}
+  - component: {fileID: 1209265931}
   m_Layer: 0
   m_Name: ZoneC
   m_TagString: Untagged
@@ -24415,6 +24507,20 @@ Transform:
   m_Father: {fileID: 53971885}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1209265931
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1209265929}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0dc0224c6844a1744b7682852e2728a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myHouseManagers: []
+  myRoadHubs: []
 --- !u!1001 &1211403928
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -24932,6 +25038,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1228813007}
+  - component: {fileID: 1228813008}
   m_Layer: 0
   m_Name: ZoneH
   m_TagString: Untagged
@@ -24955,6 +25062,20 @@ Transform:
   m_Father: {fileID: 1670138369}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1228813008
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1228813006}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0dc0224c6844a1744b7682852e2728a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myHouseManagers: []
+  myRoadHubs: []
 --- !u!1001 &1230247868
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -39422,6 +39543,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1845587417}
+  - component: {fileID: 1845587418}
   m_Layer: 0
   m_Name: ZoneI
   m_TagString: Untagged
@@ -39445,6 +39567,20 @@ Transform:
   m_Father: {fileID: 1833927885}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1845587418
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1845587416}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0dc0224c6844a1744b7682852e2728a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myHouseManagers: []
+  myRoadHubs: []
 --- !u!4 &1848206936 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 559453997545175659, guid: 6c4d2268e1a7ff448aff0620c0fe99d5,
@@ -43798,6 +43934,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1603842926, guid: 1270c0964193f674e894e253faf63920, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.100000024
+      objectReference: {fileID: 0}
+    - target: {fileID: 1603842926, guid: 1270c0964193f674e894e253faf63920, type: 3}
       propertyPath: m_LocalRotation.w
       value: 1
       objectReference: {fileID: 0}
@@ -43816,6 +43956,10 @@ PrefabInstance:
     - target: {fileID: 1603842926, guid: 1270c0964193f674e894e253faf63920, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1603842927, guid: 1270c0964193f674e894e253faf63920, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3889428028728559633, guid: 1270c0964193f674e894e253faf63920,
         type: 3}
@@ -43990,6 +44134,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2047177861}
+  - component: {fileID: 2047177862}
   m_Layer: 0
   m_Name: ZoneB
   m_TagString: Untagged
@@ -44013,6 +44158,20 @@ Transform:
   m_Father: {fileID: 53971885}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2047177862
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2047177860}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0dc0224c6844a1744b7682852e2728a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myHouseManagers: []
+  myRoadHubs: []
 --- !u!4 &2048308085 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2672265772487730139, guid: 4f0d9318e4384584f9919e91ddc3ba51,
