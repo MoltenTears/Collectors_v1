@@ -56,7 +56,7 @@ public class GarbagePickup : MonoBehaviour
         {
             isCollecting = false;
             isReturningToDepot = false;
-
+            collectionZone.ResetZone();
             DeliveringWaste();
         }
         else if (isReturningToDepot)
@@ -115,50 +115,60 @@ public class GarbagePickup : MonoBehaviour
             isCollecting = false;
             if (garbageInCollector > 0) // ... if the collector has SOME waste in it...
             {
-                Debug.Log($"Collector {myCollectorMovement.transform.name} is going to Waste Centre with partial load, not more waste available.");
+                // Debug.Log($"Collector {myCollectorMovement.transform.name} is going to Waste Centre with partial load, not more waste available.");
                 isDeliveringWaste = true; // ... take it to the Waste Centre
+                this.collectionZone.currentZoneCollector = null;
             }
             else // .. if not...
             {
-                Debug.Log($"Collector {myCollectorMovement.transform.name} is going to Collector Depot, insufficient Waste to collect.");
+                // Debug.Log($"Collector {myCollectorMovement.transform.name} is going to Collector Depot, insufficient Waste to collect.");
                 isReturningToDepot = true; // .. go back to the depot (fail catch)
+                this.collectionZone.currentZoneCollector = null;
+                
             }
         }
     }
 
     private void FindNearestWaste()
     {
-        // find all the GarbageManagers in the scene
-        garbageManagers = FindObjectsOfType<GarbageManager>();
-
         // create a temporary distance variable and set it infinitely large
         distanceToWaste = Mathf.Infinity;
         float distanceToGM;
 
         // iterate through the GarbageManagers, recording the one with the closest distance
-        foreach (GarbageManager garbageManager in garbageManagers)
+        foreach (GarbageManager garbageManager in collectionZone.myGarbageManagers)
         {
-            // if there is not currently a Collector at the house
-            if (!garbageManager.garbageBeingCollected)
+            // Debug.Log($"{garbageManager.name} being assessed for waste to collect.");
+
+            // if garbage has not been collected this run...
+            if (!garbageManager.garbageCollected)
             {
+                // get the distance to the Collection Point
                 distanceToGM = Vector3.Distance(
                     transform.position, garbageManager.GetComponentInParent<GarbageManager>().GetComponentInChildren<CollectionPoint>().transform.position);
 
-                // if the GM is closer than the previous distance recorded and the GM has at least one large bin (times minimumBinsOut if > 0) for collection...
-                if (distanceToGM < distanceToWaste 
-                    && minimumBinsOut > 0 ? garbageManager.garbageLevel >= myGameManager.binSizeMedium  * minimumBinsOut: garbageManager.garbageLevel >= myGameManager.binSizeLarge)
-                {
-                    // ... overwrite the distance variable
-                    distanceToWaste = distanceToGM;
+                // Debug.Log($"Distance from {gameObject.GetComponentInParent<CollectorMovement>().name} to {garbageManager.name} is: {distanceToGM}.");
 
-                    // ... store the object as the destination
-                    myCollectorMovement.collectorDestination = garbageManager.GetComponentInParent<GarbageManager>().GetComponentInChildren<CollectionPoint>().gameObject;
+                // set the minimum bins out value
+                if (distanceToGM < distanceToWaste && minimumBinsOut > 0 ? garbageManager.garbageLevel >= myGameManager.binSizeMedium * minimumBinsOut : garbageManager.garbageLevel >= myGameManager.binSizeLarge)
 
-                    // ... set the foundWaste bool to true
-                    foundWaste = true;
-                }
+                    // if the new object is closer than the last object (or infinity) and the Collector has a minimum bins out requirement
+                    if (distanceToGM < distanceToWaste && minimumBinsOut > 0)
+                    { 
+                        // ... overwrite the distance variable
+                        distanceToWaste = distanceToGM;
+
+                        // ... store the object as the destination
+                        myCollectorMovement.collectorDestination = garbageManager.GetComponentInParent<GarbageManager>().GetComponentInChildren<CollectionPoint>().gameObject;
+
+                        // ... get collecting!
+                        foundWaste = true;
+                        isCollecting = true;
+                    }
             }
         }
+
+        // Debug.Log($"{GetComponentInParent<CollectorMovement>().gameObject.name}'s nearest house is : {myCollectorMovement.collectorDestination}.");
     }
 
     private void MoveToWaste()
@@ -219,6 +229,7 @@ public class GarbagePickup : MonoBehaviour
                     tempGM.garbageNeedsCollecting = false;
                     tempGM.garbageBeingCollected = false;
                     tempGM.garbageLevel = 0.0f;
+                    tempGM.garbageCollected = true;
                 }
             }
             else if (collision.CompareTag("Garbage") 

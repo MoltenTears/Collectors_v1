@@ -11,6 +11,7 @@ public class GarbageManager : MonoBehaviour
     [SerializeField] private GarbageBin[] binArray;
     [SerializeField] public bool garbageNeedsCollecting = false;
     [SerializeField] public bool garbageBeingCollected = false;
+    [SerializeField] public bool garbageCollected = false;
 
     [Header("External References")]
     [SerializeField] private GameManager myGameManager;

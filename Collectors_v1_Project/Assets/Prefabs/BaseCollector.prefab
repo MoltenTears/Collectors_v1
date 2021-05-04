@@ -203,6 +203,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   activeHub: {fileID: 0}
   myGarbagePickup: {fileID: 0}
+  myGameManager: {fileID: 0}
+  myGameObject: {fileID: 0}
 --- !u!1 &5694560864072898611
 GameObject:
   m_ObjectHideFlags: 0
@@ -468,9 +470,10 @@ MonoBehaviour:
   isReturningToDepot: 0
   garbageInCollector: 0
   garbageInCollectorMax: 500
-  collectionSpeed: 60
+  collectionSpeed: 150
   myCollectorMovement: {fileID: 0}
   myNavMeshAgent: {fileID: 0}
   myGameManager: {fileID: 0}
   myDepotFrontGate: {fileID: 0}
   myWasteCentreFrontGate: {fileID: 0}
+  collectionZone: {fileID: 0}

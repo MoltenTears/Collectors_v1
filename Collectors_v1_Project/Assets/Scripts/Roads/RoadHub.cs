@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class RoadHub : MonoBehaviour
 {
-    Color m_MouseOverColor = Color.red;
-    Color m_DeactiveColour = Color.grey;
-    Color m_OriginalColor;
+    public Color m_MouseOverColor = Color.red;
+    public Color m_DeactiveColour;
+    public Color m_OriginalColor;
     MeshRenderer m_Renderer;
 
     [Header("Active RoadHub")]
@@ -17,6 +17,7 @@ public class RoadHub : MonoBehaviour
     [SerializeField] private RoadMap myRoadMap;
     [SerializeField] private CollectorInitiate myCollectorInitate;
     [SerializeField] private GameManager myGameManager;
+    [SerializeField] private DepotManager myDepotManager;
     
     [Header("Zone Management Details")]  
     [SerializeField] private ZoneManager myZoneManager;
@@ -36,6 +37,7 @@ public class RoadHub : MonoBehaviour
         myRoadMap = GameObject.FindObjectOfType<RoadMap>();
         nodeOrigin = gameObject;
         myCollectorInitate = FindObjectOfType<CollectorInitiate>();
+        myDepotManager = FindObjectOfType<DepotManager>();
         myGameManager = FindObjectOfType<GameManager>();
         myZoneManager = GetComponentInParent<ZoneManager>();
         foreach (RoadHub roadHub in myZoneManager.myRoadHubs)
@@ -61,8 +63,8 @@ public class RoadHub : MonoBehaviour
                 // re-check if the Active Collector is indeed Active
                 if (activeCollector.GetComponent<CollectorMovement>().newDespatch)
                 {
-                    // only trigger if the Player presses the right key
-                    if (Input.GetKeyDown(KeyCode.Mouse0))
+                    // only trigger if the Player presses the right key AND there is not already a Collector in the Zone
+                    if (Input.GetKeyDown(KeyCode.Mouse0) && this.myZoneManager.currentZoneCollector == null)
                     {
                         // add the combo to the List in GameManager
                         myGameManager.AddCollectorDestination(activeCollector, this.gameObject);
@@ -75,10 +77,22 @@ public class RoadHub : MonoBehaviour
 
                         // tell the Collector which zone their working in
                         activeCollector.GetComponentInChildren<GarbagePickup>().collectionZone = myZoneManager;
+                        myZoneManager.currentZoneCollector = activeCollector;
 
                         // deselect the Active Collector
                         activeCollector.GetComponent<CollectorMovement>().isActive = false;
                         ForgetActiveCollector();
+                    }
+                    // else if the player presses the key and there is already a Collector in the Zone
+                    else if (Input.GetKeyDown(KeyCode.Mouse0) && this.myZoneManager.currentZoneCollector != null)
+                    {
+                        // Debug.Log($"Cannot send collector to {myZoneManager.gameObject.name}; Collector already present. Returned to Depot.");
+
+                        // destroy the instantiation
+                        Destroy(activeCollector);
+
+                        // add it back into the Depot
+                        myDepotManager.baseCollectors++;
                     }
                 }
             }
@@ -104,7 +118,7 @@ public class RoadHub : MonoBehaviour
                 foreach (RoadHub roadHub in activeHub.GetComponent<RoadHub>().myZoneRoadHubs)
                 {
                     // change colour to indicate to the player the hub is activated
-                    roadHub.transform.GetComponent<MeshRenderer>().material.color = m_MouseOverColor;
+                    hit.transform.GetComponent<MeshRenderer>().material.color = m_MouseOverColor;
                 }
 
                 // break the foreach (because we found what we're looking for)
@@ -124,7 +138,7 @@ public class RoadHub : MonoBehaviour
                     foreach (RoadHub roadHub in activeHub.GetComponent<RoadHub>().myZoneRoadHubs)
                     {
                         // change colour to indicate to the player the hub is activated
-                        roadHub.transform.GetComponent<MeshRenderer>().material.color = m_OriginalColor;
+                        hit.transform.GetComponent<MeshRenderer>().material.color = m_OriginalColor;
                     }
                     
                     // deactivate this RoadHub
