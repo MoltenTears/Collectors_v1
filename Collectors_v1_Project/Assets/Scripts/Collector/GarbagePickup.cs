@@ -111,21 +111,8 @@ public class GarbagePickup : MonoBehaviour
         }
         else // .. if there is no waste found...
         {
-            // .. turn off collection..
-            isCollecting = false;
-            if (garbageInCollector > 0) // ... if the collector has SOME waste in it...
-            {
-                // Debug.Log($"Collector {myCollectorMovement.transform.name} is going to Waste Centre with partial load, not more waste available.");
-                isDeliveringWaste = true; // ... take it to the Waste Centre
-                this.collectionZone.currentZoneCollector = null;
-            }
-            else // .. if not...
-            {
-                // Debug.Log($"Collector {myCollectorMovement.transform.name} is going to Collector Depot, insufficient Waste to collect.");
-                isReturningToDepot = true; // .. go back to the depot (fail catch)
-                this.collectionZone.currentZoneCollector = null;
-                
-            }
+            // reset the Collector
+            FinaliseCollection();
         }
     }
 
@@ -179,6 +166,16 @@ public class GarbagePickup : MonoBehaviour
 
     private void OnTriggerEnter(Collider collision)
     {
+        CollectGarbage(collision);
+    }
+
+    private void OnTriggerStay(Collider collision)
+    {
+        CollectGarbage(collision);
+    }
+
+    private void CollectGarbage(Collider collision)
+    {
         if (isCollecting && !isDeliveringWaste)
         {
             if (collision.CompareTag("Garbage") // if the collector runs into the house trigger
@@ -187,30 +184,10 @@ public class GarbagePickup : MonoBehaviour
             {
                 // ... tell the house the Collector is here
                 collision.GetComponentInParent<GarbageManager>().garbageBeingCollected = true;
-            
+
                 // ... pause the movement
                 myNavMeshAgent.isStopped = true;
-            }
-        }
-    }
 
-    private void OnTriggerStay(Collider collision)
-    {
-        if (isCollecting && !isDeliveringWaste)
-        {
-            // temp variable
-            float tempHouseGarbage = 0;
-        
-            if (collision.GetComponentInParent<GarbageManager>())
-            {
-                tempHouseGarbage = collision.GetComponentInParent<GarbageManager>().garbageLevel;
-            }
-
-            // IF...
-            if (collision.CompareTag("Garbage") //  the collector runs into the house trigger
-                && collision.GetComponentInParent<GarbageManager>().garbageNeedsCollecting // AND the house has Garbage
-                && isCollecting) // AND the Collector is in pickup mode...
-            {
                 // ... get a reference to the house's Garbage Manager
                 GarbageManager tempGM = collision.GetComponentInParent<GarbageManager>();
 
@@ -232,16 +209,16 @@ public class GarbagePickup : MonoBehaviour
                     tempGM.garbageCollected = true;
                 }
             }
-            else if (collision.CompareTag("Garbage") 
+            else if (collision.CompareTag("Garbage")
                 && !collision.GetComponentInParent<GarbageManager>().garbageNeedsCollecting
                 && isCollecting)
             {
                 // debug
                 // Debug.Log("No more garbage at house, Collector not stopping.");
-                
+
                 // reset the bool to look for more garbage
                 foundWaste = false;
-            
+
                 // ... resume the movement
                 myNavMeshAgent.isStopped = false;
             }
@@ -283,7 +260,26 @@ public class GarbagePickup : MonoBehaviour
             // set this location as the destination
             myCollectorMovement.ResetDestination();
         }
+    }
 
+    public void FinaliseCollection()
+    {
+        Debug.LogWarning($"FinaliseCollection() called.");
 
+        // .. turn off collection..
+        isCollecting = false;
+        if (garbageInCollector > 0) // ... if the collector has SOME waste in it...
+        {
+            // Debug.Log($"Collector {myCollectorMovement.transform.name} is going to Waste Centre with partial load, not more waste available.");
+            isDeliveringWaste = true; // ... take it to the Waste Centre
+            this.collectionZone.currentZoneCollector = null;
+        }
+        else // .. if not...
+        {
+            // Debug.Log($"Collector {myCollectorMovement.transform.name} is going to Collector Depot, insufficient Waste to collect.");
+            isReturningToDepot = true; // .. go back to the depot (fail catch)
+            this.collectionZone.currentZoneCollector = null;
+
+        }
     }
 }

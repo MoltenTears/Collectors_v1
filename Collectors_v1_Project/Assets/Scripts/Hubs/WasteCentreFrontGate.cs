@@ -22,6 +22,12 @@ public class WasteCentreFrontGate : MonoBehaviour
             // pause the collector movement
             collision.GetComponentInParent<CollectorMovement>().StopMoving();
             
+            // reset the failure counter (in case it was triggered)
+            if (collision.GetComponentInParent<ResetCollector>() != null)
+            {
+                collision.GetComponentInParent<ResetCollector>().isResetting = false;
+            }
+
             // add it to the List at the Waste Centre
             myWasteCentreLot.collectorsWaitingList.Add(collision.transform.parent.gameObject);
         }

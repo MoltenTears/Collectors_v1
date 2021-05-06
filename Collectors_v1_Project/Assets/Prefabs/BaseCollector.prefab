@@ -297,6 +297,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8590226492394693771}
   - component: {fileID: 1575321755}
+  - component: {fileID: 1683587935069910364}
   - component: {fileID: 3865105313608338846}
   - component: {fileID: 5331394337387599335}
   - component: {fileID: 891693477904635190}
@@ -350,6 +351,24 @@ MonoBehaviour:
   distanceToLocation: 0
   agentDestination: {x: 0, y: 0, z: 0}
   isActive: 0
+--- !u!114 &1683587935069910364
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8590226492394693773}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b845ae300d1943f418927855c17e9f68, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myCollectorMovement: {fileID: 0}
+  minSpeed: 0.1
+  waitTimeSecondsMax: 3
+  waitTimeSecondsRemaining: 0
+  isCounting: 0
+  navMeshAgentVelocity: 0
 --- !u!195 &3865105313608338846
 NavMeshAgent:
   m_ObjectHideFlags: 0

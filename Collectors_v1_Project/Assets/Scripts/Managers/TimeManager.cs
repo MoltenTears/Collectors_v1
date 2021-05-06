@@ -56,7 +56,7 @@ public class TimeManager : MonoBehaviour
             timeSeconds += ((Time.deltaTime * secondsPerMinute) * timeSpeed);
             totalSeconds += ((Time.deltaTime * secondsPerMinute) * timeSpeed); // for the sun rotation
         }
-        else
+        else if (timeSpeed <= 0 && !myGameManger.isGameOver)
             Debug.LogError("clockSpeed set to zero, provide speed greater than or equal to 1 in TimeManager.cs");
 
         // check if the time is still real (nothing above 59)
