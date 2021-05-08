@@ -3870,7 +3870,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh227310
+  m_Name: pb_Mesh16452
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -46425,6 +46425,23 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 287225645, guid: 7d36851980934e345aa4ad133ecd35b7, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 7937419414294748702, guid: 61baf3c727a85ed4f91c52019dafd817,
+        type: 3}
+    - target: {fileID: 287225645, guid: 7d36851980934e345aa4ad133ecd35b7, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 287225645, guid: 7d36851980934e345aa4ad133ecd35b7, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 287225645, guid: 7d36851980934e345aa4ad133ecd35b7, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1563969376, guid: 7d36851980934e345aa4ad133ecd35b7, type: 3}
       propertyPath: daysText
       value: 

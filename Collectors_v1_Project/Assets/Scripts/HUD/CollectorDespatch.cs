@@ -12,9 +12,11 @@ public class CollectorDespatch : MonoBehaviour
 
     [Header("Collect Button")]
     [SerializeField] private Sprite originalImage;
+    [SerializeField] private Color originalColour;
     [SerializeField] private Button collectButton;
-    [SerializeField] private string collectTextInteractable = "SEND COLLECTOR!";
-    [SerializeField] private string collectTextNotInteractable = "NO COLLECTORS!";
+    [SerializeField] private string collectTextSendCollector = "SEND COLLECTOR!";
+    [SerializeField] private string collectTextDespatchCollector = "DESPATCH COLLECTOR!";
+    [SerializeField] private string collectTextNoCollectors = "NO COLLECTORS!";
 
     [Header("External References")]
     [SerializeField] private DepotManager myDepotManager;
@@ -24,6 +26,7 @@ public class CollectorDespatch : MonoBehaviour
     {
         myDepotManager = FindObjectOfType<DepotManager>();
         originalImage = collectButton.image.sprite;
+        originalColour = collectButton.image.color;
     }
 
     // Update is called once per frame
@@ -36,7 +39,31 @@ public class CollectorDespatch : MonoBehaviour
 
     private void ShowCollectButton()
     {
-        if (myDepotManager.baseCollectors > 0 && collectButton != null)
+        bool newDespatch = false;
+        CollectorMovement[] collectorMovements = FindObjectsOfType<CollectorMovement>();
+        foreach (CollectorMovement collectorMovement in collectorMovements)
+        {
+            if (collectorMovement.newDespatch)
+            {
+                newDespatch = true;
+                break;
+            }
+        }
+
+        if (newDespatch)
+        {
+            // Debug.Log("Collector pending Despatch.");
+
+            // allow button to be used
+            collectButton.interactable = false;
+
+            // set the text on the button
+            collectButton.GetComponentInChildren<TextMeshProUGUI>().text = collectTextDespatchCollector;
+
+            // set colour
+            collectButton.image.color = originalColour;
+        }
+        else if (myDepotManager.baseCollectors > 0 && collectButton != null)
         {
             // Debug.Log("Player could send out a Collector.");
 
@@ -44,7 +71,11 @@ public class CollectorDespatch : MonoBehaviour
             collectButton.interactable = true;
 
             // set the text on the button
-            collectButton.GetComponentInChildren<TextMeshProUGUI>().text = collectTextInteractable;
+            collectButton.GetComponentInChildren<TextMeshProUGUI>().text = collectTextSendCollector;
+
+            // set colour
+            collectButton.image.color = originalColour;
+
         }
         else
         {
@@ -52,7 +83,7 @@ public class CollectorDespatch : MonoBehaviour
             collectButton.interactable = false;
 
             // set the text on the button
-            collectButton.GetComponentInChildren<TextMeshProUGUI>().text = collectTextNotInteractable;
+            collectButton.GetComponentInChildren<TextMeshProUGUI>().text = collectTextNoCollectors;
         }
     }
 
