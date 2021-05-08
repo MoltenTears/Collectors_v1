@@ -17,7 +17,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &4429190601816898536
 Transform:
   m_ObjectHideFlags: 0
@@ -54,8 +54,8 @@ ParticleSystem:
   useRigidbodyForVelocity: 1
   startDelay:
     serializedVersion: 2
-    minMaxState: 0
-    scalar: 0
+    minMaxState: 3
+    scalar: 2
     minScalar: 0
     maxCurve:
       serializedVersion: 2
@@ -114,9 +114,9 @@ ParticleSystem:
     enabled: 1
     startLifetime:
       serializedVersion: 2
-      minMaxState: 0
-      scalar: 0.54
-      minScalar: 5
+      minMaxState: 3
+      scalar: 1
+      minScalar: 0.5
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -167,9 +167,9 @@ ParticleSystem:
         m_RotationOrder: 4
     startSpeed:
       serializedVersion: 2
-      minMaxState: 0
-      scalar: 0.5
-      minScalar: 5
+      minMaxState: 3
+      scalar: 0.8
+      minScalar: 0.3
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -284,7 +284,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.5
+      scalar: 0.3
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -337,7 +337,7 @@ ParticleSystem:
     startSizeY:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 2.87
+      scalar: 2.1
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -390,7 +390,7 @@ ParticleSystem:
     startSizeZ:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.5
+      scalar: 0
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -865,7 +865,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 4.5
+      scalar: 5
       minScalar: 10
       maxCurve:
         serializedVersion: 2
@@ -5135,8 +5135,25 @@ MonoBehaviour:
   binArray: []
   garbageNeedsCollecting: 0
   garbageBeingCollected: 0
+  garbageCollected: 0
   myGameManager: {fileID: 0}
   myHouseManager: {fileID: 0}
+  stinkParticles: {fileID: 0}
+  stinkPercentageLow: 0.4
+  stinkPercentageMedium: 0.7
+  stinkPercentageHigh: 0.9
+  stinkVolumeLow: 1
+  stinkVolumeMedium: 2
+  stinkVolumeHigh: 3
+  stinkVolumeTotal: 5
+  stinkSizeLow: {x: 0.15, y: 1.5, z: 0}
+  stinkSizeMedium: {x: 0.2, y: 1.6, z: 0}
+  stinkSizeHigh: {x: 0.2, y: 1.7, z: 0}
+  stinkSizeTotal: {x: 0.25, y: 1.8, z: 0}
+  stinkColourLow: {r: 0.48338702, g: 0.5566038, b: 0.35444108, a: 1}
+  stinkColourMedium: {r: 0.48713526, g: 0.5754717, b: 0.13843894, a: 1}
+  stinkColourHigh: {r: 0.2548772, g: 0.4056604, b: 0.028702382, a: 1}
+  stinkColourTotal: {r: 0.10797325, g: 0.3301887, b: 0, a: 1}
 --- !u!1 &9092349244496024962
 GameObject:
   m_ObjectHideFlags: 0

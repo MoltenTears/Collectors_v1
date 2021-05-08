@@ -97,8 +97,10 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 0}
-  m_LightingSettings: {fileID: 1745195560}
+  m_LightingDataAsset: {fileID: 112000000, guid: dcc70e5161703974987b7f59ea094c43,
+    type: 2}
+  m_LightingSettings: {fileID: 4890085278179872738, guid: 83c135e46bc7a1745b6bf756a5dd9819,
+    type: 2}
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -3868,7 +3870,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh16508
+  m_Name: pb_Mesh227310
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -9700,6 +9702,11 @@ PrefabInstance:
       propertyPath: isOccupied
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1011379004326137055, guid: ee9a5a661db219f4f9b483eb17f3e958,
+        type: 3}
+      propertyPath: stinkPercentageTotal
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 1608369438128563975, guid: ee9a5a661db219f4f9b483eb17f3e958,
         type: 3}
       propertyPath: isOccupied
@@ -14061,7 +14068,7 @@ MonoBehaviour:
   totalWasteGenerated: 0
   satisfactionToWin: 70
   startingBaseCollectors: 8
-  garbageMultipler: 0.15
+  garbageMultipler: 0.59
   binSizeSmall: 5
   binSizeMedium: 10
   binSizeLarge: 15
@@ -26442,7 +26449,7 @@ PrefabInstance:
     - target: {fileID: 9092349243525469315, guid: ee9a5a661db219f4f9b483eb17f3e958,
         type: 3}
       propertyPath: m_RootOrder
-      value: 28
+      value: 27
       objectReference: {fileID: 0}
     - target: {fileID: 9092349243525469315, guid: ee9a5a661db219f4f9b483eb17f3e958,
         type: 3}
@@ -37198,67 +37205,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1145252953}
   m_PrefabAsset: {fileID: 0}
---- !u!850595691 &1745195560
-LightingSettings:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: 
-  serializedVersion: 3
-  m_GIWorkflowMode: 1
-  m_EnableBakedLightmaps: 1
-  m_EnableRealtimeLightmaps: 0
-  m_RealtimeEnvironmentLighting: 1
-  m_BounceScale: 1
-  m_AlbedoBoost: 1
-  m_IndirectOutputScale: 1
-  m_UsingShadowmask: 1
-  m_BakeBackend: 1
-  m_LightmapMaxSize: 1024
-  m_BakeResolution: 40
-  m_Padding: 2
-  m_TextureCompression: 1
-  m_AO: 0
-  m_AOMaxDistance: 1
-  m_CompAOExponent: 1
-  m_CompAOExponentDirect: 0
-  m_ExtractAO: 0
-  m_MixedBakeMode: 2
-  m_LightmapsBakeMode: 1
-  m_FilterMode: 1
-  m_LightmapParameters: {fileID: 15204, guid: 0000000000000000f000000000000000, type: 0}
-  m_ExportTrainingData: 0
-  m_TrainingDataDestination: TrainingData
-  m_RealtimeResolution: 2
-  m_ForceWhiteAlbedo: 0
-  m_ForceUpdates: 0
-  m_FinalGather: 0
-  m_FinalGatherRayCount: 256
-  m_FinalGatherFiltering: 1
-  m_PVRCulling: 1
-  m_PVRSampling: 1
-  m_PVRDirectSampleCount: 32
-  m_PVRSampleCount: 512
-  m_PVREnvironmentSampleCount: 256
-  m_PVREnvironmentReferencePointCount: 2048
-  m_LightProbeSampleCountMultiplier: 4
-  m_PVRBounces: 2
-  m_PVRMinBounces: 1
-  m_PVREnvironmentMIS: 1
-  m_PVRFilteringMode: 1
-  m_PVRDenoiserTypeDirect: 1
-  m_PVRDenoiserTypeIndirect: 1
-  m_PVRDenoiserTypeAO: 1
-  m_PVRFilterTypeDirect: 0
-  m_PVRFilterTypeIndirect: 0
-  m_PVRFilterTypeAO: 0
-  m_PVRFilteringGaussRadiusDirect: 1
-  m_PVRFilteringGaussRadiusIndirect: 5
-  m_PVRFilteringGaussRadiusAO: 2
-  m_PVRFilteringAtrousPositionSigmaDirect: 0.5
-  m_PVRFilteringAtrousPositionSigmaIndirect: 2
-  m_PVRFilteringAtrousPositionSigmaAO: 1
 --- !u!1001 &1746023334
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -41612,7 +41558,7 @@ PrefabInstance:
     - target: {fileID: 9092349243525469315, guid: ee9a5a661db219f4f9b483eb17f3e958,
         type: 3}
       propertyPath: m_RootOrder
-      value: 27
+      value: 26
       objectReference: {fileID: 0}
     - target: {fileID: 9092349243525469315, guid: ee9a5a661db219f4f9b483eb17f3e958,
         type: 3}

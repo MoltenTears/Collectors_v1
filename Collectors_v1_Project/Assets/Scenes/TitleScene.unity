@@ -517,14 +517,14 @@ MonoBehaviour:
     sceneAsset: {fileID: 102900000, guid: 9fc0d4010bbf28b4594072e72b8655ab, type: 3}
     sceneName: Scenes/City1Scene
   daysEasy: 15
-  garbageSpeedEasy: 0.2
+  garbageSpeedEasy: 0.1
   startingCollectorsEasy: 8
   daysMedium: 30
-  garbageSpeedMedium: 0.4
-  startingCollectorsMedium: 6
+  garbageSpeedMedium: 0.2
+  startingCollectorsMedium: 7
   daysHard: 45
-  garbageSpeedHard: 0.6
-  startingCollectorsHard: 4
+  garbageSpeedHard: 0.3
+  startingCollectorsHard: 6
 --- !u!1 &364715731
 GameObject:
   m_ObjectHideFlags: 0

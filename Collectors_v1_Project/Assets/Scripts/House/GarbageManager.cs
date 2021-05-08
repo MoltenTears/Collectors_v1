@@ -17,6 +17,24 @@ public class GarbageManager : MonoBehaviour
     [SerializeField] private GameManager myGameManager;
     [SerializeField] private HouseManager myHouseManager;
 
+    [Header("Stink Lines")]
+    [SerializeField] private ParticleSystem stinkParticles;
+    [SerializeField] [Range(0, 1)] private float stinkPercentageLow;
+    [SerializeField] [Range(0, 1)] private float stinkPercentageMedium;
+    [SerializeField] [Range(0, 1)] private float stinkPercentageHigh;
+    [SerializeField] private float stinkVolumeLow;
+    [SerializeField] private float stinkVolumeMedium;
+    [SerializeField] private float stinkVolumeHigh;
+    [SerializeField] private float stinkVolumeTotal;
+    [SerializeField] private Vector3 stinkSizeLow;
+    [SerializeField] private Vector3 stinkSizeMedium;
+    [SerializeField] private Vector3 stinkSizeHigh;
+    [SerializeField] private Vector3 stinkSizeTotal;
+    [SerializeField] private Color stinkColourLow;
+    [SerializeField] private Color stinkColourMedium;
+    [SerializeField] private Color stinkColourHigh;
+    [SerializeField] private Color stinkColourTotal;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -24,13 +42,16 @@ public class GarbageManager : MonoBehaviour
         myHouseManager = GetComponent<HouseManager>();
         binArray = GetComponentsInChildren<GarbageBin>();
 
+        stinkParticles = GetComponentInChildren<ParticleSystem>();
+        UpdateParticles(stinkParticles, 0.0f, new Vector3(0,0,0), Color.gray);
+
         SetMaxGarbage();
     }
 
     // Update is called once per frame
     private void Update()
     {
-        if(myHouseManager.isOccupied)
+        if (myHouseManager.isOccupied)
         {
             if (!garbageBeingCollected && garbageLevel <= maxGarbageLevel)
             {
@@ -38,6 +59,56 @@ public class GarbageManager : MonoBehaviour
             }
             SetOutBins();
         }
+
+        SetStink();
+    }
+
+    private void UpdateParticles(ParticleSystem _particleSystem, float _emitterValue, Vector3 _stinkSize, Color _stinkColour)
+    {
+        // get the emitter module
+        var particleEmitter = _particleSystem.emission;
+        
+        // change the rateOverTime
+        particleEmitter.rateOverTime = _emitterValue;
+
+        // set the size of the particle
+        var main = _particleSystem.main;
+        main.startSizeX = _stinkSize.x;
+        main.startSizeY = _stinkSize.y;
+        main.startSizeZ = _stinkSize.z;
+
+        // set the colour of the particle
+        main.startColor = _stinkColour;
+    }
+
+    private void SetStink()
+    {
+        if (garbageLevel >= maxGarbageLevel)
+        {
+            // Debug.Log($"{gameObject.name} emitter set to TOTAL.");
+            UpdateParticles(stinkParticles, stinkVolumeTotal, stinkSizeTotal, stinkColourTotal);
+        }
+        else if (garbageLevel/maxGarbageLevel >= stinkPercentageHigh)
+        {
+            // Debug.Log($"{gameObject.name} emitter set to HIGH.");
+            UpdateParticles(stinkParticles, stinkVolumeHigh, stinkSizeHigh, stinkColourHigh);
+        }
+        else if (garbageLevel / maxGarbageLevel >= stinkPercentageMedium)
+        {
+            // Debug.Log($"{gameObject.name} emitter set to MEDIUM.");
+            UpdateParticles(stinkParticles, stinkVolumeMedium, stinkSizeMedium, stinkColourMedium);
+        }
+        else if (garbageLevel / maxGarbageLevel >= stinkPercentageLow)
+        {
+            // Debug.Log($"{gameObject.name} emitter set to LOW.");
+            UpdateParticles(stinkParticles, stinkVolumeLow, stinkSizeLow, stinkColourLow);
+        }
+        else
+        {
+            // Debug.Log($"{gameObject.name} emitter set to NONE.");
+            UpdateParticles(stinkParticles, 0.0f, new Vector3(0, 0, 0), Color.gray);
+        }
+
     }
 
     private void SetMaxGarbage()
