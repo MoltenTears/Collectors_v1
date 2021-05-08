@@ -137,7 +137,7 @@ public class GarbagePickup : MonoBehaviour
                 // Debug.Log($"Distance from {gameObject.GetComponentInParent<CollectorMovement>().name} to {garbageManager.name} is: {distanceToGM}.");
 
                 // set the minimum bins out value
-                if (distanceToGM < distanceToWaste && minimumBinsOut > 0 ? garbageManager.garbageLevel >= myGameManager.binSizeMedium * minimumBinsOut : garbageManager.garbageLevel >= myGameManager.binSizeLarge)
+                if (distanceToGM < distanceToWaste && minimumBinsOut > 0 ? garbageManager.garbageLevel >= myGameManager.binSizeSmall * minimumBinsOut : garbageManager.garbageLevel >= myGameManager.binSizeSmall)
 
                     // if the new object is closer than the last object (or infinity) and the Collector has a minimum bins out requirement
                     if (distanceToGM < distanceToWaste && minimumBinsOut > 0)

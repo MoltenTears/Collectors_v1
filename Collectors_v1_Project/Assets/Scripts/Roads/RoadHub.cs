@@ -138,7 +138,7 @@ public class RoadHub : MonoBehaviour
                     foreach (RoadHub roadHub in activeHub.GetComponent<RoadHub>().myZoneRoadHubs)
                     {
                         // change colour to indicate to the player the hub is activated
-                        hit.transform.GetComponent<MeshRenderer>().material.color = m_OriginalColor;
+                        roadHub.transform.GetComponent<MeshRenderer>().material.color = m_OriginalColor;
                     }
                     
                     // deactivate this RoadHub
