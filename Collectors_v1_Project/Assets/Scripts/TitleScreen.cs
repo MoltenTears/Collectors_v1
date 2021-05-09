@@ -56,14 +56,8 @@ public class TitleScreen : MonoBehaviour
 
     public void ChoosDifficultyEasy()
     {
-        // set days to play
-        myGameManager.daysToPlay = daysEasy;
-
-        // set accumuilation speed
-        myGameManager.garbageMultipler = garbageSpeedEasy;
-
-        // set number of Collectors 
-        myGameManager.startingBaseCollectors = startingCollectorsEasy;
+        // set Game Manager
+        myGameManager.difficultySetting = GameManager.DifficultySetting.EASY;
 
         // Start Game
         StartGame();
@@ -71,14 +65,8 @@ public class TitleScreen : MonoBehaviour
 
     public void ChoosDifficultyMedium()
     {
-        // set days to play
-        myGameManager.daysToPlay = daysMedium;
-
-        // set accumuilation speed
-        myGameManager.garbageMultipler = garbageSpeedMedium;
-
-        // set number of Collectors 
-        myGameManager.startingBaseCollectors = startingCollectorsMedium;
+        // set Game Manager
+        myGameManager.difficultySetting = GameManager.DifficultySetting.MEDIUM;
 
         // Start Game
         StartGame();
@@ -86,14 +74,8 @@ public class TitleScreen : MonoBehaviour
 
     public void ChoosDifficultyHard()
     {
-        // set days to play
-        myGameManager.daysToPlay = daysHard;
-
-        // set accumuilation speed
-        myGameManager.garbageMultipler = garbageSpeedHard;
-
-        // set number of Collectors 
-        myGameManager.startingBaseCollectors = startingCollectorsHard;
+        // set Game Manager
+        myGameManager.difficultySetting = GameManager.DifficultySetting.HARD;
 
         // Start Game
         StartGame();

@@ -4,8 +4,16 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    public enum DifficultySetting
+    {
+        NONE,
+        EASY,
+        MEDIUM,
+        HARD
+    }
 
     [Header("Gameplay Variables")]
+    [SerializeField] public DifficultySetting difficultySetting;
     [SerializeField] public int daysToPlay;
     [SerializeField] public int daysLeftToPlay;
     [SerializeField] public bool isGameOver;
@@ -58,19 +66,44 @@ public class GameManager : MonoBehaviour
     [SerializeField] public float wasteTolleranceShareMedium;
     [SerializeField] public float wasteTolleranceShareHigh;
 
+    [Header("External References")]
+    [SerializeField] private DepotManager myDepotManager;
+
+    [Header("Difficultly - EASY")]
+    [SerializeField] private int daysEasy;
+    [SerializeField] private float garbageSpeedEasy;
+    [SerializeField] private int startingCollectorsEasy;
+    [SerializeField] private float satisfactionToWinEasy;
+
+    [Header("Difficultly - MEDIUM")]
+    [SerializeField] private int daysMedium;
+    [SerializeField] private float garbageSpeedMedium;
+    [SerializeField] private int startingCollectorsMedium;
+    [SerializeField] private float satisfactionToWinMedium;
+
+    [Header("Difficultly - HARD")]
+    [SerializeField] private int daysHard;
+    [SerializeField] private float garbageSpeedHard;
+    [SerializeField] private int startingCollectorsHard;
+    [SerializeField] private float satisfactionToWinHard;
+
+    [Header("Zone Game Objects")]
+    [SerializeField] private GameObject zoneEssential;
+    [SerializeField] private GameObject zoneEasy;
+    [SerializeField] private GameObject zoneMedium;
+    [SerializeField] private GameObject zoneHard;
+
     [Header("Lists")]
     [SerializeField] public List<GarbageManager> houseGarbage = new List<GarbageManager>();
     [SerializeField] public List<SatisfactionManager> houseSatisfaction = new List<SatisfactionManager>();
     [SerializeField] public List<ActiveCollector> activeCollectorsList = new List<ActiveCollector>();
-
-    [Header("External References")]
-    [SerializeField] private DepotManager myDepotManager;
 
 // Singleton
     public static GameManager GMInstance { get; private set; }
 
     private void Awake()
     {
+        // Singleton
         if (GMInstance  == null)
         {
             GMInstance = this;
@@ -85,6 +118,7 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         daysLeftToPlay = daysToPlay;
+        SetZones();
     }
 
     private void Update()
@@ -99,6 +133,76 @@ public class GameManager : MonoBehaviour
         GetHouses();
         GetGarbage();
         GetSatisfaction();
+    }
+
+    public void SetZones()
+    {
+        // find the zones in the level
+        zoneEssential = GameObject.FindGameObjectWithTag("ZoneEssential");
+        zoneEasy = GameObject.FindGameObjectWithTag("ZoneEasy");
+        zoneMedium = GameObject.FindGameObjectWithTag("ZoneMedium");
+        zoneHard = GameObject.FindGameObjectWithTag("ZoneHard");
+
+        // deactivate all the zones
+        if (zoneEssential != null) zoneEssential.SetActive(false);
+        if (zoneEasy != null) zoneEasy.SetActive(false);
+        if (zoneMedium != null) zoneMedium.SetActive(false);
+        if (zoneHard != null) zoneHard.SetActive(false);
+
+        // based on the difficulty setting, activate selected zones
+        switch (difficultySetting)
+        {
+            case DifficultySetting.EASY:
+                {
+                    // activate related zones
+                    if (zoneEssential != null) zoneEssential.SetActive(true);
+                    if (zoneEasy != null) zoneEasy.SetActive(true);
+
+                    // update the settings
+                    daysToPlay = daysEasy;
+                    garbageMultipler = garbageSpeedEasy;
+                    startingBaseCollectors = startingCollectorsEasy;
+                    satisfactionToWin = satisfactionToWinEasy;
+
+                    break;
+                }
+            case DifficultySetting.MEDIUM:
+                {
+                    // activate related zones
+                    if (zoneEssential != null) zoneEssential.SetActive(true);
+                    if (zoneEasy != null) zoneEasy.SetActive(true);
+                    if (zoneMedium != null) zoneMedium.SetActive(true);
+
+                    // update the settings
+                    daysToPlay = daysMedium;
+                    garbageMultipler = garbageSpeedMedium;
+                    startingBaseCollectors = startingCollectorsMedium;
+                    satisfactionToWin = satisfactionToWinMedium;
+
+                    break;
+                }
+            case DifficultySetting.HARD:
+                {
+                    // activate related zones
+                    if (zoneEssential != null) zoneEssential.SetActive(true);
+                    if (zoneEasy != null) zoneEasy.SetActive(true);
+                    if (zoneMedium != null) zoneMedium.SetActive(true);
+                    if (zoneHard != null) zoneHard.SetActive(true);
+
+                    // update the settings
+                    daysToPlay = daysHard;
+                    garbageMultipler = garbageSpeedHard;
+                    startingBaseCollectors = startingCollectorsHard;
+                    satisfactionToWin = satisfactionToWinHard;
+
+                    break;
+                }
+            default:
+                {
+                    Debug.LogError("GameManager.SetZones() switch failed.");
+                    break;
+                }
+        }
     }
 
     private void FindDepotManager()

@@ -35,6 +35,7 @@ public class TimeManager : MonoBehaviour
     void Start()
     {
         myGameManger = FindObjectOfType<GameManager>();
+        myGameManger.SetZones();
         days = myGameManger.daysToPlay;
         SetStartTime();
     }

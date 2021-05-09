@@ -12,6 +12,10 @@ TagManager:
   - House
   - Difficulty
   - PauseScreen
+  - ZoneEssential
+  - ZoneEasy
+  - ZoneMedium
+  - ZoneHard
   layers:
   - Default
   - TransparentFX
