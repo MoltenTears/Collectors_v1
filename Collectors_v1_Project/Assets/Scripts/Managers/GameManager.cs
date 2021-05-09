@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
 
     [Header("Gameplay Variables")]
     [SerializeField] public DifficultySetting difficultySetting;
+    [SerializeField] public bool isDifficultySet;
     [SerializeField] public int daysToPlay;
     [SerializeField] public int daysLeftToPlay;
     [SerializeField] public bool isGameOver;
@@ -118,7 +119,6 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         daysLeftToPlay = daysToPlay;
-        SetZones();
     }
 
     private void Update()
@@ -137,6 +137,8 @@ public class GameManager : MonoBehaviour
 
     public void SetZones()
     {
+        Debug.Log($"SetZones() called.");
+
         // find the zones in the level
         zoneEssential = GameObject.FindGameObjectWithTag("ZoneEssential");
         zoneEasy = GameObject.FindGameObjectWithTag("ZoneEasy");
@@ -148,26 +150,34 @@ public class GameManager : MonoBehaviour
         if (zoneEasy != null) zoneEasy.SetActive(false);
         if (zoneMedium != null) zoneMedium.SetActive(false);
         if (zoneHard != null) zoneHard.SetActive(false);
+    }
+
+    public void SetDifficulty()
+    {
+        Debug.Log($"SetDifficulty() called.");
 
         // based on the difficulty setting, activate selected zones
         switch (difficultySetting)
         {
             case DifficultySetting.EASY:
                 {
+                    Debug.Log($"Difficultly confirmed as: {difficultySetting}.");
                     // activate related zones
                     if (zoneEssential != null) zoneEssential.SetActive(true);
                     if (zoneEasy != null) zoneEasy.SetActive(true);
 
                     // update the settings
                     daysToPlay = daysEasy;
+                    daysLeftToPlay = daysEasy;
                     garbageMultipler = garbageSpeedEasy;
-                    startingBaseCollectors = startingCollectorsEasy;
+                    myDepotManager.baseCollectors = startingCollectorsEasy;
                     satisfactionToWin = satisfactionToWinEasy;
 
                     break;
                 }
             case DifficultySetting.MEDIUM:
                 {
+                    Debug.Log($"Difficultly confirmed as: {difficultySetting}.");
                     // activate related zones
                     if (zoneEssential != null) zoneEssential.SetActive(true);
                     if (zoneEasy != null) zoneEasy.SetActive(true);
@@ -175,14 +185,16 @@ public class GameManager : MonoBehaviour
 
                     // update the settings
                     daysToPlay = daysMedium;
+                    daysLeftToPlay = daysMedium;
                     garbageMultipler = garbageSpeedMedium;
-                    startingBaseCollectors = startingCollectorsMedium;
+                    myDepotManager.baseCollectors = startingCollectorsMedium;
                     satisfactionToWin = satisfactionToWinMedium;
 
                     break;
                 }
             case DifficultySetting.HARD:
                 {
+                    Debug.Log($"Difficultly confirmed as: {difficultySetting}.");
                     // activate related zones
                     if (zoneEssential != null) zoneEssential.SetActive(true);
                     if (zoneEasy != null) zoneEasy.SetActive(true);
@@ -191,10 +203,16 @@ public class GameManager : MonoBehaviour
 
                     // update the settings
                     daysToPlay = daysHard;
+                    daysLeftToPlay = daysHard;
                     garbageMultipler = garbageSpeedHard;
-                    startingBaseCollectors = startingCollectorsHard;
+                    myDepotManager.baseCollectors = startingCollectorsHard;
                     satisfactionToWin = satisfactionToWinHard;
 
+                    break;
+                }
+            case DifficultySetting.NONE:
+                {
+                    // do nothing, it's ok :-)
                     break;
                 }
             default:
@@ -203,6 +221,8 @@ public class GameManager : MonoBehaviour
                     break;
                 }
         }
+
+        isDifficultySet = true;
     }
 
     private void FindDepotManager()

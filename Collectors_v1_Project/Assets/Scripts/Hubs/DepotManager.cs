@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class DepotManager : MonoBehaviour
 {
+    
     [SerializeField] public DepotLot[] myDepotLots;
     [SerializeField] public int baseCollectors; // TODO repeat for future different types of Collectors
     [SerializeField] private DepotFrontGate myDepotFrontGate;

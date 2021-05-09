@@ -8,6 +8,7 @@ public class CollectorMovement : MonoBehaviour
     [Header("References")]
     [SerializeField] public NavMeshAgent myAgent;
     [SerializeField] public CollectorTypes.CollectorType myCollectorType;
+    [SerializeField] private AudioManager myAudioManager;
 
     [Header("Movement")]
     [SerializeField] public bool newDespatch = true;
@@ -33,13 +34,18 @@ public class CollectorMovement : MonoBehaviour
     void Start()
     {
         myAgent = gameObject.GetComponent<NavMeshAgent>();
+        myAudioManager = FindObjectOfType<AudioManager>();
     }
 
     private void Update()
     {
         if (collectorDestination && gotDestination)
         {
-            newDespatch = false;
+            if (newDespatch)
+            {
+                newDespatch = false;
+                myAudioManager.DespatchCollectorSFX();
+            }
             GotDestination();
         }
     }

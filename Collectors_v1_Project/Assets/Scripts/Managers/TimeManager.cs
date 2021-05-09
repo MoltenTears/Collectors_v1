@@ -30,13 +30,17 @@ public class TimeManager : MonoBehaviour
 
     [Header("External References")]
     [SerializeField] private GameManager myGameManger;
+    [SerializeField] private ManageHubs myManagehubs;
 
     // Start is called before the first frame update
     void Start()
     {
+        // get references
         myGameManger = FindObjectOfType<GameManager>();
-        myGameManger.SetZones();
-        days = myGameManger.daysToPlay;
+        myManagehubs = FindObjectOfType<ManageHubs>();
+
+        // set days
+        
         SetStartTime();
     }
 
@@ -44,9 +48,26 @@ public class TimeManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        days = myGameManger.daysToPlay;
+
         UpdateSeconds();
 
         ResetSeconds();
+    }
+
+    private void LateUpdate()
+    {
+        if (!myGameManger.isDifficultySet)
+        {
+            // set the Zones again in the GameMAnager Singelton
+            myGameManger.SetZones();
+
+            // set the difficult variables
+            myGameManger.SetDifficulty();
+
+            // record the RoadHubs in the ManageHubs
+            myManagehubs.ConfirmHubs();
+        }
     }
 
     void UpdateSeconds()

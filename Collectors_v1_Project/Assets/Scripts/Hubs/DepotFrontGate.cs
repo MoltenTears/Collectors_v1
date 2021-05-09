@@ -8,11 +8,14 @@ public class DepotFrontGate : MonoBehaviour
 
     [SerializeField] private DepotManager myDepotManager;
     [SerializeField] private GameManager myGameManager;
+    [SerializeField] private AudioManager myAudioManager;
+
 
     private void Start()
     {
         myDepotManager = FindObjectOfType<DepotManager>();
         myGameManager = FindObjectOfType<GameManager>();
+        myAudioManager = FindObjectOfType<AudioManager>();
     }
 
     private void OnTriggerEnter(Collider collision)
@@ -36,6 +39,9 @@ public class DepotFrontGate : MonoBehaviour
 
             // ... destroy the game object
             Destroy(collision.transform.parent.gameObject);
+
+            // trigger return sound
+            myAudioManager.CollectorReturnSFX();
 
             // add the truck back to the tally of trucks at the depot
             int tempCount = myDepotManager.baseCollectors;

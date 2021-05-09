@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &7968516774522263401
+--- !u!1 &273205088756464071
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,22 +8,23 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 7968516774522263403}
-  - component: {fileID: 7968516774522263400}
+  - component: {fileID: 273205088756464069}
+  - component: {fileID: 273205088756464070}
+  - component: {fileID: 273205088756464068}
   m_Layer: 0
-  m_Name: GameManager
+  m_Name: GameManager 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &7968516774522263403
+--- !u!4 &273205088756464069
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7968516774522263401}
+  m_GameObject: {fileID: 273205088756464071}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.8998605, y: 1.1656854, z: -3.8426275}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -31,24 +32,26 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7968516774522263400
+--- !u!114 &273205088756464070
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7968516774522263401}
+  m_GameObject: {fileID: 273205088756464071}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fa5040cc84dea544a9a55d35dc5bc2da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  daysToPlay: 2
+  difficultySetting: 1
+  daysToPlay: 100
   daysLeftToPlay: 0
   isGameOver: 0
   totalWasteGenerated: 0
-  satisfactionToWin: 70
-  garbageMultipler: 0.4
+  satisfactionToWin: 100
+  startingBaseCollectors: 0
+  garbageMultipler: 0
   binSizeSmall: 5
   binSizeMedium: 10
   binSizeLarge: 15
@@ -81,6 +84,44 @@ MonoBehaviour:
   wasteTolleranceShareLow: 0.5
   wasteTolleranceShareMedium: 0.7
   wasteTolleranceShareHigh: 0.9
+  myDepotManager: {fileID: 0}
+  daysEasy: 10
+  garbageSpeedEasy: 0.1
+  startingCollectorsEasy: 4
+  satisfactionToWinEasy: 40
+  daysMedium: 20
+  garbageSpeedMedium: 0.2
+  startingCollectorsMedium: 6
+  satisfactionToWinMedium: 60
+  daysHard: 30
+  garbageSpeedHard: 0.3
+  startingCollectorsHard: 8
+  satisfactionToWinHard: 80
+  zoneEssential: {fileID: 0}
+  zoneEasy: {fileID: 0}
+  zoneMedium: {fileID: 0}
+  zoneHard: {fileID: 0}
   houseGarbage: []
   houseSatisfaction: []
   activeCollectorsList: []
+--- !u!114 &273205088756464068
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 273205088756464071}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 075ba9462685d0e4fb2cf1c7d39f1189, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  roadHubs: []
+  moveSpeed: 1
+  moveStep: 0
+  yCoordDown: -0.5
+  yCoordUp: 0
+  yCoordShow: 0
+  moveTollerance: 0
+  myNewDespatch: 0
+  showHubs: 0

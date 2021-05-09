@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ManageHubs : MonoBehaviour
 {
-    [SerializeField] private List<GameObject> roadHubs;
+    [SerializeField] public List<GameObject> roadHubs;
     [SerializeField] private float moveSpeed;
     [SerializeField] private float moveStep;
     [SerializeField] private float yCoordDown;
@@ -13,19 +13,8 @@ public class ManageHubs : MonoBehaviour
     [SerializeField] private float moveTollerance;
     [SerializeField] private bool myNewDespatch;
 
+    [SerializeField] public bool confirmedHubs;
     [SerializeField] public bool showHubs;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        RoadHub[] roadHubsTemp = FindObjectsOfType<RoadHub>();
-        foreach (RoadHub roadHub in roadHubsTemp)
-        {
-            roadHubs.Add(roadHub.transform.gameObject);
-
-            roadHub.transform.position = new Vector3(roadHub.transform.position.x, yCoordDown, roadHub.transform.position.z);
-        }
-    }
 
     // Update is called once per frame
     void Update()
@@ -34,6 +23,45 @@ public class ManageHubs : MonoBehaviour
 
         CheckNewDespatch();
 
+        UpdateHubs();
+
+        // ConfirmHubs();
+    }
+
+    public void ConfirmHubs()
+    {
+        if (!confirmedHubs)
+        {
+            if (roadHubs.Count == 0)
+            {
+                InitialiseHubs();
+                
+                if (roadHubs.Count > 0)
+                {
+                    confirmedHubs = true;
+                }
+            }
+            else
+            {
+                Debug.Log($"RoadHub count: {roadHubs.Count}.");
+            }
+        }
+    }
+
+    public void InitialiseHubs()
+    {
+        RoadHub[] roadHubsTemp = FindObjectsOfType<RoadHub>();
+
+        foreach (RoadHub roadHub in roadHubsTemp)
+        {
+            roadHubs.Add(roadHub.transform.gameObject);
+
+            roadHub.transform.position = new Vector3(roadHub.transform.position.x, yCoordDown, roadHub.transform.position.z);
+        }
+    }
+
+    public void UpdateHubs()
+    {
         if (myNewDespatch)
         {
             ShowHubs();
@@ -96,6 +124,7 @@ public class ManageHubs : MonoBehaviour
         {
             if (collectorMovement.newDespatch)
             {
+                Debug.Log("New Collector Despatched!");
                 myNewDespatch = true;
                 break;
             }

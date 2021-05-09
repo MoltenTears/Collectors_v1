@@ -5,6 +5,10 @@ UI Asset Pack: www.kenney.nl
 SceneHandler.cs: https://answers.unity.com/questions/242794/inspector-field-for-scene-asset.html
 Singleton Pattern: https://gamedevtoday.com/singleton-unity-c-code/
 
+Truck Accelerating: https://www.zapsplat.com/music/large-truck-drive-away/
+Background music: https://www.zapsplat.com/music/game-music-action-uplifting-house-anthem-fast-paced-retro-game-melody-leading-into-pumping-synth-chords/
+Bell: https://www.zapsplat.com/music/small-handbell-single-ring/
+
 Project Management Repository
 https://github.com/MoltenTears/Collectors_v1 (public repo)
 

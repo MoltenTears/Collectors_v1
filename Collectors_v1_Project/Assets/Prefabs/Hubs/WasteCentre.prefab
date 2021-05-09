@@ -171,7 +171,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 961b66ba6d0872545865163f85a3acb0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  distanceToWaste: Infinity
+  garbageManagers: []
+  minimumBinsOut: 0
   isCollecting: 0
+  foundWaste: 0
   isDeliveringWaste: 0
   isReturningToDepot: 0
   garbageInCollector: 0
@@ -182,6 +186,7 @@ MonoBehaviour:
   myGameManager: {fileID: 0}
   myDepotFrontGate: {fileID: 0}
   myWasteCentreFrontGate: {fileID: 0}
+  collectionZone: {fileID: 0}
 --- !u!1 &1367651099
 GameObject:
   m_ObjectHideFlags: 0
@@ -454,7 +459,7 @@ GameObject:
   - component: {fileID: 2934360757395866150}
   - component: {fileID: 1887993634}
   - component: {fileID: 1887993635}
-  m_Layer: 10
+  m_Layer: 12
   m_Name: CollectorParking (1)
   m_TagString: WasteCentre
   m_Icon: {fileID: 3443629218296621865, guid: 0000000000000000d000000000000000, type: 0}
@@ -516,6 +521,7 @@ MonoBehaviour:
   myGarbagePickup: {fileID: 0}
   myWasteCentreManager: {fileID: 0}
   myGameManager: {fileID: 0}
+  myWasteCentreLot: {fileID: 0}
   isDroppingWaste: 0
   dropoffSpeed: 0
 --- !u!1 &1062073916283111677
@@ -784,7 +790,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 961b66ba6d0872545865163f85a3acb0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  distanceToWaste: Infinity
+  garbageManagers: []
+  minimumBinsOut: 0
   isCollecting: 0
+  foundWaste: 0
   isDeliveringWaste: 0
   isReturningToDepot: 0
   garbageInCollector: 0
@@ -795,6 +805,7 @@ MonoBehaviour:
   myGameManager: {fileID: 0}
   myDepotFrontGate: {fileID: 0}
   myWasteCentreFrontGate: {fileID: 0}
+  collectionZone: {fileID: 0}
 --- !u!1 &2399588937524892650
 GameObject:
   m_ObjectHideFlags: 0
@@ -1134,7 +1145,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4091169939608023915}
   - component: {fileID: 757255605926507218}
-  m_Layer: 11
+  m_Layer: 10
   m_Name: WasteDropOffPoint
   m_TagString: WasteCentre
   m_Icon: {fileID: 0}
@@ -1562,7 +1573,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 961b66ba6d0872545865163f85a3acb0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  distanceToWaste: Infinity
+  garbageManagers: []
+  minimumBinsOut: 0
   isCollecting: 0
+  foundWaste: 0
   isDeliveringWaste: 0
   isReturningToDepot: 0
   garbageInCollector: 0
@@ -1573,6 +1588,7 @@ MonoBehaviour:
   myGameManager: {fileID: 0}
   myDepotFrontGate: {fileID: 0}
   myWasteCentreFrontGate: {fileID: 0}
+  collectionZone: {fileID: 0}
 --- !u!1 &4439466204421065869
 GameObject:
   m_ObjectHideFlags: 0
@@ -1674,7 +1690,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 961b66ba6d0872545865163f85a3acb0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  distanceToWaste: Infinity
+  garbageManagers: []
+  minimumBinsOut: 0
   isCollecting: 0
+  foundWaste: 0
   isDeliveringWaste: 0
   isReturningToDepot: 0
   garbageInCollector: 0
@@ -1685,6 +1705,7 @@ MonoBehaviour:
   myGameManager: {fileID: 0}
   myDepotFrontGate: {fileID: 0}
   myWasteCentreFrontGate: {fileID: 0}
+  collectionZone: {fileID: 0}
 --- !u!1 &4607192944583206737
 GameObject:
   m_ObjectHideFlags: 0
@@ -2153,7 +2174,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 961b66ba6d0872545865163f85a3acb0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  distanceToWaste: Infinity
+  garbageManagers: []
+  minimumBinsOut: 0
   isCollecting: 0
+  foundWaste: 0
   isDeliveringWaste: 0
   isReturningToDepot: 0
   garbageInCollector: 0
@@ -2164,6 +2189,7 @@ MonoBehaviour:
   myGameManager: {fileID: 0}
   myDepotFrontGate: {fileID: 0}
   myWasteCentreFrontGate: {fileID: 0}
+  collectionZone: {fileID: 0}
 --- !u!1 &6050385806149671771
 GameObject:
   m_ObjectHideFlags: 0
@@ -2883,7 +2909,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 961b66ba6d0872545865163f85a3acb0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  distanceToWaste: Infinity
+  garbageManagers: []
+  minimumBinsOut: 0
   isCollecting: 0
+  foundWaste: 0
   isDeliveringWaste: 0
   isReturningToDepot: 0
   garbageInCollector: 0
@@ -2894,6 +2924,7 @@ MonoBehaviour:
   myGameManager: {fileID: 0}
   myDepotFrontGate: {fileID: 0}
   myWasteCentreFrontGate: {fileID: 0}
+  collectionZone: {fileID: 0}
 --- !u!1 &7177002414943011199
 GameObject:
   m_ObjectHideFlags: 0
@@ -3204,7 +3235,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 961b66ba6d0872545865163f85a3acb0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  distanceToWaste: Infinity
+  garbageManagers: []
+  minimumBinsOut: 0
   isCollecting: 0
+  foundWaste: 0
   isDeliveringWaste: 0
   isReturningToDepot: 0
   garbageInCollector: 0
@@ -3215,6 +3250,7 @@ MonoBehaviour:
   myGameManager: {fileID: 0}
   myDepotFrontGate: {fileID: 0}
   myWasteCentreFrontGate: {fileID: 0}
+  collectionZone: {fileID: 0}
 --- !u!1 &7856412883322074085
 GameObject:
   m_ObjectHideFlags: 0
@@ -3228,7 +3264,7 @@ GameObject:
   - component: {fileID: 7856412883322074083}
   - component: {fileID: 227196181946558147}
   - component: {fileID: 7856412883322074086}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: WasteCentreFrontGate
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3264,7 +3300,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7856412883322074085}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -3383,7 +3419,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 961b66ba6d0872545865163f85a3acb0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  distanceToWaste: Infinity
+  garbageManagers: []
+  minimumBinsOut: 0
   isCollecting: 0
+  foundWaste: 0
   isDeliveringWaste: 0
   isReturningToDepot: 0
   garbageInCollector: 0
@@ -3394,6 +3434,7 @@ MonoBehaviour:
   myGameManager: {fileID: 0}
   myDepotFrontGate: {fileID: 0}
   myWasteCentreFrontGate: {fileID: 0}
+  collectionZone: {fileID: 0}
 --- !u!1 &8001147653690419982
 GameObject:
   m_ObjectHideFlags: 0
@@ -3925,7 +3966,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 961b66ba6d0872545865163f85a3acb0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  distanceToWaste: Infinity
+  garbageManagers: []
+  minimumBinsOut: 0
   isCollecting: 0
+  foundWaste: 0
   isDeliveringWaste: 0
   isReturningToDepot: 0
   garbageInCollector: 0
@@ -3936,3 +3981,4 @@ MonoBehaviour:
   myGameManager: {fileID: 0}
   myDepotFrontGate: {fileID: 0}
   myWasteCentreFrontGate: {fileID: 0}
+  collectionZone: {fileID: 0}

@@ -627,7 +627,6 @@ GameObject:
   m_Component:
   - component: {fileID: 3889428028728559663}
   - component: {fileID: 3889428028728559632}
-  - component: {fileID: 7612673293630283766}
   m_Layer: 11
   m_Name: CollectorDepot
   m_TagString: Untagged
@@ -674,21 +673,6 @@ NavMeshObstacle:
   m_CarveOnlyStationary: 1
   m_Center: {x: 0, y: 0, z: 0}
   m_TimeToStationary: 0.5
---- !u!114 &7612673293630283766
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3889428028728559633}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eb11585b7fb71ff479a34065e35614d1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  myDepotLots: []
-  baseCollectors: 0
-  myDepotFrontGate: {fileID: 0}
 --- !u!1 &5978419063280314333
 GameObject:
   m_ObjectHideFlags: 0
@@ -837,8 +821,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myDepotLots: []
-  baseCollectors: 0
+  baseCollectors: 4
   myDepotFrontGate: {fileID: 0}
+  depotFrontGateTrans: {fileID: 0}
+  baseCollectorPrefab: {fileID: 8590226492394693773, guid: d14caf168012dbe4dbd74b6b6041df94,
+    type: 3}
 --- !u!1001 &106229263078378713
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1076,6 +1063,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: DepotGate
       objectReference: {fileID: 0}
+    - target: {fileID: 4458835292998509290, guid: 4b531b77815564e4db47c3b825e55f9e,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4458835292998509292, guid: 4b531b77815564e4db47c3b825e55f9e,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4458835292998509293, guid: 4b531b77815564e4db47c3b825e55f9e,
         type: 3}
       propertyPath: m_RootOrder
@@ -1094,7 +1091,7 @@ PrefabInstance:
     - target: {fileID: 4458835292998509293, guid: 4b531b77815564e4db47c3b825e55f9e,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -0.100000024
       objectReference: {fileID: 0}
     - target: {fileID: 4458835292998509293, guid: 4b531b77815564e4db47c3b825e55f9e,
         type: 3}
@@ -1104,17 +1101,17 @@ PrefabInstance:
     - target: {fileID: 4458835292998509293, guid: 4b531b77815564e4db47c3b825e55f9e,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4458835292998509293, guid: 4b531b77815564e4db47c3b825e55f9e,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4458835292998509293, guid: 4b531b77815564e4db47c3b825e55f9e,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4458835292998509293, guid: 4b531b77815564e4db47c3b825e55f9e,
         type: 3}

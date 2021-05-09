@@ -18,7 +18,7 @@ public class RoadHub : MonoBehaviour
     [SerializeField] private CollectorInitiate myCollectorInitate;
     [SerializeField] private GameManager myGameManager;
     [SerializeField] private DepotManager myDepotManager;
-    
+
     [Header("Zone Management Details")]  
     [SerializeField] private ZoneManager myZoneManager;
     [SerializeField] private List<RoadHub> myZoneRoadHubs;
