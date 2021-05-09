@@ -36,6 +36,8 @@ public class TimeManager : MonoBehaviour
     private void Awake()
     {
         myGameManger = FindObjectOfType<GameManager>();
+        
+        
         myDifficultyNumber = FindObjectOfType<DifficultyNumber>();
         if (myDifficultyNumber.difficultyNo == 1) myGameManger.difficultySetting = GameManager.DifficultySetting.EASY;
     }

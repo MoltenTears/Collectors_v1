@@ -25,7 +25,7 @@ PC Standalone executable capable of 60fps (really, no specs)
 
 Operational Instructions
 Mouse movement and left mouse button
-Keyboard escape to trigger in-game menu and mian menu exit
+Keyboard escape to trigger in-game pause screen
 
 
 Overview of Collectors
@@ -35,10 +35,11 @@ If there is at least one(1) Collector at the Collector Depot (bottom left corner
 green "Send Collector!" button on the HUD. This will result in a Collector being positioned at the front gate of the 
 Collector Depot, ready for assignment. The player can now click the left mouse button on any of the intersections (marked 
 by a blue dome, which turns red when it is being pointed at; indicating that this will be where the Collector is despatched to).
+Road Hubs turn grey when a Collector is already in that collection Zone.
 
 Once despatched, the player has no control over the Collectors' movements. It will first move to the selected destination, then
-find the closest house with sufficient garbage to collect, move to that house, and repeat the process until it is full (or there
-is insuficient garbage to collect).
+find the closest house with sufficient garbage to collect, move to that house, and repeat the process througout the zone until it
+ is full (or there is insuficient garbage to collect).
 
 Once full, the Collector will move to the Waste Centre (top right corner of the city), dump its waste, then return to the Collector
 Depot for the player to despatch it again.
@@ -58,6 +59,22 @@ Pending Bugs:
 
 
 Week 12:
+---
+FEATURE: added SFX for player feedback and background music for Title and first City.
+---
+BUG: Difficulty settings not working.
+FIX: moved settings to GameManager and added a support singleton.
+---
+FEATURE: added pause screen
+---
+BUG: Despatch Collector button unclear when collector at gate but not yet assigned. 
+FIX: Added text on button to inidcate that a Collector needed to be despatched before the button could be pressed again.
+---
+FEATURE: added "stink lines" depending on how much waste was awaiting collection at a house.
+---
+BUG: Collector would occasionally get "lost" and start spinning in circles.
+FIX: method implemented to catch "lost Collector" and send them to the Waste Centre or Collector Depot depending on garbage in the 
+Collector.
 ---
 BUG: Collectors often stat collecting in packs due to the broad application of finding a house with garbage to collect.
 FEATURE: split the city up into "zones" so that a Collector can be assigned to a Zone, only collect in that zone, and drop waste 

@@ -5,7 +5,10 @@ using UnityEngine;
 
 public class AudioManager : MonoBehaviour
 {
+    [SerializeField] private SceneType mySceneType;
+
     [Header("Audio Objects")]
+    [SerializeField] private AudioSource backgroundMusicTitle;
     [SerializeField] private AudioSource backgroundMusicCity1;
     [SerializeField] private AudioSource desaptchCollector;
     [SerializeField] private AudioSource collectorReturnToDepot;
@@ -17,7 +20,16 @@ public class AudioManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        mySceneType = FindObjectOfType<SceneType>();
+
+        if (mySceneType.isTitle)
+        {
+            backgroundMusicTitle.Play();
+        }
+        else if (mySceneType.isCity1)
+        {
+            backgroundMusicCity1.Play();
+        }
     }
 
     // Update is called once per frame
