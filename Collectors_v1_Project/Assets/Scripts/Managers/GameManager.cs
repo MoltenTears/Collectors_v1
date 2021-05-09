@@ -137,7 +137,7 @@ public class GameManager : MonoBehaviour
 
     public void SetZones()
     {
-        Debug.Log($"SetZones() called.");
+        // Debug.Log($"SetZones() called.");
 
         // find the zones in the level
         zoneEssential = GameObject.FindGameObjectWithTag("ZoneEssential");
@@ -154,7 +154,7 @@ public class GameManager : MonoBehaviour
 
     public void SetDifficulty()
     {
-        Debug.Log($"SetDifficulty() called.");
+        // Debug.Log($"SetDifficulty() called.");
 
         // based on the difficulty setting, activate selected zones
         switch (difficultySetting)
@@ -170,7 +170,7 @@ public class GameManager : MonoBehaviour
                     daysToPlay = daysEasy;
                     daysLeftToPlay = daysEasy;
                     garbageMultipler = garbageSpeedEasy;
-                    myDepotManager.baseCollectors = startingCollectorsEasy;
+                    startingBaseCollectors = startingCollectorsEasy;
                     satisfactionToWin = satisfactionToWinEasy;
 
                     break;
@@ -187,7 +187,7 @@ public class GameManager : MonoBehaviour
                     daysToPlay = daysMedium;
                     daysLeftToPlay = daysMedium;
                     garbageMultipler = garbageSpeedMedium;
-                    myDepotManager.baseCollectors = startingCollectorsMedium;
+                    startingBaseCollectors = startingCollectorsMedium;
                     satisfactionToWin = satisfactionToWinMedium;
 
                     break;
@@ -205,7 +205,7 @@ public class GameManager : MonoBehaviour
                     daysToPlay = daysHard;
                     daysLeftToPlay = daysHard;
                     garbageMultipler = garbageSpeedHard;
-                    myDepotManager.baseCollectors = startingCollectorsHard;
+                    startingBaseCollectors = startingCollectorsHard;
                     satisfactionToWin = satisfactionToWinHard;
 
                     break;

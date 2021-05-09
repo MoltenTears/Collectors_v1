@@ -18,6 +18,7 @@ public class RoadHub : MonoBehaviour
     [SerializeField] private CollectorInitiate myCollectorInitate;
     [SerializeField] private GameManager myGameManager;
     [SerializeField] private DepotManager myDepotManager;
+    [SerializeField] private AudioManager myAudioManager;
 
     [Header("Zone Management Details")]  
     [SerializeField] private ZoneManager myZoneManager;
@@ -39,6 +40,7 @@ public class RoadHub : MonoBehaviour
         myCollectorInitate = FindObjectOfType<CollectorInitiate>();
         myDepotManager = FindObjectOfType<DepotManager>();
         myGameManager = FindObjectOfType<GameManager>();
+        myAudioManager = FindObjectOfType<AudioManager>();
         myZoneManager = GetComponentInParent<ZoneManager>();
         foreach (RoadHub roadHub in myZoneManager.myRoadHubs)
         {
@@ -66,6 +68,9 @@ public class RoadHub : MonoBehaviour
                     // only trigger if the Player presses the right key AND there is not already a Collector in the Zone
                     if (Input.GetKeyDown(KeyCode.Mouse0) && this.myZoneManager.currentZoneCollector == null)
                     {
+                        // play SFX
+                        myAudioManager.RoadHubClickSFX();
+
                         // add the combo to the List in GameManager
                         myGameManager.AddCollectorDestination(activeCollector, this.gameObject);
 

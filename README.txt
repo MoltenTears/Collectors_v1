@@ -6,8 +6,14 @@ SceneHandler.cs: https://answers.unity.com/questions/242794/inspector-field-for-
 Singleton Pattern: https://gamedevtoday.com/singleton-unity-c-code/
 
 Truck Accelerating: https://www.zapsplat.com/music/large-truck-drive-away/
-Background music: https://www.zapsplat.com/music/game-music-action-uplifting-house-anthem-fast-paced-retro-game-melody-leading-into-pumping-synth-chords/
+in-game Background music: https://www.zapsplat.com/music/game-music-action-uplifting-house-anthem-fast-paced-retro-game-melody-leading-into-pumping-synth-chords/
 Bell: https://www.zapsplat.com/music/small-handbell-single-ring/
+Bins: https://www.zapsplat.com/music/small-metal-trash-can-fall-over-1/
+Twang: https://www.zapsplat.com/music/cartoon-plucked-twang-boing-spring-jump-2/
+cheer: https://www.zapsplat.com/music/light-applause-cheer/
+menu button: https://www.zapsplat.com/music/organic-button-click-good-for-apps-games-ui-software-etc-7/
+hub click: https://www.zapsplat.com/music/multimedia-plastic-style-button-click-2/
+title background music: https://www.zapsplat.com/music/game-music-action-urban-groove-electro-breakbeat-with-a-funky-electronic-bass-and-record-scratching/
 
 Project Management Repository
 https://github.com/MoltenTears/Collectors_v1 (public repo)

@@ -22,6 +22,7 @@ public class GarbagePickup : MonoBehaviour
     [SerializeField] private GameManager myGameManager;
     [SerializeField] private DepotFrontGate myDepotFrontGate;
     [SerializeField] private WasteCentreFrontGate myWasteCentreFrontGate;
+    [SerializeField] private AudioManager myAudioManager;
 
     [SerializeField] public ZoneManager collectionZone;
 
@@ -32,6 +33,7 @@ public class GarbagePickup : MonoBehaviour
         myGameManager = FindObjectOfType<GameManager>();
         myDepotFrontGate = FindObjectOfType<DepotFrontGate>();
         myWasteCentreFrontGate = FindObjectOfType<WasteCentreFrontGate>();
+        myAudioManager = FindObjectOfType<AudioManager>();
     }
 
     private void Update()
@@ -207,6 +209,8 @@ public class GarbagePickup : MonoBehaviour
                     tempGM.garbageBeingCollected = false;
                     tempGM.garbageLevel = 0.0f;
                     tempGM.garbageCollected = true;
+
+                    myAudioManager.GarbageCollectedSFX();
                 }
             }
             else if (collision.CompareTag("Garbage")
@@ -230,10 +234,10 @@ public class GarbagePickup : MonoBehaviour
         if (isCollecting && !isDeliveringWaste)
         {
             if (collision.GetComponentInParent<GarbageManager>())
-            {
+            {              
                 // tell the house, the collector has left
                 collision.GetComponentInParent<GarbageManager>().garbageBeingCollected = false;
-                collision.GetComponentInParent<GarbageManager>().garbageNeedsCollecting = false;
+                collision.GetComponentInParent<GarbageManager>().garbageNeedsCollecting = false;   
             }
         }
     }

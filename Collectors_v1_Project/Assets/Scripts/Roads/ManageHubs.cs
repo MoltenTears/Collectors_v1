@@ -91,28 +91,35 @@ public class ManageHubs : MonoBehaviour
         {
             // Debug.Log($"{roadHub.name} wants to move from Y: {roadHub.transform.position.y} to Y: {yCoordUp}");
 
-            // ... if the object is not yet at the new position...
-            if (Vector3.Distance(roadHub.transform.position,
-                new Vector3(roadHub.transform.position.x, yCoordUp, roadHub.transform.position.z)) > moveTollerance)
+            if (roadHub != null)
             {
-                // ... MoveToward the Hide position
-                roadHub.transform.position = Vector3.MoveTowards(roadHub.transform.position, new Vector3(roadHub.transform.position.x, yCoordUp, roadHub.transform.position.z), moveStep);
+                // ... if the object is not yet at the new position...
+                if (Vector3.Distance(roadHub.transform.position,
+                new Vector3(roadHub.transform.position.x, yCoordUp, roadHub.transform.position.z)) > moveTollerance)
+                {
+                    // ... MoveToward the Hide position
+                    roadHub.transform.position = Vector3.MoveTowards(roadHub.transform.position, new Vector3(roadHub.transform.position.x, yCoordUp, roadHub.transform.position.z), moveStep);
+                }
             }
         }
     }
 
     public void HideHubs()
     {
+
         // each raodHub...
         foreach (GameObject roadHub in roadHubs)
         {
-            // Debug.Log($"{roadHub.name} wants to move from Y: {roadHub.transform.position.y} to Y: {yCoordDown}");
-
-            if (Vector3.Distance(roadHub.transform.position, 
-                new Vector3(roadHub.transform.position.x, yCoordDown, roadHub.transform.position.z)) > moveTollerance)
+            if (roadHub != null)
             {
-                // ... MoveToward the Hide position
-                roadHub.transform.position = Vector3.MoveTowards(roadHub.transform.position, new Vector3(roadHub.transform.position.x, yCoordDown, roadHub.transform.position.z), moveStep);
+                // Debug.Log($"{roadHub.name} wants to move from Y: {roadHub.transform.position.y} to Y: {yCoordDown}");
+
+                if (Vector3.Distance(roadHub.transform.position,
+                    new Vector3(roadHub.transform.position.x, yCoordDown, roadHub.transform.position.z)) > moveTollerance)
+                {
+                    // ... MoveToward the Hide position
+                    roadHub.transform.position = Vector3.MoveTowards(roadHub.transform.position, new Vector3(roadHub.transform.position.x, yCoordDown, roadHub.transform.position.z), moveStep);
+                }
             }
         }
     }

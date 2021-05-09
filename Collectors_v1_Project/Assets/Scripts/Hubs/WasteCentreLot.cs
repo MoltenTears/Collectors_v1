@@ -18,11 +18,13 @@ public class WasteCentreLot : MonoBehaviour
 
     [Header("References")]
     [SerializeField] private WasteCenteManager myWasteCentreManager;
+    [SerializeField] private AudioManager myAudioManager;
 
     void Start()
     {
         myWasteCentreManager = GetComponentInParent<WasteCenteManager>();
         myWasteCentreFrontGate = GetComponentInChildren<WasteCentreFrontGate>();
+        myAudioManager = FindObjectOfType<AudioManager>();
         FindQueueSpots();
     }
 
@@ -41,6 +43,9 @@ public class WasteCentreLot : MonoBehaviour
     {
         if (nextCollector && nextCollector.GetComponentInChildren<GarbagePickup>().isReturningToDepot)
         {
+            // play SFX
+            myAudioManager.CheerSFX();
+
             // turn back on NAvMeshAgent
             nextCollector.GetComponent<CollectorMovement>().myAgent.enabled = true;
 
