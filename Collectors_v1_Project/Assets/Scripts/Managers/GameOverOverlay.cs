@@ -12,10 +12,10 @@ public class GameOverOverlay : MonoBehaviour
     [SerializeField] public bool playerWon = false;
 
     [Header("Outcome Variables")]
-    int wasteGeneratedInt;
-    int totalWasteCollectedInt;
-    int wasteRemainingPercentageInt;
-    int satisfactionPercentageInt;
+    [SerializeField] public int wasteGeneratedInt;
+    [SerializeField] public int totalWasteCollectedInt;
+    [SerializeField] public int wasteRemainingPercentageInt;
+    [SerializeField] public int satisfactionPercentageInt;
 
     [Header("External References")]
     [SerializeField] private GameManager myGameManager;
@@ -24,10 +24,10 @@ public class GameOverOverlay : MonoBehaviour
     [SerializeField] private TimeManager myTimeManager;
 
     [Header("Text Elements")]
-    [SerializeField] private TextMeshProUGUI satisfactionScore;
-    [SerializeField] private TextMeshProUGUI wasteRemaining;
-    [SerializeField] private TextMeshProUGUI wasteGenerated;
-    [SerializeField] private TextMeshProUGUI wasteCollected;
+    [SerializeField] public TextMeshProUGUI satisfactionScore;
+    [SerializeField] public TextMeshProUGUI wasteRemaining;
+    [SerializeField] public TextMeshProUGUI wasteGenerated;
+    [SerializeField] public TextMeshProUGUI wasteCollected;
     [SerializeField] private TextMeshProUGUI outcome;
 
 
@@ -62,7 +62,7 @@ public class GameOverOverlay : MonoBehaviour
         }
     }
 
-    private void CollectStats()
+    public void CollectStats()
     {
         // satisfaction calculations
         GetSatisfactionFinal();
@@ -80,7 +80,7 @@ public class GameOverOverlay : MonoBehaviour
         AdviseOutcome();
     }
 
-    private void AdviseOutcome()
+    public void AdviseOutcome()
     {
         // if the player's score was higher than the required value
         if (satisfactionPercentageInt >= myGameManager.satisfactionToWin)
@@ -98,7 +98,7 @@ public class GameOverOverlay : MonoBehaviour
 
     }
 
-    private void GetWasteCollectedTotal()
+    public void GetWasteCollectedTotal()
     {
         // initalise temp variable for later use
         float garbageInCollectors = 0.0f;
@@ -121,20 +121,20 @@ public class GameOverOverlay : MonoBehaviour
         wasteCollected.text = totalWasteCollectedInt.ToString();
     }
 
-    private void GetWasteGeneratedFinal()
+    public void GetWasteGeneratedFinal()
     {
         wasteGeneratedInt = Convert.ToInt32(myGameManager.totalWasteGenerated);
         wasteGenerated.text = wasteGeneratedInt.ToString();
     }
 
-    private void GetWasteRemainingFinal()
+    public void GetWasteRemainingFinal()
     {
         float wasteRemainingPercentge = (myGameManager.cityGarbageLevel / myGameManager.maxCityGarbageLevel) * 100;
         wasteRemainingPercentageInt = Convert.ToInt32(wasteRemainingPercentge); // rounded for simpler score
         wasteRemaining.text = wasteRemainingPercentageInt.ToString();
     }
 
-    private void GetSatisfactionFinal()
+    public void GetSatisfactionFinal()
     {
         float satisfactionPercentage = (myGameManager.citySatisfactionLevel / myGameManager.maxCitySatisfactionLevel) * 100;
         satisfactionPercentageInt = Convert.ToInt32(satisfactionPercentage); // rounded for simpler score

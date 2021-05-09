@@ -11,6 +11,7 @@ TagManager:
   - Instructions
   - House
   - Difficulty
+  - PauseScreen
   layers:
   - Default
   - TransparentFX

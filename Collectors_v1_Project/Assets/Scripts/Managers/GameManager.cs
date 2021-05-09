@@ -85,7 +85,6 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         daysLeftToPlay = daysToPlay;
-
     }
 
     private void Update()
