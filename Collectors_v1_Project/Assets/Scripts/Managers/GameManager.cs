@@ -99,6 +99,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] public List<SatisfactionManager> houseSatisfaction = new List<SatisfactionManager>();
     [SerializeField] public List<ActiveCollector> activeCollectorsList = new List<ActiveCollector>();
 
+    [SerializeField] private DifficultyNumber myDifficultyNumber;
+
 // Singleton
     public static GameManager GMInstance { get; private set; }
 
@@ -114,15 +116,28 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        myDepotManager = FindObjectOfType<DepotManager>();
+        myDifficultyNumber = FindObjectOfType<DifficultyNumber>();
+        isDifficultySet = false;
+        Debug.Log($"Diffculty started with: {difficultySetting}");
     }
 
     private void Start()
     {
+
+
         daysLeftToPlay = daysToPlay;
     }
 
     private void Update()
     {
+        if (!isDifficultySet)
+        {
+            SetZones();
+            SetDifficulty();
+        }
+
         CheckGameOver();
         if (myDepotManager == null) FindDepotManager();
     }
@@ -137,7 +152,7 @@ public class GameManager : MonoBehaviour
 
     public void SetZones()
     {
-        // Debug.Log($"SetZones() called.");
+        Debug.Log($"SetZones() called.");
 
         // find the zones in the level
         zoneEssential = GameObject.FindGameObjectWithTag("ZoneEssential");
@@ -156,71 +171,116 @@ public class GameManager : MonoBehaviour
     {
         // Debug.Log($"SetDifficulty() called.");
 
-        // based on the difficulty setting, activate selected zones
-        switch (difficultySetting)
+        if (myDifficultyNumber.difficultyNo == 1)
         {
-            case DifficultySetting.EASY:
-                {
-                    Debug.Log($"Difficultly confirmed as: {difficultySetting}.");
-                    // activate related zones
-                    if (zoneEssential != null) zoneEssential.SetActive(true);
-                    if (zoneEasy != null) zoneEasy.SetActive(true);
+            Debug.Log("Difficulty set to EASY (DifficultyNumber)");
+            if (zoneEssential != null) zoneEssential.SetActive(true);
+            if (zoneEasy != null) zoneEasy.SetActive(true);
 
-                    // update the settings
-                    daysToPlay = daysEasy;
-                    daysLeftToPlay = daysEasy;
-                    garbageMultipler = garbageSpeedEasy;
-                    startingBaseCollectors = startingCollectorsEasy;
-                    satisfactionToWin = satisfactionToWinEasy;
-
-                    break;
-                }
-            case DifficultySetting.MEDIUM:
-                {
-                    Debug.Log($"Difficultly confirmed as: {difficultySetting}.");
-                    // activate related zones
-                    if (zoneEssential != null) zoneEssential.SetActive(true);
-                    if (zoneEasy != null) zoneEasy.SetActive(true);
-                    if (zoneMedium != null) zoneMedium.SetActive(true);
-
-                    // update the settings
-                    daysToPlay = daysMedium;
-                    daysLeftToPlay = daysMedium;
-                    garbageMultipler = garbageSpeedMedium;
-                    startingBaseCollectors = startingCollectorsMedium;
-                    satisfactionToWin = satisfactionToWinMedium;
-
-                    break;
-                }
-            case DifficultySetting.HARD:
-                {
-                    Debug.Log($"Difficultly confirmed as: {difficultySetting}.");
-                    // activate related zones
-                    if (zoneEssential != null) zoneEssential.SetActive(true);
-                    if (zoneEasy != null) zoneEasy.SetActive(true);
-                    if (zoneMedium != null) zoneMedium.SetActive(true);
-                    if (zoneHard != null) zoneHard.SetActive(true);
-
-                    // update the settings
-                    daysToPlay = daysHard;
-                    daysLeftToPlay = daysHard;
-                    garbageMultipler = garbageSpeedHard;
-                    startingBaseCollectors = startingCollectorsHard;
-                    satisfactionToWin = satisfactionToWinHard;
-
-                    break;
-                }
-            case DifficultySetting.NONE:
-                {
-                    // do nothing, it's ok :-)
-                    break;
-                }
-            default:
-                {
-                    Debug.LogError("GameManager.SetZones() switch failed.");
-                    break;
-                }
+            // update the settings
+            daysToPlay = daysEasy;
+            daysLeftToPlay = daysEasy;
+            garbageMultipler = garbageSpeedEasy;
+            myDepotManager.baseCollectors = startingCollectorsEasy;
+            satisfactionToWin = satisfactionToWinEasy;
         }
+        else if (myDifficultyNumber.difficultyNo == 2)
+        {
+            Debug.Log("Difficulty set to MEDIUM (DifficultyNumber)");
+            if (zoneEssential != null) zoneEssential.SetActive(true);
+            if (zoneEasy != null) zoneEasy.SetActive(true);
+            if (zoneMedium != null) zoneMedium.SetActive(true);
+
+            // update the settings
+            daysToPlay = daysMedium;
+            daysLeftToPlay = daysMedium;
+            garbageMultipler = garbageSpeedMedium;
+            myDepotManager.baseCollectors = startingCollectorsMedium;
+            satisfactionToWin = satisfactionToWinMedium;
+        }
+        else if (myDifficultyNumber.difficultyNo == 3)
+        {
+            Debug.Log("Difficulty set to HARD (DifficultyNumber)");
+            if (zoneEssential != null) zoneEssential.SetActive(true);
+            if (zoneEasy != null) zoneEasy.SetActive(true);
+            if (zoneMedium != null) zoneMedium.SetActive(true);
+            if (zoneHard != null) zoneHard.SetActive(true);
+
+            // update the settings
+            daysToPlay = daysHard;
+            daysLeftToPlay = daysHard;
+            garbageMultipler = garbageSpeedHard;
+            myDepotManager.baseCollectors = startingCollectorsHard;
+            satisfactionToWin = satisfactionToWinHard;
+        }
+
+
+
+        //// based on the difficulty setting, activate selected zones
+        //switch (difficultySetting)
+        //{
+        //    case DifficultySetting.EASY:
+        //        {
+        //            Debug.Log($"Difficultly confirmed as: {difficultySetting}.");
+        //            // activate related zones
+        //            if (zoneEssential != null) zoneEssential.SetActive(true);
+        //            if (zoneEasy != null) zoneEasy.SetActive(true);
+
+        //            // update the settings
+        //            daysToPlay = daysEasy;
+        //            daysLeftToPlay = daysEasy;
+        //            garbageMultipler = garbageSpeedEasy;
+        //            myDepotManager.baseCollectors = startingCollectorsEasy;
+        //            satisfactionToWin = satisfactionToWinEasy;
+
+        //            break;
+        //        }
+        //    case DifficultySetting.MEDIUM:
+        //        {
+        //            Debug.Log($"Difficultly confirmed as: {difficultySetting}.");
+        //            // activate related zones
+        //            if (zoneEssential != null) zoneEssential.SetActive(true);
+        //            if (zoneEasy != null) zoneEasy.SetActive(true);
+        //            if (zoneMedium != null) zoneMedium.SetActive(true);
+
+        //            // update the settings
+        //            daysToPlay = daysMedium;
+        //            daysLeftToPlay = daysMedium;
+        //            garbageMultipler = garbageSpeedMedium;
+        //            myDepotManager.baseCollectors = startingCollectorsMedium;
+        //            satisfactionToWin = satisfactionToWinMedium;
+
+        //            break;
+        //        }
+        //    case DifficultySetting.HARD:
+        //        {
+        //            Debug.Log($"Difficultly confirmed as: {difficultySetting}.");
+        //            // activate related zones
+        //            if (zoneEssential != null) zoneEssential.SetActive(true);
+        //            if (zoneEasy != null) zoneEasy.SetActive(true);
+        //            if (zoneMedium != null) zoneMedium.SetActive(true);
+        //            if (zoneHard != null) zoneHard.SetActive(true);
+
+        //            // update the settings
+        //            daysToPlay = daysHard;
+        //            daysLeftToPlay = daysHard;
+        //            garbageMultipler = garbageSpeedHard;
+        //            myDepotManager.baseCollectors = startingCollectorsHard;
+        //            satisfactionToWin = satisfactionToWinHard;
+
+        //            break;
+        //        }
+        //    case DifficultySetting.NONE:
+        //        {
+        //            // do nothing, it's ok :-)
+        //            break;
+        //        }
+        //    default:
+        //        {
+        //            Debug.LogError("GameManager.SetZones() switch failed.");
+        //            break;
+        //        }
+        //}
 
         isDifficultySet = true;
     }

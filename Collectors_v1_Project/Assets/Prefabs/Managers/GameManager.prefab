@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 273205088756464070}
   - component: {fileID: 273205088756464068}
   m_Layer: 0
-  m_Name: GameManager 1
+  m_Name: GameManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -44,7 +44,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa5040cc84dea544a9a55d35dc5bc2da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  difficultySetting: 1
+  difficultySetting: 0
+  isDifficultySet: 0
   daysToPlay: 100
   daysLeftToPlay: 0
   isGameOver: 0
@@ -124,4 +125,5 @@ MonoBehaviour:
   yCoordShow: 0
   moveTollerance: 0
   myNewDespatch: 0
+  confirmedHubs: 0
   showHubs: 0

@@ -8,33 +8,20 @@ using Utilities;
 public class TitleScreen : MonoBehaviour
 {
     [SerializeField] GameManager myGameManager;
+    [SerializeField] DifficultyNumber myDifficultyNumber;
 
     [SerializeField] GameObject instructionsGO;
     [SerializeField] GameObject difficulyGO;
     [SerializeField] SceneField FirstScene;
 
-    [Header("Difficultly - EASY")]
-    [SerializeField] private int daysEasy;
-    [SerializeField] private float garbageSpeedEasy;
-    [SerializeField] private int startingCollectorsEasy;
-
-    [Header("Difficultly - MEDIUM")]
-    [SerializeField] private int daysMedium;
-    [SerializeField] private float garbageSpeedMedium;
-    [SerializeField] private int startingCollectorsMedium;
-
-    [Header("Difficultly - HARD")]
-    [SerializeField] private int daysHard;
-    [SerializeField] private float garbageSpeedHard;
-    [SerializeField] private int startingCollectorsHard;
-
     private void Start()
     {
         myGameManager = FindObjectOfType<GameManager>();
+        myDifficultyNumber = FindObjectOfType<DifficultyNumber>();
 
         // find instructionsGO and set it to false
         instructionsGO = GameObject.FindGameObjectWithTag("Instructions");
-        instructionsGO.SetActive(false);
+        //instructionsGO.SetActive(false);
 
         // find difficultyGO and set it to false
         difficulyGO = GameObject.FindGameObjectWithTag("Difficulty");
@@ -59,6 +46,8 @@ public class TitleScreen : MonoBehaviour
         // set Game Manager
         myGameManager.difficultySetting = GameManager.DifficultySetting.EASY;
 
+         myDifficultyNumber.difficultyNo = 1;
+
         // Start Game
         StartGame();
     }
@@ -67,6 +56,8 @@ public class TitleScreen : MonoBehaviour
     {
         // set Game Manager
         myGameManager.difficultySetting = GameManager.DifficultySetting.MEDIUM;
+
+        myDifficultyNumber.difficultyNo = 2;
 
         // Start Game
         StartGame();
@@ -77,6 +68,8 @@ public class TitleScreen : MonoBehaviour
         // set Game Manager
         myGameManager.difficultySetting = GameManager.DifficultySetting.HARD;
 
+        myDifficultyNumber.difficultyNo = 3;
+
         // Start Game
         StartGame();
     }
@@ -84,9 +77,8 @@ public class TitleScreen : MonoBehaviour
 
     public void StartGame()
     {
+
         Debug.Log($"StartGame() called with difficultly: {myGameManager.difficultySetting}.");
-
-
         SceneManager.LoadScene(FirstScene.SceneName);
     }
 

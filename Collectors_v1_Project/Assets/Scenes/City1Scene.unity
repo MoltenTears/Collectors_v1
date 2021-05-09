@@ -43709,23 +43709,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 273205088756464070, guid: 04157f761d923cd4f993ed6e55ae38d6,
         type: 3}
-      propertyPath: garbageSpeedEasy
-      value: 0.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 273205088756464070, guid: 04157f761d923cd4f993ed6e55ae38d6,
-        type: 3}
-      propertyPath: garbageSpeedHard
-      value: 0.4
-      objectReference: {fileID: 0}
-    - target: {fileID: 273205088756464070, guid: 04157f761d923cd4f993ed6e55ae38d6,
-        type: 3}
       propertyPath: difficultySetting
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 273205088756464070, guid: 04157f761d923cd4f993ed6e55ae38d6,
-        type: 3}
-      propertyPath: garbageSpeedMedium
-      value: 0.3
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 273205088756464071, guid: 04157f761d923cd4f993ed6e55ae38d6,
         type: 3}

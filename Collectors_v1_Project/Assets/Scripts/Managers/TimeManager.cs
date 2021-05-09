@@ -31,12 +31,19 @@ public class TimeManager : MonoBehaviour
     [Header("External References")]
     [SerializeField] private GameManager myGameManger;
     [SerializeField] private ManageHubs myManagehubs;
+    [SerializeField] private DifficultyNumber myDifficultyNumber;
+
+    private void Awake()
+    {
+        myGameManger = FindObjectOfType<GameManager>();
+        myDifficultyNumber = FindObjectOfType<DifficultyNumber>();
+        if (myDifficultyNumber.difficultyNo == 1) myGameManger.difficultySetting = GameManager.DifficultySetting.EASY;
+    }
 
     // Start is called before the first frame update
     void Start()
     {
         // get references
-        myGameManger = FindObjectOfType<GameManager>();
         myManagehubs = FindObjectOfType<ManageHubs>();
 
         // set days
@@ -48,18 +55,6 @@ public class TimeManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!myGameManger.isDifficultySet)
-        {
-            // set the Zones again in the GameMAnager Singelton
-            myGameManger.SetZones();
-
-            // set the difficult variables
-            myGameManger.SetDifficulty();
-
-            // record the RoadHubs in the ManageHubs
-            myManagehubs.ConfirmHubs();
-        }
-        
         days = myGameManger.daysToPlay;
 
         UpdateSeconds();
@@ -69,7 +64,19 @@ public class TimeManager : MonoBehaviour
 
     private void LateUpdate()
     {
+        if (!myGameManger.isDifficultySet)
+        {
+            Debug.Log($"difficulty set: {myGameManger.isDifficultySet}.");
 
+            // set the Zones again in the GameMAnager Singelton
+            myGameManger.SetZones();
+
+            // set the difficult variables
+            myGameManger.SetDifficulty();
+
+            // record the RoadHubs in the ManageHubs
+            myManagehubs.ConfirmHubs();
+        }
     }
 
     void UpdateSeconds()
