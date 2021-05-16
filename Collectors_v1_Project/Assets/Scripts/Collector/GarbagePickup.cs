@@ -268,7 +268,7 @@ public class GarbagePickup : MonoBehaviour
 
     public void FinaliseCollection()
     {
-        Debug.LogWarning($"FinaliseCollection() called.");
+        // Debug.LogWarning($"FinaliseCollection() called.");
 
         // .. turn off collection..
         isCollecting = false;

@@ -40,6 +40,11 @@ public class TimeManager : MonoBehaviour
         
         myDifficultyNumber = FindObjectOfType<DifficultyNumber>();
         if (myDifficultyNumber.difficultyNo == 1) myGameManger.difficultySetting = GameManager.DifficultySetting.EASY;
+        else if (myDifficultyNumber.difficultyNo == 2) myGameManger.difficultySetting = GameManager.DifficultySetting.MEDIUM;
+        else if (myDifficultyNumber.difficultyNo == 3) myGameManger.difficultySetting = GameManager.DifficultySetting.HARD;
+        else myGameManger.difficultySetting = GameManager.DifficultySetting.MEDIUM;
+
+
     }
 
     // Start is called before the first frame update

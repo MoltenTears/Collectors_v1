@@ -42,6 +42,8 @@ public class GameOverOverlay : MonoBehaviour
         myGameManager = FindObjectOfType<GameManager>();
         myWasteCentreManager = FindObjectOfType<WasteCenteManager>();
         myTimeManager = FindObjectOfType<TimeManager>();
+
+        ResetStats();
     }
 
     // Update is called once per frame
@@ -115,7 +117,7 @@ public class GameOverOverlay : MonoBehaviour
         float totalwasteCollected = myWasteCentreManager.generalWaste + garbageInCollectors;
 
         // convert to int
-        totalWasteCollectedInt = Convert.ToInt32(totalwasteCollected);
+        totalWasteCollectedInt = Mathf.RoundToInt(totalwasteCollected);
 
         // send it to the UGUI
         wasteCollected.text = totalWasteCollectedInt.ToString();
@@ -123,21 +125,31 @@ public class GameOverOverlay : MonoBehaviour
 
     public void GetWasteGeneratedFinal()
     {
-        wasteGeneratedInt = Convert.ToInt32(myGameManager.totalWasteGenerated);
+        wasteGeneratedInt = Mathf.RoundToInt(myGameManager.totalWasteGenerated);
         wasteGenerated.text = wasteGeneratedInt.ToString();
     }
 
     public void GetWasteRemainingFinal()
     {
         float wasteRemainingPercentge = (myGameManager.cityGarbageLevel / myGameManager.maxCityGarbageLevel) * 100;
-        wasteRemainingPercentageInt = Convert.ToInt32(wasteRemainingPercentge); // rounded for simpler score
+        wasteRemainingPercentageInt = Mathf.RoundToInt(wasteRemainingPercentge); // rounded for simpler score
         wasteRemaining.text = wasteRemainingPercentageInt.ToString();
     }
 
     public void GetSatisfactionFinal()
     {
         float satisfactionPercentage = (myGameManager.citySatisfactionLevel / myGameManager.maxCitySatisfactionLevel) * 100;
-        satisfactionPercentageInt = Convert.ToInt32(satisfactionPercentage); // rounded for simpler score
+        satisfactionPercentageInt = Mathf.RoundToInt(satisfactionPercentage); // rounded for simpler score
         satisfactionScore.text = satisfactionPercentageInt.ToString();
+    }
+
+    private void ResetStats()
+    {
+        isFinished = false;
+        playerWon = false;
+        wasteGeneratedInt = 0;
+        totalWasteCollectedInt = 0;
+        wasteRemainingPercentageInt = 0;
+        satisfactionPercentageInt = 0;
     }
 }

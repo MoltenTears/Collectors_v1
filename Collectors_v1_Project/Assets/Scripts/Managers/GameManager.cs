@@ -101,26 +101,26 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private DifficultyNumber myDifficultyNumber;
 
-// Singleton
-    public static GameManager GMInstance { get; private set; }
+//// Singleton
+//    public static GameManager GMInstance { get; private set; }
 
     private void Awake()
     {
-        // Singleton
-        if (GMInstance  == null)
-        {
-            GMInstance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
+        //// Singleton
+        //if (GMInstance  == null)
+        //{
+        //    GMInstance = this;
+        //    DontDestroyOnLoad(gameObject);
+        //}
+        //else
+        //{
+        //    Destroy(gameObject);
+        //}
 
         myDepotManager = FindObjectOfType<DepotManager>();
         myDifficultyNumber = FindObjectOfType<DifficultyNumber>();
         isDifficultySet = false;
-        Debug.Log($"Diffculty started with: {difficultySetting}");
+        // Debug.Log($"Diffculty started with: {difficultySetting}");
     }
 
     private void Start()
@@ -181,7 +181,7 @@ public class GameManager : MonoBehaviour
             daysToPlay = daysEasy;
             daysLeftToPlay = daysEasy;
             garbageMultipler = garbageSpeedEasy;
-            myDepotManager.baseCollectors = startingCollectorsEasy;
+            if( myDepotManager != null) myDepotManager.baseCollectors = startingCollectorsEasy;
             satisfactionToWin = satisfactionToWinEasy;
         }
         else if (myDifficultyNumber.difficultyNo == 2)
@@ -195,7 +195,7 @@ public class GameManager : MonoBehaviour
             daysToPlay = daysMedium;
             daysLeftToPlay = daysMedium;
             garbageMultipler = garbageSpeedMedium;
-            myDepotManager.baseCollectors = startingCollectorsMedium;
+            if (myDepotManager != null) myDepotManager.baseCollectors = startingCollectorsMedium;
             satisfactionToWin = satisfactionToWinMedium;
         }
         else if (myDifficultyNumber.difficultyNo == 3)
@@ -210,7 +210,7 @@ public class GameManager : MonoBehaviour
             daysToPlay = daysHard;
             daysLeftToPlay = daysHard;
             garbageMultipler = garbageSpeedHard;
-            myDepotManager.baseCollectors = startingCollectorsHard;
+            if (myDepotManager != null) myDepotManager.baseCollectors = startingCollectorsHard;
             satisfactionToWin = satisfactionToWinHard;
         }
 
