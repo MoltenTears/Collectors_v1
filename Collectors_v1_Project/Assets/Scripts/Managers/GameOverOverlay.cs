@@ -131,14 +131,23 @@ public class GameOverOverlay : MonoBehaviour
 
     public void GetWasteRemainingFinal()
     {
-        float wasteRemainingPercentge = (myGameManager.cityGarbageLevel / myGameManager.maxCityGarbageLevel) * 100;
+        float wasteRemainingPercentge = 0;
+        if (myGameManager.cityGarbageLevel != 0 && myGameManager.maxCityGarbageLevel != 0)
+        {
+            wasteRemainingPercentge = (myGameManager.cityGarbageLevel / myGameManager.maxCityGarbageLevel) * 100;
+        }
         wasteRemainingPercentageInt = Mathf.RoundToInt(wasteRemainingPercentge); // rounded for simpler score
         wasteRemaining.text = wasteRemainingPercentageInt.ToString();
     }
 
     public void GetSatisfactionFinal()
     {
-        float satisfactionPercentage = (myGameManager.citySatisfactionLevel / myGameManager.maxCitySatisfactionLevel) * 100;
+        float satisfactionPercentage = 0;
+
+        if (myGameManager.citySatisfactionLevel != 0 && myGameManager.maxCitySatisfactionLevel != 0)
+        {
+            satisfactionPercentage = (myGameManager.citySatisfactionLevel / myGameManager.maxCitySatisfactionLevel) * 100;
+        }
         satisfactionPercentageInt = Mathf.RoundToInt(satisfactionPercentage); // rounded for simpler score
         satisfactionScore.text = satisfactionPercentageInt.ToString();
     }

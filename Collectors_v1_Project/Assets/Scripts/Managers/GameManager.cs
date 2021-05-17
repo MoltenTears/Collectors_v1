@@ -152,7 +152,7 @@ public class GameManager : MonoBehaviour
 
     public void SetZones()
     {
-        Debug.Log($"SetZones() called.");
+        // Debug.Log($"SetZones() called.");
 
         // find the zones in the level
         zoneEssential = GameObject.FindGameObjectWithTag("ZoneEssential");
@@ -173,7 +173,7 @@ public class GameManager : MonoBehaviour
 
         if (myDifficultyNumber.difficultyNo == 1)
         {
-            Debug.Log("Difficulty set to EASY (DifficultyNumber)");
+            // Debug.Log("Difficulty set to EASY (DifficultyNumber)");
             if (zoneEssential != null) zoneEssential.SetActive(true);
             if (zoneEasy != null) zoneEasy.SetActive(true);
 
@@ -186,7 +186,7 @@ public class GameManager : MonoBehaviour
         }
         else if (myDifficultyNumber.difficultyNo == 2)
         {
-            Debug.Log("Difficulty set to MEDIUM (DifficultyNumber)");
+            // Debug.Log("Difficulty set to MEDIUM (DifficultyNumber)");
             if (zoneEssential != null) zoneEssential.SetActive(true);
             if (zoneEasy != null) zoneEasy.SetActive(true);
             if (zoneMedium != null) zoneMedium.SetActive(true);
@@ -200,7 +200,7 @@ public class GameManager : MonoBehaviour
         }
         else if (myDifficultyNumber.difficultyNo == 3)
         {
-            Debug.Log("Difficulty set to HARD (DifficultyNumber)");
+            // Debug.Log("Difficulty set to HARD (DifficultyNumber)");
             if (zoneEssential != null) zoneEssential.SetActive(true);
             if (zoneEasy != null) zoneEasy.SetActive(true);
             if (zoneMedium != null) zoneMedium.SetActive(true);

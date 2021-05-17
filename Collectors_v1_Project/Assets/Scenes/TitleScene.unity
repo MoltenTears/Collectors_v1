@@ -1005,11 +1005,11 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Collectors: LOTS
+  m_text: 'Collectors: SOME
 
     Garbage: SLOW
 
-    Days: 15
+    Days: 10
 
 '
   m_isRightToLeft: 0
@@ -1145,11 +1145,11 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Collectors: FEW
+  m_text: 'Collectors: LOTS
 
     Garbage: FAST
 
-    Days: 45
+    Days: 30
 
 '
   m_isRightToLeft: 0
@@ -2309,11 +2309,11 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Collectors: ENOUGH
+  m_text: 'Collectors: MORE
 
     Garbage: MODERATE
 
-    Days: 30
+    Days: 20
 
 '
   m_isRightToLeft: 0
@@ -4059,8 +4059,17 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1038366912, guid: 350e20e8360baa64a9467cc0030d1309, type: 3}
+      propertyPath: Loop
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1038366912, guid: 350e20e8360baa64a9467cc0030d1309, type: 3}
       propertyPath: m_PlayOnAwake
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2245424008226820059, guid: 350e20e8360baa64a9467cc0030d1309,
+        type: 3}
+      propertyPath: Loop
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2245424008226820059, guid: 350e20e8360baa64a9467cc0030d1309,
         type: 3}

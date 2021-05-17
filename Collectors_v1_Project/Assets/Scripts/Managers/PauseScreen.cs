@@ -9,7 +9,7 @@ using TMPro;
 public class PauseScreen : MonoBehaviour
 {
     [SerializeField] private GameOverOverlay myGameOverOverlay;
-    private float originalTimeScale;
+    [SerializeField] private float originalTimeScale;
     [SerializeField] private GameObject pauseScreen;
     [SerializeField] private bool isPaused;
     [SerializeField] private Button pauseButton;
@@ -28,7 +28,8 @@ public class PauseScreen : MonoBehaviour
     {
         myGameOverOverlay = FindObjectOfType<GameOverOverlay>();
         pauseScreen = GameObject.FindGameObjectWithTag("PauseScreen");
-        originalTimeScale = Time.timeScale;
+        originalTimeScale = 1;
+        isPaused = false;
     }
 
     // Update is called once per frame

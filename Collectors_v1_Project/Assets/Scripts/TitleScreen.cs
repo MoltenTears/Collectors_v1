@@ -78,7 +78,7 @@ public class TitleScreen : MonoBehaviour
     public void StartGame()
     {
 
-        Debug.Log($"StartGame() called with difficultly: {myGameManager.difficultySetting}.");
+        // Debug.Log($"StartGame() called with difficultly: {myGameManager.difficultySetting}.");
         SceneManager.LoadScene(FirstScene.SceneName);
     }
 

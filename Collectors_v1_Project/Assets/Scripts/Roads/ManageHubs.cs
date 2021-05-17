@@ -16,6 +16,11 @@ public class ManageHubs : MonoBehaviour
     [SerializeField] public bool confirmedHubs;
     [SerializeField] public bool showHubs;
 
+    private void Start()
+    {
+        ConfirmHubs();
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -23,9 +28,7 @@ public class ManageHubs : MonoBehaviour
 
         CheckNewDespatch();
 
-        UpdateHubs();
-
-        // ConfirmHubs();
+        UpdateHubs(); 
     }
 
     public void ConfirmHubs()
@@ -35,11 +38,6 @@ public class ManageHubs : MonoBehaviour
             if (roadHubs.Count == 0)
             {
                 InitialiseHubs();
-                
-                if (roadHubs.Count > 0)
-                {
-                    confirmedHubs = true;
-                }
             }
             else
             {
@@ -50,6 +48,11 @@ public class ManageHubs : MonoBehaviour
 
     public void InitialiseHubs()
     {
+        Debug.Log("RoadHubs Initialised.");
+
+        // flush the old list
+        roadHubs.Clear();
+
         RoadHub[] roadHubsTemp = FindObjectsOfType<RoadHub>();
 
         foreach (RoadHub roadHub in roadHubsTemp)
@@ -57,6 +60,12 @@ public class ManageHubs : MonoBehaviour
             roadHubs.Add(roadHub.transform.gameObject);
 
             roadHub.transform.position = new Vector3(roadHub.transform.position.x, yCoordDown, roadHub.transform.position.z);
+        }
+
+        // stop the loop
+        if (roadHubs.Count > 0)
+        {
+            confirmedHubs = true;
         }
     }
 
@@ -131,7 +140,7 @@ public class ManageHubs : MonoBehaviour
         {
             if (collectorMovement.newDespatch)
             {
-                Debug.Log("New Collector Despatched!");
+                // Debug.Log("New Collector Despatched!");
                 myNewDespatch = true;
                 break;
             }

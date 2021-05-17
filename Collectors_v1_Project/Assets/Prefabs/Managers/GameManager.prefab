@@ -89,15 +89,15 @@ MonoBehaviour:
   daysEasy: 10
   garbageSpeedEasy: 0.1
   startingCollectorsEasy: 4
-  satisfactionToWinEasy: 40
+  satisfactionToWinEasy: 50
   daysMedium: 20
-  garbageSpeedMedium: 0.2
+  garbageSpeedMedium: 0.15
   startingCollectorsMedium: 6
-  satisfactionToWinMedium: 60
+  satisfactionToWinMedium: 65
   daysHard: 30
-  garbageSpeedHard: 0.3
+  garbageSpeedHard: 0.2
   startingCollectorsHard: 8
-  satisfactionToWinHard: 80
+  satisfactionToWinHard: 70
   zoneEssential: {fileID: 0}
   zoneEasy: {fileID: 0}
   zoneMedium: {fileID: 0}
@@ -105,6 +105,7 @@ MonoBehaviour:
   houseGarbage: []
   houseSatisfaction: []
   activeCollectorsList: []
+  myDifficultyNumber: {fileID: 0}
 --- !u!114 &273205088756464068
 MonoBehaviour:
   m_ObjectHideFlags: 0

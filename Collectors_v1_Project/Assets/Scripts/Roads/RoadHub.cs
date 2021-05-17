@@ -108,9 +108,15 @@ public class RoadHub : MonoBehaviour
     {
         RaycastHit[] hits = Physics.RaycastAll(Camera.main.ScreenPointToRay(Input.mousePosition));
 
+        // start with not hitting a RoadHub
+        bool hitHub = false;
+
         foreach (RaycastHit hit in hits)
         {
-            // if there is an ActiveCollector
+            // debug hit name
+            // Debug.Log($"Hit: {hit.collider.gameObject.name}.");
+
+            // if it is a RoadHub
             if (hit.collider.GetComponent<RoadHub>())
             {
                 // store a reference for later
@@ -126,31 +132,33 @@ public class RoadHub : MonoBehaviour
                     hit.transform.GetComponent<MeshRenderer>().material.color = m_MouseOverColor;
                 }
 
+                // indicate that a RaodHub was hit
+                hitHub = true;
+
                 // break the foreach (because we found what we're looking for)
                 break;
             }
-            else
-            {
-                // deactiveate the RoadHub
-                isActive = false;
-
-                // if there was a reference to an ActiveHub
-                if (activeHub != null)
-                {
-                    // creset the RoadHub
-
-                    // for each RoadHub in the Zone...
-                    foreach (RoadHub roadHub in activeHub.GetComponent<RoadHub>().myZoneRoadHubs)
-                    {
-                        // change colour to indicate to the player the hub is activated
-                        roadHub.transform.GetComponent<MeshRenderer>().material.color = m_OriginalColor;
-                    }
-                    
-                    // deactivate this RoadHub
-                    activeHub.GetComponent<RoadHub>().isActive = false;
-                }
-            }
         }
+
+        // if no RoadHub was hit AND there WAS a reference to an ActiveHub
+        if (!hitHub && activeHub != null)
+        {
+            // for each RoadHub in the Zone...
+            foreach (RoadHub roadHub in activeHub.GetComponent<RoadHub>().myZoneRoadHubs)
+                {
+                    // change colour to indicate to the player the Zone is de - activated
+                    roadHub.transform.GetComponent<MeshRenderer>().material.color = m_OriginalColor;
+                }
+
+            // deactivate this RoadHub
+            activeHub.GetComponent<RoadHub>().isActive = false;
+
+            // remove reference to an Active Hub
+            activeHub = null;
+
+        }
+            
+        
     }
 
     private void ForgetActiveCollector()

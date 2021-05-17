@@ -339,6 +339,7 @@ MonoBehaviour:
   collectorDestination: {fileID: 0}
   myAgent: {fileID: 0}
   myCollectorType: 1
+  myAudioManager: {fileID: 0}
   newDespatch: 1
   isMoving: 0
   agentSpeed: 0
@@ -364,10 +365,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myCollectorMovement: {fileID: 0}
+  myGarbagePickup: {fileID: 0}
   minSpeed: 0.1
   waitTimeSecondsMax: 3
   waitTimeSecondsRemaining: 0
-  isCounting: 0
+  isResetting: 0
   navMeshAgentVelocity: 0
 --- !u!195 &3865105313608338846
 NavMeshAgent:
@@ -488,11 +490,12 @@ MonoBehaviour:
   isDeliveringWaste: 0
   isReturningToDepot: 0
   garbageInCollector: 0
-  garbageInCollectorMax: 500
+  garbageInCollectorMax: 1000
   collectionSpeed: 150
   myCollectorMovement: {fileID: 0}
   myNavMeshAgent: {fileID: 0}
   myGameManager: {fileID: 0}
   myDepotFrontGate: {fileID: 0}
   myWasteCentreFrontGate: {fileID: 0}
+  myAudioManager: {fileID: 0}
   collectionZone: {fileID: 0}
