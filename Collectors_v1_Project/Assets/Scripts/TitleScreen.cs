@@ -10,9 +10,14 @@ public class TitleScreen : MonoBehaviour
     [SerializeField] GameManager myGameManager;
     [SerializeField] DifficultyNumber myDifficultyNumber;
 
-    [SerializeField] GameObject instructionsGO;
     [SerializeField] GameObject difficulyGO;
     [SerializeField] SceneField FirstScene;
+
+    [Header("Insturctions Pages")]
+    [SerializeField] GameObject instructionsGO;
+    [SerializeField] GameObject instructionsPage1;
+    [SerializeField] GameObject instructionsPage2;
+    [SerializeField] GameObject instructionsPage3;
 
     private void Start()
     {
@@ -21,7 +26,8 @@ public class TitleScreen : MonoBehaviour
 
         // find instructionsGO and set it to false
         instructionsGO = GameObject.FindGameObjectWithTag("Instructions");
-        //instructionsGO.SetActive(false);
+        InstructionsOff();
+        instructionsGO.SetActive(false);
 
         // find difficultyGO and set it to false
         difficulyGO = GameObject.FindGameObjectWithTag("Difficulty");
@@ -85,6 +91,7 @@ public class TitleScreen : MonoBehaviour
     public void InstructionsButton()
     {
         instructionsGO.SetActive(true);
+        instructionsPage1.SetActive(true);
     }
 
     public void ExitButton()
@@ -97,5 +104,33 @@ public class TitleScreen : MonoBehaviour
     {
         instructionsGO.SetActive(false);
         difficulyGO.SetActive(false);
+    }
+
+    public void InstructionsOff()
+    {
+        instructionsPage1.SetActive(false);
+        instructionsPage2.SetActive(false);
+        instructionsPage3.SetActive(false);
+    }
+
+    public void InstructionsPage1()
+    {
+        instructionsPage1.SetActive(true);
+        instructionsPage2.SetActive(false);
+        instructionsPage3.SetActive(false);
+    }
+
+    public void InstructionsPage2()
+    {
+        instructionsPage1.SetActive(false);
+        instructionsPage2.SetActive(true);
+        instructionsPage3.SetActive(false);
+    }
+
+    public void InstructionsPage3()
+    {
+        instructionsPage1.SetActive(false);
+        instructionsPage2.SetActive(false);
+        instructionsPage3.SetActive(true);
     }
 }

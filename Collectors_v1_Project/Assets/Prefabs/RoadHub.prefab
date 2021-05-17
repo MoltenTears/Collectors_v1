@@ -52,12 +52,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0127b39cf8ecf474391061fea6d97171, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_MouseOverColor: {r: 1, g: 0, b: 0, a: 1}
+  m_DeactiveColour: {r: 0, g: 0, b: 0, a: 0}
+  m_OriginalColor: {r: 0, g: 0, b: 0, a: 0}
   isActive: 0
   activeHub: {fileID: 0}
   myRoadMap: {fileID: 0}
   myCollectorInitate: {fileID: 0}
   myGameManager: {fileID: 0}
-  nodeOrigin: {fileID: 0}
+  myDepotManager: {fileID: 0}
+  myAudioManager: {fileID: 0}
+  myZoneManager: {fileID: 0}
+  myZoneRoadHubs: []
   ConnectedRoadHubs: []
   activeCollector: {fileID: 0}
 --- !u!114 &6168997718985617544
@@ -166,6 +172,11 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7526201411614099614, guid: 70cb0475ec3415c48a6adcb099c70501,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8797623128249625922, guid: 70cb0475ec3415c48a6adcb099c70501,
         type: 3}
       propertyPath: m_Icon
@@ -175,6 +186,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: RoadNode
+      objectReference: {fileID: 0}
+    - target: {fileID: 8797623128249625922, guid: 70cb0475ec3415c48a6adcb099c70501,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8797623128249625933, guid: 70cb0475ec3415c48a6adcb099c70501,
         type: 3}
@@ -251,6 +267,11 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7526201411614099614, guid: 70cb0475ec3415c48a6adcb099c70501,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8797623128249625922, guid: 70cb0475ec3415c48a6adcb099c70501,
         type: 3}
       propertyPath: m_Icon
@@ -260,6 +281,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: RoadNode (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8797623128249625922, guid: 70cb0475ec3415c48a6adcb099c70501,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8797623128249625933, guid: 70cb0475ec3415c48a6adcb099c70501,
         type: 3}
@@ -336,6 +362,11 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7526201411614099614, guid: 70cb0475ec3415c48a6adcb099c70501,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8797623128249625922, guid: 70cb0475ec3415c48a6adcb099c70501,
         type: 3}
       propertyPath: m_Icon
@@ -345,6 +376,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: RoadNode (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8797623128249625922, guid: 70cb0475ec3415c48a6adcb099c70501,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8797623128249625933, guid: 70cb0475ec3415c48a6adcb099c70501,
         type: 3}
@@ -430,6 +466,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: RoadNode (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8797623128249625922, guid: 70cb0475ec3415c48a6adcb099c70501,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8797623128249625933, guid: 70cb0475ec3415c48a6adcb099c70501,
         type: 3}
