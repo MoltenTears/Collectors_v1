@@ -3564,7 +3564,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh4477406
+  m_Name: pb_Mesh18102
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -11309,6 +11309,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 2104891811}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &541765663 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3200844663867417209, guid: 7d36851980934e345aa4ad133ecd35b7,
+    type: 3}
+  m_PrefabInstance: {fileID: 3200844662651186227}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &556095873
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -44411,6 +44423,45 @@ PrefabInstance:
       propertyPath: m_AnchorMin.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3200844664100800017, guid: 7d36851980934e345aa4ad133ecd35b7,
+        type: 3}
+      propertyPath: normalFillSpirte
+      value: 
+      objectReference: {fileID: -4530426593466845105, guid: 14e161e4f0d029145861443079f99615,
+        type: 3}
+    - target: {fileID: 3200844664100800017, guid: 7d36851980934e345aa4ad133ecd35b7,
+        type: 3}
+      propertyPath: normalHandleImage
+      value: 
+      objectReference: {fileID: 3200844662651186228}
+    - target: {fileID: 3200844664100800017, guid: 7d36851980934e345aa4ad133ecd35b7,
+        type: 3}
+      propertyPath: winningFillSpirte
+      value: 
+      objectReference: {fileID: 7937419414294748702, guid: 61baf3c727a85ed4f91c52019dafd817,
+        type: 3}
+    - target: {fileID: 3200844664100800017, guid: 7d36851980934e345aa4ad133ecd35b7,
+        type: 3}
+      propertyPath: normalButtonSpirte
+      value: 
+      objectReference: {fileID: 4018367105640525561, guid: 14e161e4f0d029145861443079f99615,
+        type: 3}
+    - target: {fileID: 3200844664100800017, guid: 7d36851980934e345aa4ad133ecd35b7,
+        type: 3}
+      propertyPath: winningButtonSpirte
+      value: 
+      objectReference: {fileID: -429952196614069818, guid: 61baf3c727a85ed4f91c52019dafd817,
+        type: 3}
+    - target: {fileID: 3200844664100800017, guid: 7d36851980934e345aa4ad133ecd35b7,
+        type: 3}
+      propertyPath: satisfactionFillImage
+      value: 
+      objectReference: {fileID: 541765663}
+    - target: {fileID: 3200844664100800017, guid: 7d36851980934e345aa4ad133ecd35b7,
+        type: 3}
+      propertyPath: satisfactionHandleImage
+      value: 
+      objectReference: {fileID: 3200844662651186228}
     - target: {fileID: 3200844664100800044, guid: 7d36851980934e345aa4ad133ecd35b7,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -44453,6 +44504,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7d36851980934e345aa4ad133ecd35b7, type: 3}
+--- !u!114 &3200844662651186228 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3200844664028445624, guid: 7d36851980934e345aa4ad133ecd35b7,
+    type: 3}
+  m_PrefabInstance: {fileID: 3200844662651186227}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &4850974655572248991
 PrefabInstance:
   m_ObjectHideFlags: 0

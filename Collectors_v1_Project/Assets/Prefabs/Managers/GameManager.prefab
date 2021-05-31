@@ -93,7 +93,7 @@ MonoBehaviour:
   daysMedium: 20
   garbageSpeedMedium: 0.15
   startingCollectorsMedium: 6
-  satisfactionToWinMedium: 65
+  satisfactionToWinMedium: 60
   daysHard: 30
   garbageSpeedHard: 0.2
   startingCollectorsHard: 8

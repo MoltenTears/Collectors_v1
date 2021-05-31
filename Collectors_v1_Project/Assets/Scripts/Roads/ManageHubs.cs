@@ -48,7 +48,7 @@ public class ManageHubs : MonoBehaviour
 
     public void InitialiseHubs()
     {
-        Debug.Log("RoadHubs Initialised.");
+        // Debug.Log("RoadHubs Initialised.");
 
         // flush the old list
         roadHubs.Clear();
